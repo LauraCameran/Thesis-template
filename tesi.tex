@@ -35,7 +35,8 @@
 
 \usepackage[T1]{fontenc}                % codifica dei font:
                                         % NOTA BENE! richiede una distribuzione *completa* di LaTeX
-\usepackage{lmodern} % font expansion error
+
+\usepackage{lmodern}                    % font expansion error
 
 \usepackage[utf8]{inputenc}             % codifica di input; anche [latin1] va bene
                                         % NOTA BENE! va accordata con le preferenze dell'editor
@@ -102,6 +103,11 @@
                                         % 2. eseguire: biber tesi
                                         % 3. compilare ancora tesi.tex.
 
+\usepackage{float}                      % [H]     
+
+
+% \usepackage[table]{xcolor}              % tables rowcolor
+
 \input{tesi-config}                     % file con le impostazioni personali
 
 \begin{document}
@@ -113,7 +119,7 @@
 \input{inizio-fine/colophon}
 \input{inizio-fine/dedica}
 \input{inizio-fine/sommario}
-\input{inizio-fine/ringraziamenti}
+% \input{inizio-fine/ringraziamenti}
 \input{inizio-fine/indici}
 \cleardoublepage
 

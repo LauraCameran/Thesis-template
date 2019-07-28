@@ -7,34 +7,75 @@
 \label{cap:introduzione}
 %**************************************************************
 
-Introduzione al contesto applicativo.\\
+% Introduzione al contesto applicativo.\\
 
-\noindent Esempio di utilizzo di un termine nel glossario \\
-\gls{api}. \\
+% \noindent Esempio di utilizzo di un termine nel glossario \\
+% \gls{api}. \\
 
-\noindent Esempio di citazione in linea \\
-\cite{site:agile-manifesto}. \\
+% \noindent Esempio di citazione in linea \\
+% \cite{site:agile-manifesto}. \\
 
-\noindent Esempio di citazione nel pie' di pagina \\
-citazione\footcite{womak:lean-thinking} \\
-
-%**************************************************************
-\section{L'azienda}
-
-Descrizione dell'azienda.
+% \noindent Esempio di citazione nel pie' di pagina \\
+% citazione\footcite{womak:lean-thinking} \\
 
 %**************************************************************
-\section{L'idea}
+\section{Il progetto}
+%Descrizione dell'azienda.
+Finantix è un'azienda di informatica che vende prodotti software.
+Il suo prodotto principale è suddiviso in moduli.
+Ognuno di questi moduli prevede una propria documentazione delle API Java (un archivio zip contente documentazione in formato Javadoc) e la documentazione della API RESTful (un archivio zip contenente documentazione in formato Open API).
+Questa documentazione viene manualmente caricata sulla piattaforma Confluence ove cui è consultata. 
 
-Introduzione all'idea dello stage.
+%Introduzione all'idea dello stage.
+Il plugin Maven nasce dalla necessità di automatizzare la pubblicazione di questa documentazione su Confluence, in modo da semplificare e velocizzare notevolmente questo processo.
+Infatti, una volta configurato correttamente il plugin in tutti i progetti relativi ai moduli software, il caricamento avviene direttamente durante la build dei progetti, senza richiedere ulteriore intervento umano.
+
+%**************************************************************
+\section{Principali problematiche}
+Le principali problematiche riscontrate 
+
+%**************************************************************
+\subsection{Soluzioni scelte}
+.....
+
+%**************************************************************
+\section{Strumenti utilizzati}
+Qui di seguito viene riportata una tabelle con tutte le tecnologie utilizzate e a quale scopo.
+
+\begin{table}[H]
+	{\def\arraystretch{1.5}
+    \begin{tabularx}{\textwidth}{c | X}
+        % \rowcolor{gray!30}
+        \textbf{Tecnologie} &
+        \textbf{Scopo} \\ \hline
+        Eclipse & Ambiente di sviluppo \\
+        Maven & Build automation per la gestione di progetti \\
+        Confluence & Pubblicazione, creazione e consultazione di documentazione \\
+        Jira & Issue tracking system \\
+        Jenkins & Continuous integration \\
+        Sonarqube & Analisi statica del codice \\
+        Bitbucket e GitKraken & Controllo di versione \\
+        JUnit & Test di unità \\
+        Visual Studio Code & Editor di codice \\
+        SequenceDiagram.org & Creazione dei diagrammi di sequenza \\
+        ObjectAid UML Explorer & Creazione dei diagrammi delle classi \\
+        Meecrowave & Creazione di server \\
+    \end{tabularx}} \\
+\caption{Tabella di tecnologie utilizzate durante il progetto e loro scopo.}
+\end{table}
+
+
+%**************************************************************
+\section{Il prodotto ottenuto}
+.....
 
 %**************************************************************
 \section{Organizzazione del testo}
 
 \begin{description}
-    \item[{\hyperref[cap:processi-metodologie]{Il secondo capitolo}}] descrive ...
+    \item[{\hyperref[cap:analisi-requisiti]{Il secondo capitolo}}] comprende l'analisi dettagliata dei requisiti del prodotto con casi d'uso e il relativo tracciamento dei requisiti individuati.
     
-    \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] approfondisce ...
+    \item[{\hyperref[cap:progettazione]{Il terzo capitolo}}] descrive la progettazione d....
     
     \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] approfondisce ...
     
