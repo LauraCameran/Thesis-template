@@ -80,7 +80,7 @@
 
 \usepackage[italian]{varioref}          % riferimenti completi della pagina
 
-\usepackage[dvipsnames]{xcolor}         % colori
+% \usepackage[dvipsnames]{xcolor}         % colori
 
 \usepackage{booktabs}                   % tabelle                                       
 \usepackage{tabularx}                   % tabelle di larghezza prefissata                                    
@@ -104,6 +104,47 @@
                                         % 3. compilare ancora tesi.tex.
 
 \usepackage{float}                      % [H]     
+
+
+% -- DA SWEG
+\usepackage{enumitem}
+\usepackage{totpages}
+\usepackage{tabularx, array}
+\usepackage{dcolumn}
+\usepackage{epstopdf}
+\usepackage{fancyhdr}
+% \usepackage{calc}
+\usepackage{datatool}
+\usepackage[bottom]{footmisc}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{placeins}
+\usepackage{color}
+\usepackage{makecell}
+\usepackage{pdflscape}
+\usepackage[table,usenames,dvipsnames]{xcolor}
+
+\definecolor{lightgray}{gray}{0.92}
+\definecolor{lightblue}{rgb}{0.93,0.95,1.0}
+\definecolor{headgray}{gray}{0.88}
+\colorlet{beautyblue}{blue!45}
+
+% Ridefinizione dell'env tabularx. Il vecchio è utilizzabile con l'env oldtabularx
+\let\oldtabularx\tabularx
+\let\endoldtabularx\endtabularx
+\renewenvironment{tabularx}{\rowcolors{2}{white}{lightgray}\oldtabularx}{\endoldtabularx}
+
+% Per tabularx con padding, parametro tra [], eg [1.3]
+\newenvironment{paddedtablex}[1][1]{%
+	\renewcommand*{\arraystretch}{#1}%
+	\renewcommand\theadfont{\bfseries}%
+	\tabularx%
+}{\endtabularx}
+
+
+% --
 
 
 % \usepackage[table]{xcolor}              % tables rowcolor

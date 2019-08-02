@@ -8,7 +8,7 @@
 %**************************************************************
 
 \intro{Tale capitolo ha l’obiettivo di esporre e analizzare i requisiti espliciti e impliciti per la realizzazione del plugin Maven per la pubblicazione di documentazione software.
-L'attività di analisi ha funto da base per la fase di progettazione del software in modo che essa fosse perfettamente conforme alle richieste dell’azienda}\\
+L'attività di analisi ha funto da base per la fase di progettazione del software, in modo che il prodotto fosse conforme alle richieste dell’azienda.}\\
 
 \section{Casi d'uso}
 
@@ -30,56 +30,177 @@ Essendo il progetto finalizzato alla creazione di un tool per l'automazione di u
 \label{uc:scenario-principale}
 \end{usecase}
 
-\section{Tracciamento dei requisiti}
 
-Da un'attenta analisi dei requisiti e degli use case effettuata sul progetto è stata stilata la tabella che traccia i requisiti in rapporto agli use case.\\
-Sono stati individuati diversi tipi di requisiti e si è quindi fatto utilizzo di un codice identificativo per distinguerli.\\
-Il codice dei requisiti è così strutturato R(F/Q/V)(N/D/O) dove:
-\begin{enumerate}
-	\item[R =] requisito
-    \item[F =] funzionale
-    \item[Q =] qualitativo
-    \item[V =] di vincolo
-    \item[N =] obbligatorio (necessario)
-    \item[D =] desiderabile
-    \item[Z =] opzionale
-\end{enumerate}
-Nelle tabelle \ref{tab:requisiti-funzionali}, \ref{tab:requisiti-qualitativi} e \ref{tab:requisiti-vincolo} sono riassunti i requisiti e il loro tracciamento con gli use case delineati in fase di analisi.
+\begin{usecase}{1}{Configurazione}
+\usecaseactors{Sviluppatore}
+\usecasepre{Lo sviluppatore sta utilizzando il progetto}
+\usecasedesc{Lo sviluppatore configura come }
+\usecasepost{Il sistema è pronto per l'esecuzione}
+\label{uc:scenario-principale}
+\end{usecase}
+
+
+
+\section{Requisiti}
+Ad ogni requisito viene assegnato il codice identificativo univoco:
+	\begin{center}
+		\texttt{R[Numero][Tipo][Priorità]}
+	\end{center}
+	in cui ogni parte ha un significato preciso:
+	\begin{itemize}
+		\item \textbf{R}: requisito.
+		\item \textbf{Numero}: numero progressivo che segue la struttura dei documenti.
+		\item \textbf{Tipo}: la la tipologia di requisito che può essere di:
+		\begin{itemize}
+			\item \textbf{F}: funzionalità.
+			\item \textbf{Q}: qualità.
+			\item \textbf{V}: vincolo.
+		\end{itemize}
+		\item \textbf{Priorità}: indica il grado di urgenza di un requisito di essere soddisfatto, come:
+		\begin{itemize}
+			\item \textbf{0}: opzionale.
+			\item \textbf{1}: desiderabile.
+			\item \textbf{2}: obbligatorio.
+		\end{itemize}
+	\end{itemize}
+
+
+	Esempio: \texttt{R2Q1} indica il secondo requisito di qualità ed è desiderabile.
+
+
+\subsection{Tracciamento dei requisiti}
+
+Da un'attenta analisi dei requisiti e dei cais d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.\\
+
 
 \newpage
 
-\begin{table}%
-\caption{Tabella del tracciamento dei requisti funzionali}
-\label{tab:requisiti-funzionali}
-\begin{tabularx}{\textwidth}{lXl}
-\hline\hline
-\textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
-\hline
-RFN-1     & L'interfaccia permette di configurare il tipo di sonde del test & UC1 \\
-\hline
-\end{tabularx}
-\end{table}%
+\newcommand{\req}[3]{%
+#1 & #2 & #3 \\
+}
 
-\begin{table}%
-\caption{Tabella del tracciamento dei requisiti qualitativi}
-\label{tab:requisiti-qualitativi}
-\begin{tabularx}{\textwidth}{lXl}
-\hline\hline
-\textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
-\hline
-RQD-1    & Le prestazioni del simulatore hardware deve garantire la giusta esecuzione dei test e non la generazione di falsi negativi & - \\
-\hline
-\end{tabularx}
-\end{table}%
+	%COMANDI PER REQ DI FUNZIONALITÀ
+	% Generazione automatica dei numeri
+	\newcounter{vaF} % valore
+	\newcounter{secF}[vaF] % per il secondo livello del requisito
+	\newcounter{thF}[secF] % terzo livello
 
-\begin{table}%
-\caption{Tabella del tracciamento dei requisiti di vincolo}
-\label{tab:requisiti-vincolo}
-\begin{tabularx}{\textwidth}{lXl}
-\hline\hline
-\textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
-\hline
-RVO-1    & La libreria per l'esecuzione dei test automatici deve essere riutilizzabile & - \\
-\hline
-\end{tabularx}
-\end{table}%
+	\newcommand{\ReqF}[3]{\stepcounter{vaF}R\thevaF F#1 & #2 & #3 \\} % Primo livello
+	\newcommand{\subReqF}[3]{\stepcounter{secF}R\thevaF.\thesecF F#1 & #2 & #3 \\} % Secondo livello
+	\newcommand{\subsubReqF}[3]{\stepcounter{thF}R\thevaF.\thesecF.\thethF F#1 & #2 & #3 \\} % Terzo livello
+
+	\newcounter{tableCounter} % Per automatizzare conteggio tabelle
+
+	\subsection{Requisiti di funzionalità}\label{RequisitiFunzionalità}
+
+	\stepcounter{tableCounter}
+	\begin{table}[H]
+		\begin{paddedtablex}[1.7]{\textwidth}{cXc}%0 opz  2 obb
+			\rowcolor{beautyblue} \textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\\toprule
+
+			% \stepcounter{vaF} % Per allineare i requisiti ai casi d'uso
+
+			% da casi d'uso
+			\rowcolor{lightgray}\ReqF{2}{Redmine deve poter inviare una segnalazione al Producer Redmine}{Interno UC1-PR}
+                \rowcolor{white}\subReqF{2}{Redmine deve poter inviare la segnalazione di apertura issue al Producer Redmine}{Interno UC1.1-PR}
+                \rowcolor{lightgray}\subReqF{2}{Redmine deve poter inviare la segnalazione di modifica issue al Producer Redmine}{Interno UC1.2-PR}
+                \rowcolor{white}\subReqF{2}{Redmine deve poter inviare la segnalazione di commento di una issue al Producer Redmine}{Interno UC1.3-PR}
+            \rowcolor{lightgray}\ReqF{2}{GitLab deve essere in grado di inviare una segnalazione al Producer GitLab}{Interno UC2-PG}
+			     \rowcolor{white}\subReqF{2}{GitLab deve essere in grado di segnalare l'apertura di issue al Producer GitLab}{Interno UC2.1-PG}
+			     \rowcolor{lightgray}\subReqF{2}{GitLab deve essere in grado di segnalare la modifica issue al Producer GitLab}{Interno UC2.2-PG}
+                 \rowcolor{white}\subReqF{2}{GitLab deve essere in grado di segnalare il commento di una issue al Producer GitLab}{Interno UC2.3-PG}
+			     \rowcolor{lightgray}\subReqF{2}{GitLab deve poter segnalare un evento di push al Producer GitLab}{Interno UC2.4-PG}
+                 \rowcolor{white}\subReqF{2}{GitLab deve poter segnalare un evento di commento di commit al Producer GitLab}{Interno UC2.5-PG}
+			\rowcolor{lightgray}\ReqF{2}{Il Producer Redmine deve essere in grado di inviare un messaggio al Gestore Personale}{Interno UC3-GP}
+				\rowcolor{white}\subReqF{2}{Il Producer Redmine deve essere in grado di inviare un messaggio di apertura issue al Gestore Personale}{Interno UC3.1-GP}
+				\rowcolor{lightgray}\subReqF{2}{Il Producer Redmine deve essere in grado di inviare un messaggio di modifica issue al Gestore Personale}{Interno UC3.2-GP}
+                \rowcolor{white}\subReqF{2}{Il Producer Redmine deve essere in grado di inviare un messaggio di commento issue al Gestore Personale}{Interno UC3.3-GP}
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Elenco dei requisiti di funzionalità (\thetableCounter)}
+	\end{table}
+
+
+
+
+	%COMANDI PER REQUISITI DI Qualità
+	% Generazione automatica dei numeri
+	\newcounter{vaQ} % valore
+	\newcounter{secQ}[vaQ]
+	\newcounter{thQ}[secQ] % terzo livello
+
+	\newcommand{\ReqQ}[3]{\stepcounter{vaQ}R\thevaQ Q#1 & #2 & #3 \\}
+	\newcommand{\subReqQ}[3]{\stepcounter{secQ}R\thevaQ.\thesecQ Q#1 & #2 & #3 \\}
+	\newcommand{\subsubReqQ}[3]{\stepcounter{thQ}R\thevaQ.\thesecQ.\thethQ Q#1 & #2 & #3 \\} % Terzo livello
+
+
+
+
+	\setcounter{tableCounter}{1}
+	% NB: molti requisiti di qualità sono stati tolti perchè non sono veri requisiti del sistema, riguardano noi e il nostro modo di fare, non il sistema
+	\subsection{Requisiti di qualità}\label{RequisitiQualita}
+
+	\begin{table}[H]
+		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
+			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\
+			\toprule
+			\ReqQ{1}{La copertura dei test deve essere almeno pari al 70\% del codice}{Interno}
+			\ReqQ{1}{Ogni commit effettuato deve rispettare la formattazione descritta nella wiki}{Interno}
+			\ReqQ{1}{Ogni documento deve attraversare tutte le fasi previste dal suo ciclo di vita}{Interno QPR008}
+            % \ReqQ{1}{Ogni modulo deve essere prima progettato e solo successivamente codificato}{Interno}
+            \ReqQ{1}{L'intera progettazione del progetto non deve contenere un numero di pattern più alto di quanto segnalato nel pdq}{Interno QPR012}
+			\ReqQ{2}{Le norme presenti sulla wiki aziendale devono essere rispettate}{Interno}
+			\ReqQ{2}{Deve essere redatto un manuale utente}{Interno}
+			\ReqQ{2}{Deve essere redatto un manuale dello sviluppatore}{Capitolato}
+            \ReqQ{1}{Deve essere redatta una pagina di utilizzo Maven ..}{Interno}
+
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Elenco dei requisiti di qualità.}
+	\end{table}
+
+
+
+
+
+
+
+
+
+
+
+% \begin{table}%
+% \caption{Tabella del tracciamento dei requisti funzionali}
+% \label{tab:requisiti-funzionali}
+% \begin{tabularx}{\textwidth}{lXl}
+% \hline\hline
+% \textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
+% \hline
+% RFN-1     & L'interfaccia permette di configurare il tipo di sonde del test & UC1 \\
+% \hline
+% \end{tabularx}
+% \end{table}%
+
+% \begin{table}%
+% \caption{Tabella del tracciamento dei requisiti qualitativi}
+% \label{tab:requisiti-qualitativi}
+% \begin{tabularx}{\textwidth}{lXl}
+% \hline\hline
+% \textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
+% \hline
+% RQD-1    & Le prestazioni del simulatore hardware deve garantire la giusta esecuzione dei test e non la generazione di falsi negativi & - \\
+% \hline
+% \end{tabularx}
+% \end{table}%
+
+% \begin{table}%
+% \caption{Tabella del tracciamento dei requisiti di vincolo}
+% \label{tab:requisiti-vincolo}
+% \begin{tabularx}{\textwidth}{lXl}
+% \hline\hline
+% \textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
+% \hline
+% RVO-1    & La libreria per l'esecuzione dei test automatici deve essere riutilizzabile & - \\
+% \hline
+% \end{tabularx}
+% \end{table}%
