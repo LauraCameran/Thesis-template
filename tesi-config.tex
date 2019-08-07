@@ -7,16 +7,16 @@
 %**************************************************************
 
 % Autore
-\newcommand{\myName}{Laura Cameran}                                    
+\newcommand{\myName}{Laura Cameran}
 \newcommand{\myTitle}{Un plugin Maven per l'automatizzazione della pubblicazione di documentazione software}
 
-% Tipo di tesi                   
+% Tipo di tesi
 \newcommand{\myDegree}{Tesi di laurea triennale}
 
-% Università             
+% Università
 \newcommand{\myUni}{Università degli Studi di Padova}
 
-% Facoltà       
+% Facoltà
 \newcommand{\myFaculty}{Corso di Laurea in Informatica}
 
 % Dipartimento
@@ -50,11 +50,11 @@
 %**************************************************************
 % Impostazioni di biblatex
 %**************************************************************
-\bibliography{bibliografia} % database di biblatex 
+\bibliography{bibliografia} % database di biblatex
 
 \defbibheading{bibliography} {
     \cleardoublepage
-    \phantomsection 
+    \phantomsection
     \addcontentsline{toc}{chapter}{\bibname}
     \chapter*{\bibname\markboth{\bibname}{\bibname}}
 }
@@ -162,7 +162,7 @@
     breaklines=true,
     frameround=ftff,
     frame=single
-} 
+}
 
 
 %**************************************************************
@@ -204,8 +204,8 @@
 \newenvironment{risk}[1]{
     \refstepcounter{riskcounter}        % increment counter
     \par \noindent                      % start new paragraph
-    \textbf{\arabic{riskcounter}. #1}   % display the title before the 
-                                        % content of the environment is displayed 
+    \textbf{\arabic{riskcounter}. #1}   % display the title before the
+                                        % content of the environment is displayed
 }{
     \par\medskip
 }
@@ -226,13 +226,13 @@
 % #1: ID
 % #2: Nome
 \newenvironment{usecase}[2]{
-    \renewcommand{\theusecasecounter}{\usecasename #1}  % this is where the display of 
+    \renewcommand{\theusecasecounter}{\usecasename #1}  % this is where the display of
                                                         % the counter is overwritten/modified
     \refstepcounter{usecasecounter}             % increment counter
     \vspace{10pt}
     \par \noindent                              % start new paragraph
-    {\large \textbf{\usecasename #1: #2}}       % display the title before the 
-                                                % content of the environment is displayed 
+    {\large \textbf{\usecasename #1: #2}}       % display the title before the
+                                                % content of the environment is displayed
     \medskip
 }{
     \medskip
@@ -253,10 +253,55 @@
 \newenvironment{namespacedesc}{
     \vspace{10pt}
     \par \noindent                              % start new paragraph
-    \begin{description} 
+    \begin{description}
 }{
     \end{description}
     \medskip
 }
 
 \newcommand{\classdesc}[2]{\item[\textbf{#1:}] #2}
+
+
+
+
+
+% PRESI DA SWE
+
+\newcommand{\req}[3]{%
+#1 & #2 & #3 \\
+}
+
+	%COMANDI PER REQ DI FUNZIONALITÀ
+	% Generazione automatica dei numeri
+	\newcounter{vaF} % valore
+	\newcounter{secF}[vaF] % per il secondo livello del requisito
+	\newcounter{thF}[secF] % terzo livello
+
+	\newcommand{\ReqF}[3]{\stepcounter{vaF}R\thevaF F#1 & #2 & #3 \\} % Primo livello
+	\newcommand{\subReqF}[3]{\stepcounter{secF}R\thevaF.\thesecF F#1 & #2 & #3 \\} % Secondo livello
+	\newcommand{\subsubReqF}[3]{\stepcounter{thF}R\thevaF.\thesecF.\thethF F#1 & #2 & #3 \\} % Terzo livello
+
+	% \newcounter{tableCounter} % Per automatizzare conteggio tabelle
+
+
+
+	%COMANDI PER REQUISITI DI Qualità
+	% Generazione automatica dei numeri
+	\newcounter{vaQ} % valore
+	\newcounter{secQ}[vaQ]
+	\newcounter{thQ}[secQ] % terzo livello
+
+	\newcommand{\ReqQ}[3]{\stepcounter{vaQ}R\thevaQ Q#1 & #2 & #3 \\}
+	\newcommand{\subReqQ}[3]{\stepcounter{secQ}R\thevaQ.\thesecQ Q#1 & #2 & #3 \\}
+    \newcommand{\subsubReqQ}[3]{\stepcounter{thQ}R\thevaQ.\thesecQ.\thethQ Q#1 & #2 & #3 \\} % Terzo livello
+
+
+
+	% COMANDI PER REQ DI VINCOLO
+	% Generazione automatica dei numeri
+
+	\newcounter{vaV} % valore
+	\newcounter{secV}[vaV]
+
+	\newcommand{\ReqV}[3]{\stepcounter{vaV}R\thevaV V#1 & #2 & #3 \\}
+	\newcommand{\subReqV}[3]{\stepcounter{secV}R\thevaV.\thesecV V#1 & #2 & #3 \\}
