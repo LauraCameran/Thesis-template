@@ -10,34 +10,34 @@
 \intro{Tale capitolo ha l’obiettivo di esporre e analizzare i requisiti espliciti e impliciti per la realizzazione del plugin Maven per la pubblicazione di documentazione software.
 L'attività di analisi ha funto da base per la fase di progettazione del software, in modo che il prodotto fosse conforme alle richieste dell’azienda.}
 
-\section{Casi d'uso}
+% \section{Casi d'uso}
 
-Per lo studio dei casi di utilizzo del prodotto sono stati creati dei diagrammi.
-I diagrammi dei casi d'uso (in inglese \emph{Use Case Diagram}) sono diagrammi di tipo \gls{uml} dedicati alla descrizione delle funzioni o servizi offerti da un sistema, così come sono percepiti e utilizzati dagli attori che interagiscono col sistema stesso.
-Essendo il progetto finalizzato alla creazione di un tool per l'automazione di un processo, le interazioni da parte dell'utilizzatore devono essere ovviamente ridotte allo stretto necessario. Per questo motivo i diagrammi d'uso risultano semplici e in numero ridotto.
+% Per lo studio dei casi di utilizzo del prodotto sono stati creati dei diagrammi.
+% I diagrammi dei casi d'uso (in inglese \emph{Use Case Diagram}) sono diagrammi di tipo \gls{uml} dedicati alla descrizione delle funzioni o servizi offerti da un sistema, così come sono percepiti e utilizzati dagli attori che interagiscono col sistema stesso.
+% Essendo il progetto finalizzato alla creazione di un tool per l'automazione di un processo, le interazioni da parte dell'utilizzatore devono essere ovviamente ridotte allo stretto necessario. Per questo motivo i diagrammi d'uso risultano semplici e in numero ridotto.
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.9\columnwidth]{usecase/scenario-principale}
-    \caption{Use Case - UC0: Scenario principale}
-\end{figure}
+% \begin{figure}[!h]
+%     \centering
+%     \includegraphics[width=0.9\columnwidth]{usecase/scenario-principale}
+%     \caption{Use Case - UC0: Scenario principale}
+% \end{figure}
 
-\begin{usecase}{0}{Scenario principale}
-\usecaseactors{Sviluppatore applicativi}
-\usecasepre{Lo sviluppatore è entrato nel plug-in di simulazione all'interno dell'IDE}
-\usecasedesc{La finestra di simulazione mette a disposizione i comandi per configurare, registrare o eseguire un test}
-\usecasepost{Il sistema è pronto per permettere una nuova interazione}
-\label{uc:scenario-principale}
-\end{usecase}
+% \begin{usecase}{0}{Scenario principale}
+% \usecaseactors{Sviluppatore applicativi}
+% \usecasepre{Lo sviluppatore è entrato nel plug-in di simulazione all'interno dell'IDE}
+% \usecasedesc{La finestra di simulazione mette a disposizione i comandi per configurare, registrare o eseguire un test}
+% \usecasepost{Il sistema è pronto per permettere una nuova interazione}
+% \label{uc:scenario-principale}
+% \end{usecase}
 
 
-\begin{usecase}{1}{Configurazione}
-\usecaseactors{Sviluppatore}
-\usecasepre{Lo sviluppatore sta utilizzando il progetto}
-\usecasedesc{Lo sviluppatore configura come }
-\usecasepost{Il sistema è pronto per l'esecuzione}
-\label{uc:scenario-principale}
-\end{usecase}
+% \begin{usecase}{1}{Configurazione}
+% \usecaseactors{Sviluppatore}
+% \usecasepre{Lo sviluppatore sta utilizzando il progetto}
+% \usecasedesc{Lo sviluppatore configura come }
+% \usecasepost{Il sistema è pronto per l'esecuzione}
+% \label{uc:scenario-principale}
+% \end{usecase}
 
 
 
@@ -68,86 +68,160 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	Esempio: \texttt{R2Q1} indica il secondo requisito di qualità ed è desiderabile.
 
 
-\subsection{Tracciamento dei requisiti}
 
-Da un'attenta analisi dei requisiti e dei casi d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.
+% Da un'attenta analisi dei requisiti e dei casi d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.
 
 % \newpage
 
-	\subsubsection{Requisiti di funzionalità}\label{RequisitiFunzionalità}
+	\subsection{Requisiti di funzionalità}\label{RequisitiFunzionalità}
 
 	% \stepcounter{tableCounter}
 	% TODO chiedere di sta roba
 	\begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}%0 opz  2 obb
 			\rowcolor{beautyblue} \textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\\toprule
-			\ReqF{2}{L'utente deve poter pubblicare la documentazione da lui scelta}{UC\thevaF}
-				\subReqF{2}{L'utente deve poter pubblicare un archivio (.zip o .jar)}{UC\thevaF.\thesecF}
-				\subReqF{2}{L'utente deve poter pubblicare un file html}{UC\thevaF.\thesecF}
-				\subReqF{2}{L'utente deve poter pubblicare una cartella}{UC\thevaF.\thesecF}
-            \ReqF{2}{Inserimento credenziali}{UC\thevaF}
-			    \subReqF{2}{Inserimento username}{UC\thevaF.\thesecF}
-				\subReqF{2}{Inserimento password}{UC\thevaF.\thesecF}
-				\subReqF{2}{Inserimento identificativo server}{UC\thevaF.\thesecF}
+			\ReqF{2}{Il sistema deve fornire delle proprietà per tutti gli elementi configurabili dall'utente}{Azienda}
+			\ReqF{2}{L'utente deve poter pubblicare la documentazione da lui scelta}{Azienda}
+				\subReqF{2}{L'utente deve poter pubblicare un archivio (.zip o .jar)}{Azienda}
+				\subReqF{2}{L'utente deve poter pubblicare un file html}{Azienda}
+				\subReqF{2}{L'utente deve poter pubblicare una cartella}{Azienda}	
+			\ReqF{2}{Il sistema deve dare un messaggio di errore se l'utente non fornisce nessuna documentazione}{Azienda}
+			\ReqF{2}{Il sistema deve dare un messaggio di errore se l'archivio dato non esiste}{Azienda}				
+            \ReqF{2}{Inserimento credenziali}{Azienda}
+			    \subReqF{2}{Inserimento username}{Azienda}
+				\subReqF{2}{Inserimento password}{Azienda}
+				\subReqF{2}{Inserimento identificativo server}{Azienda}
+			\ReqF{2}{Il sistema deve dare un messaggio di errore se l'utente non fornisce, in almeno uno dei due modi, le sue credenziali}{Azienda}
+			\ReqF{2}{L'utente deve poter inserire il nome della categoria Confluence in cui allocare la documentazione}{Azienda}	
+			\ReqF{2}{Il sistema deve dare un messaggio di errore se la categoria non è stata aggiunta}{Azienda}
+			\ReqF{2}{L'utente deve poter modificare il luogo in cui l'archivio viene salvato all'interno del progetto}{Azienda}
+			\ReqF{2}{L'utente deve poter modificare le tipologie di file da inserire nella documentazione}{Azienda}
+				\ReqF{2}{L'utente deve poter modificare le tipologie di file da includere nella cartella}{Azienda}
+				\ReqF{2}{L'utente deve poter modificare le tipologie di file da escludere dalla cartella}{Azienda}
+			\ReqF{2}{Il sistema deve fornire il nome del ``main entrance file'' di ogni pagina Doc del plugin Confluence}{Azienda}
+			\ReqF{2}{L'utente deve poter modificare il nome del file principale della documentazione}{Azienda}
+			\ReqF{2}{L'utente deve poter inserire il nome della documentazione}{Azienda}
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Elenco dei requisiti di funzionalità
+		\caption{Elenco dei requisiti di funzionalità (1)}
+	\end{table}
+
+
+	\begin{table}[H]
+		\begin{paddedtablex}[1.7]{\textwidth}{cXc}%0 opz  2 obb
+			\rowcolor{beautyblue} \textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\\toprule
+			\ReqF{2}{L'utente deve poter inserire la versione della documentazione}{Azienda}
+			\ReqF{1}{Il sistema deve essere in grado di costruire il titolo della pagina contenente la documentazione, a partire da nome e versione della documentazione}{Interno}
+			\ReqF{2}{L'utente deve poter configurare il plugin in modo che esso non fallisca se avvengono errori del client}{Azienda}
+			\ReqF{2}{L'utente deve poter configurare il plugin in modo che esso ne salti la propria esecuzione}{Azienda}
+			\ReqF{2}{L'utente deve poter inserire i tipi di progetto supportati dal plugin}{Azienda}
+			\ReqF{2}{Il sistema deve permettere il salto dell'esecuzione del plugin, nel caso in cui il progetto compilato non sia tra i tipi supportati}{Azienda}
+			\ReqF{2}{L'utente deve poter inserie i tipi di progetto a cui il plugin non deve dare messaggi di avvertimento}{Azienda}
+			\ReqF{2}{L'utente deve poter configurare il plugin in modo che esso non fallisca se l'archivio dato non esiste}{Azienda}
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Elenco dei requisiti di funzionalità (2)
 		% (\thetableCounter)
 		}
 	\end{table}
 
 
 
-
 	% \setcounter{tableCounter}{1}
 	% NB: molti requisiti di qualità sono stati tolti perchè non sono veri requisiti del sistema, riguardano noi e il nostro modo di fare, non il sistema
-	\subsubsection{Requisiti di qualità}\label{RequisitiQualita}
+	\subsection{Requisiti di qualità}\label{RequisitiQualita}
 
 	\begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
 			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\
 			\toprule
-			\ReqQ{1}{La copertura dei test deve essere almeno pari al 70\% del codice}{Interno}
-            % \ReqQ{1}{Ogni modulo deve essere prima progettato e solo successivamente codificato}{Interno}
-            % \ReqQ{1}{L'intera progettazione del progetto non deve contenere un numero di pattern più alto di quanto segnalato nel pdq}{Interno QPR012}
-			\ReqQ{1}{Le norme presenti sulla wiki aziendale devono essere rispettate}{Interno}
-			\subReqQ{1}{Ogni commit effettuato deve rispettare la formattazione descritta nella wiki}{Interno}
-			\ReqQ{2}{Deve essere redatto un manuale utente}{Interno}
-			\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva come configurare il plugin}{Interno}
-			\subReqQ{1}{Deve essere redatta una pagina di utilizzo Maven ``Usage'' che descriva tutti i possibili utilizzi del plugin}{Interno}
-			\ReqQ{2}{Deve essere redatto un manuale dello sviluppatore}{Interno}
-			\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva la progettazione del plugin tramite diagrammi}{Interno}
-			\subReqQ{2}{Deve essere redatta e generata la documentazione Javadoc del plugin}{Interno}
+			\ReqQ{1}{La copertura dei test deve essere almeno pari al 70\% del codice}{Azienda}
+			\ReqQ{1}{Le norme presenti sulla wiki aziendale devono essere rispettate}{Azienda}
+				\subReqQ{1}{Ogni commit effettuato deve rispettare la formattazione descritta nella wiki}{Azienda}
+				\subReqQ{1}{Il nome di ogni variabile, classe, ecc nel codice deve essere significativo}{Azienda}
+				\subReqQ{1}{I commenti nel codice devono essere facilmente comprensibili}{Azienda}
+				\subReqQ{1}{Il codice non deve contenere violazioni di SonarQube con alta severità}{Azienda}
+			\ReqQ{1}{Ogni messaggio di errore del plugin deve essere sufficientemente esplicativo}{Interno}
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Elenco dei requisiti di qualità.}
+		\caption{Elenco dei requisiti di qualità (1)}
 	\end{table}
 
 
-	\subsubsection{Requisiti di vincolo}\label{RequisitiVincolo}
+	\begin{table}[H]
+		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
+			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\
+			\toprule
+			\ReqQ{2}{Deve essere redatto un manuale utente}{Azienda}
+				\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva come configurare il plugin}{Azienda}
+				\subReqQ{1}{Deve essere redatta una pagina di utilizzo Maven ``Usage'' che descriva tutti i possibili utilizzi del plugin}{Azienda}
+			\ReqQ{2}{Deve essere redatto un manuale dello sviluppatore}{Azienda}
+				\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva la progettazione del plugin tramite diagrammi}{Azienda}
+				\subReqQ{2}{Deve essere redatta e generata la documentazione Javadoc del plugin}{Azienda}
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Elenco dei requisiti di qualità (2)}
+	\end{table}
+
+
+
+
+
+	\subsection{Requisiti di vincolo}\label{RequisitiVincolo}
 
 	\begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
 			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\
 			\toprule
-			\ReqV{2}{Il plugin deve essere sviluppato nel linguaggio di programmazione Java}{Interno}
-			\ReqV{2}{Il plugin deve essere testato tramite JUnit}{Interno}
-			\ReqV{2}{Come ambiente di sviluppo è necessario utilizzare Eclipse}{Interno}
-			\ReqV{2}{Per la build dei progetti è necessario utilizzare Maven}{Interno}
-			\ReqV{2}{Per la pubblicazione di documentazione è necessario utilizzare Confluence}{Interno}
-			\ReqV{2}{I requisiti identificati devono essere tracciati su Jira}{Interno}
-			\subReqV{2}{Lo stato di ogni requisito presente su Jira deve sempre essere opportunamente aggiornato}{Interno}
-			\ReqV{2}{Come strumento di Continuous integration è necessario utilizzare Jenkins}{Interno}
-			\ReqV{2}{Per l'analisi statica del codice è necessario utilizzare SonarQube}{Interno}
-			\ReqV{2}{Per il controllo di versione del codice è necessario utilizzare Bitbucket}{Interno}
+			\ReqV{2}{Il plugin deve essere sviluppato nel linguaggio di programmazione Java}{Azienda}
+			\ReqV{2}{Il plugin deve essere testato tramite JUnit}{Azienda}
+			\ReqV{2}{Come ambiente di sviluppo è necessario utilizzare Eclipse}{Azienda}
+			\ReqV{2}{Per la build dei progetti è necessario utilizzare Maven}{Azienda}
+			\ReqV{2}{Per la pubblicazione di documentazione è necessario utilizzare Confluence}{Azienda}
+			\ReqV{2}{I requisiti identificati devono essere tracciati su Jira}{Azienda}
+				\subReqV{2}{Lo stato di ogni requisito presente su Jira deve sempre essere opportunamente aggiornato}{Azienda}
+			\ReqV{2}{Come strumento di Continuous integration è necessario utilizzare Jenkins}{Azienda}
+			\ReqV{2}{Per l'analisi statica del codice è necessario utilizzare SonarQube}{Azienda}
+			\ReqV{2}{Per il controllo di versione del codice è necessario utilizzare Bitbucket}{Azienda}
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Elenco dei requisiti di vincolo (1)}
+	\end{table}
+
+
+	\begin{table}[H]
+		% \centering
+		% {\def\arraystretch{1.7}
+		% \begin{tabularx}{\textwidth}{cXc}
+		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
+			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\
+			\toprule
+			\ReqV{0}{Utilizzare GitKraken come client di Git}{Interno}
+			\ReqV{0}{Utilizzare JUnit per realizzare test di unità}{Interno}
+			\ReqV{0}{Utilizzare Visual Studio Code come editor per il codice}{Interno}
+			\ReqV{0}{Utilizzare SequenceDiagram.org per la creazione dei diagrammi di sequenza}{Interno}
 			\ReqV{0}{Utilizzare ObjectAid UML Explorer per la creazione dei diagrammi delle classi}{Interno}
+			\ReqV{0}{Utilizzare Meecrowave per la creazione di un semplice server}{Azienda}
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Elenco dei requisiti di vincolo.}
+		\caption{Elenco dei requisiti di vincolo (2)}
 	\end{table}
 
 
+	\section{Riepilogo dei requisiti}
 
+	\begin{table}[H]
+		\centering
+		{\def\arraystretch{1.7}
+		\begin{tabularx}{\textwidth}{XXXX}
+			\rowcolor{beautyblue} \textbf{Tipologia} & \textbf{Obbligatori} & \textbf{Desiderabili} & \textbf{Opzionali} \\\toprule
+			Di funzionalità & 28 & 1 & 0 \\
+			Di qualità & 5 & 8 & 0 \\
+			Di vincolo & 10 & 0 & 6
+			\\\bottomrule
+		\end{tabularx}}
+		\caption{Riepilogo dei requisiti}
+	\end{table}
 
 
 

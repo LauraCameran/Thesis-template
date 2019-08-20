@@ -7,27 +7,66 @@
 \label{cap:progettazione}
 %**************************************************************
 
-\intro{Breve introduzione al capitolo}\\
+\intro{Il capitolo corrente ha lo scopo di illustrare l'architettura del plugin nel  dettaglio con il supporto di diagrammi e le scelte progettuali effettuate.}\\
 
 %**************************************************************
-\section{Tecnologie e strumenti} %TODO vedere se serve
+\section{Tecnologie}
 \label{sec:tecnologie-strumenti}
 
-Di seguito viene data una panoramica delle tecnologie e strumenti utilizzati.
+In questa sezione viene data una panoramica delle tecnologie e librerie principali utilizzate.
 
-\subsection*{Tecnologia 1}
-Descrizione Tecnologia 1.
+\subsection*{JavaX}
+\begin{itemize}
+    \item javax.annotation (per le annotazioni Nonnull e Nullable)
+    \item javax.ws.rs.core (per la creazione di risorse: Low-level interfaces and annotations used to create RESTful service resources.)
+    \item javax.xml.bind.annotation (per la trasformazione di JSON in oggetti Java)
+\end{itemize}
 
-\subsection*{Tecnologia 2}
-Descrizione Tecnologia 2
+
+\subsection*{Codehaus Plexus}
+Codehaus Plexus è una collezione di componenti usata da Apache Maven.
+Per ZipArchiver e utilità.
+\begin{itemize}
+    \item org.codehaus.plexus.archiver
+    \item org.codehaus.plexus.util
+\end{itemize}
+
+\subsection*{Maven}
+\begin{itemize}
+    \item org.apache.maven.plugins.annotations (Mojo, Paremeter, ecc)
+    \item org.apache.maven.plugin (Exceptions)
+\end{itemize}
+
+\subsection*{Jersey}
+Per il client.
+
 
 %**************************************************************
-\section{Ciclo di vita del software}
-\label{sec:ciclo-vita-software}
+\section{Diagramma dei package} %TODO da rifare
+\label{sec:diagramma-package}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{immagini/PackageDiagram.png}\\
+    \caption{Diagramma dei package}
+\end{figure}
 
 %**************************************************************
-\section{Progettazione}
-\label{sec:progettazione}
+\section{Diagramma delle classi}
+\label{sec:diagramma-classi}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/ClassD.png}\\
+    \caption{Diagramma delle classi}
+\end{figure}
+
+
+%**************************************************************
+% \section{Ciclo di vita del software}
+% \label{sec:ciclo-vita-software}
+
+%**************************************************************
+% \section{Progettazione}
+% \label{sec:progettazione}
 
 % \subsubsection{Namespace 1} %**************************
 % Descrizione namespace 1.
