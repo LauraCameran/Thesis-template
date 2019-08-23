@@ -78,11 +78,10 @@ La documentazione che fornisce l'utente può essere di tre tipi:
 	\item singolo file HTML.
 \end{enumerate}
 Nei casi 2. e 3. il plugin si occupa anche dell'archiviazione. \\
-
 I possibili modi per fornire le credenziali sono molteplici:
 \begin{itemize}
 	\item username e password vengono date direttamente nei campi della configurazione a loro destinati;
-	\item username e password vengono prese dalla sezione server del file ``.m2/settings.xml'' in cui sono salvate criptate. \footnote{A questo scopo, l'utente deve aver prima proceduto con la criptazione delle proprie credenziali come spiegato alla pagina \hyperref{https://maven.apache.org/guides/mini/guide-encryption.html}} 
+	\item username e password vengono prese dalla sezione server del file ``.m2/settings.xml'' in cui sono salvate criptate. \footnote{A questo scopo, l'utente deve aver prima proceduto con la criptazione delle proprie credenziali come spiegato alla pagina \url{https://maven.apache.org/guides/mini/guide-encryption.html}} 
 \end{itemize}
 Non è necessario che l'utente provveda entrambi i modi, ma almeno uno deve esserci.
 Se ci sono entrambi, il plugin utilizza il prelevamento dal file ``settings.xml''. \\

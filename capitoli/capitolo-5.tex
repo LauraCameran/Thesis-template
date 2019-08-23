@@ -10,39 +10,61 @@
 \intro{Il capitolo corrente ha lo scopo di illustrare l'architettura del plugin nel  dettaglio con il supporto di diagrammi e le scelte progettuali effettuate.}\\
 
 \section{Procedura di lavoro}
-Inizialmente per capire il funzionamento di un plugin Maven, è stato sviluppato un prototipo. 
-Dopodichè è stata effettuata la scelta delle tecnologie più adatte..
+Inizialmente per capire il funzionamento di un plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo.
+Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria.
+Il prototipo consisteva in un semplice plugin Maven che effettuava delle stampe e delle chiamate REST ad un server creato al momento con Meecrowave.
+Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin \emph{Docs} di Confluence.
+Ciò ha permesso di comprendere il caricamento di materiale su \emph{Docs} ed ha consentito di effetture la scelta delle librerie Java più adatte per il prodotto finale.
+
 
 %**************************************************************
 \section{Tecnologie e librerie utilizzate}
 \label{sec:tecnologie-strumenti}
 
 In questa sezione viene data una panoramica delle tecnologie e librerie principali utilizzate.
+Esse sono state scelte dalla candidata in concomitanza con gli sviluppatori DevOps senior dell'azienda.
 
-\subsection*{JavaX}
+
+\subsection{JavaX}
+JavaX è un package di estensioni standard per il linguaggio Java.
+Le estensioni che include sono numerose; quelle usate per la realizzazione del prodotto sono:
 \begin{itemize}
-    \item javax.annotation (per le annotazioni Nonnull e Nullable)
-    \item javax.ws.rs.core (per la creazione di risorse: Low-level interfaces and annotations used to create RESTful service resources.)
-    \item javax.xml.bind.annotation (per la trasformazione di JSON in oggetti Java)
+    \item \bd{javax.annotation}: per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, richieste secondo la politica aziendale, in modo da segnalare gli elementi che possono essere nulli o meno;
+    \item \bd{javax.ws.rs.core}: per la creazione di risorse relative ai servizi
+    RESTful, utili per il client al momento della comunicazione con Confluence;
+    % Low-level interfaces and annotations used to create RESTful service resources
+    \item \bd{javax.xml.bind.annotation}: per la trasformazione automatica di JSON in oggetti Java, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
 \end{itemize}
 
 
-\subsection*{Codehaus Plexus}
+\subsection{Codehaus Plexus}
 Codehaus Plexus è una collezione di componenti usata da Apache Maven.
-Per ZipArchiver e utilità.
+Le librerie adottate per il progetto sono:
 \begin{itemize}
-    \item org.codehaus.plexus.archiver
-    \item org.codehaus.plexus.util
+    \item \bd{org.codehaus.plexus.archiver}: per l'archiviazione della documentazione;
+    \item \bd{org.codehaus.plexus.util}: per utilità varie, adatte per la scrittura su file.
 \end{itemize}
 
-\subsection*{Maven}
+
+\subsection{Maven}
+Maven è la tecnologia centrale del prodotto.
+Di essa sono state utilizzate numerose classi, ma i package principali sono:
 \begin{itemize}
-    \item org.apache.maven.plugins.annotations (Mojo, Paremeter, ecc)
-    \item org.apache.maven.plugin (Exceptions)
+    \item \bd{org.apache.maven.plugins.annotations}: per le annotazioni relative ai plugin Maven, quali per esempio \texttt{Mojo} per identificare un \emph{goal},  \texttt{Paremeter} per segnalare un parametro della configurazione, ecc;
+    \item \bd{org.apache.maven.plugin}: per le eccezioni che può lanciare un plugin Maven;
+    \item \bd{org.apache.maven.project}: per accedere alle informazioni del progetto (quali nome e versione);
+    \item \bd{org.apache.maven.settings}: per decriptare le credenziali provenienti dal file ``settings.xml''.
 \end{itemize}
 
-\subsection*{Jersey}
-Per il client.
+
+\subsection{Jersey} %aveva tanta documentazione rispetto ad altri client
+Jersey è un framework opensource per lo sviluppo di servizi web RESTful in Java.
+All'interno del progetto è stata una parte focale perché utilizzato per la creazione del client:
+\begin{itemize}
+    \item \bd{com.sun.jersey.api.client}: per il client che effettua le chiamate verso Confluence;
+    \item \bd{com.sun.jersey.api.client.config}: per la configurazione iniziale del client.
+\end{itemize}
+
 
 
 %**************************************************************
@@ -50,9 +72,39 @@ Per il client.
 \label{sec:diagramma-package}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{immagini/PackageDiagram.png}\\
+    \includegraphics[width=0.8\textwidth]{immagini/PackageDiagram.png}\\
     \caption{Diagramma dei package}
 \end{figure}
+Le classi principali del \emph{Maven documentation publisher plug-in} sono i \emph{mojos} di Maven e il client.
+Un \emph{mojo} è un \emph{goal} esguibile in Maven, ovvero la classe che concretamente realizza lo scopo prefissato.
+I \emph{mojos} appartengono al package Java \texttt{com.thedigitalstack.maven.docs.publisher.plugin} e il client al sub-package\\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin.client}.
+Tra loro è possibile identificare due classi fondamentali: PublisherMojo e CleanupMojo.
+Entrambe sono \emph{mojos} di Maven e perciò determinano \emph{goal} differenti.
+Alcuni metodi che riguardano il client e le impostazioni del server sono uguali, per questo motivo esiste una classe padre e un riferimento a DocPluginClient.
+DocPluginClient svolge le operazioni lato client ed è l'unico oggetto che comunica direttamente con Confluence.
+
+
+
+% ----------- da tradurre ----------
+PublisherMojo  achieves the documentation publication in Confluence. For this reason, its goal is named publish and its default life cycle phase is package.
+
+CleanupMojo performs the complete elimination of SNAPSHOT doc pages. That means all docs which version contains the -SNAPSHOT qualifier. For this reason, its goal is named cleanup and no life cycle phase is specified.
+
+It does not require further parameters by user. It simply relies on isSnapshot(String) method to understand if the evaluated title is a -SNAPSHOT.
+
+
+
+PublisherMojo and CleanupMojo extends AbrasctPluginMojo. This abstract class extends AbstractMojo class and defines methods in common to both mojos, e.g. createClient() for client initialization, and lets subclasses implement the execute() method.
+
+AbstractPluginMojo makes use of one ServerBean object which contains the required information to connect to the Confluence server, such as URL and credentials (username and password). Furthermore it requires a boolean, (trustSelfSigned) to determine if self signed certificates are accepted, and a server id, in case user wish to get credentials directly from settings.xml file instead of giving them himself.
+
+The client created by AbstractPluginMojo is a DocsPluginClient object. 
+
+
+
+DocsPluginClient class provides all the necessary to create and use an instance of Jersey client. It receives the configuration information by ServerInfo (a simple bean class similar to ServerBean) and realizes the base directory required by every REST call. Primary methods which performs REST calls are:
+
+Mostly everyone of these methods can throw a DocPluginException when the client response received is unexpected because something went wrong. Another exception that DocsPluginClient can throw is DocPluginConfigurationException: a RuntimeException which can occur during client building.
 
 %**************************************************************
 \section{Diagrammi delle classi}
