@@ -3,14 +3,18 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Progettazione} %TODO e codifica
+\chapter{Progettazione e realizzazione} %TODO e codifica
 \label{cap:progettazione}
 %**************************************************************
 
 \intro{Il capitolo corrente ha lo scopo di illustrare l'architettura del plugin nel  dettaglio con il supporto di diagrammi e le scelte progettuali effettuate.}\\
 
+\section{Procedura di lavoro}
+Inizialmente per capire il funzionamento di un plugin Maven, è stato sviluppato un prototipo. 
+Dopodichè è stata effettuata la scelta delle tecnologie più adatte..
+
 %**************************************************************
-\section{Tecnologie}
+\section{Tecnologie e librerie utilizzate}
 \label{sec:tecnologie-strumenti}
 
 In questa sezione viene data una panoramica delle tecnologie e librerie principali utilizzate.
@@ -51,14 +55,41 @@ Per il client.
 \end{figure}
 
 %**************************************************************
-\section{Diagramma delle classi}
-\label{sec:diagramma-classi}
+\section{Diagrammi delle classi}
+\label{sec:diagrammi-classi}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{immagini/ClassD.png}\\
-    \caption{Diagramma delle classi}
+    \includegraphics[width=0.95\textwidth]{immagini/mojo-gerarchy.png}\\
+    \caption{Diagramma delle classi relativo alla gerarchia principale del plugin}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{immagini/client.png}\\
+    \caption{Diagramma delle classi relativo al client}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.26\textwidth]{immagini/details.png}\\
+    \caption{Diagramma delle classi relativo ai dettagli di ogni componente del plugin Confluence}
+\end{figure}
+
+\section{Diagrammi di sequenza}
+\label{sec:diagrammi-sequenza}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/CreateDocSequence.png}\\
+    \caption{Diagramma di sequenza relativo al goal \emph{publish}}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/SequenceCleanupConfluence.png}\\
+    \caption{Diagramma di sequenza relativo al goal \emph{cleanup}}
+\end{figure}
 
 %**************************************************************
 % \section{Ciclo di vita del software}
@@ -79,6 +110,8 @@ Per il client.
 
 %**************************************************************
 \section{Design Pattern utilizzati}
+
+\subsection{Template Method}
 
 %**************************************************************
 % \section{Codifica}

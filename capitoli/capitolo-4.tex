@@ -39,6 +39,76 @@ L'attività di analisi ha funto da base per la fase di progettazione del softwar
 % \label{uc:scenario-principale}
 % \end{usecase}
 
+\section{Premessa}
+Il prodotto realizzato è un plugin Maven e possiede come nome ufficiale: \emph{Maven documentation publisher plug-in}.
+Un plugin Maven è un programma non autonomo che interagisce con la tecnologia Maven per ampliarne o estenderne le funzionalità originarie.
+
+Essendo un plugin Maven, esso deve avere un \emph{goal}, ovvero uno scopo ben preciso.
+L'obiettivo all'inizio dello stage era il semplice caricamento di documentazione archiviata su \emph{Docs} di Confluence, per questo motivo è stato scelto di creare il goal denominato \emph{publish}.
+Successivamente, nel corso dello stage, sono state aggiunte delle nuove funzionalità e un nuovo goal, dato che le tempistiche pianificate erano ottimistiche e hanno permesso sufficiente tempo per ampliare il prodotto.
+
+
+\section{Descrizione del prodotto}
+
+\emph{Maven documentation publisher plug-in} supporta la pubblicazione di documentazione in formato HTML. Ha due \emph{goal}:
+\begin{itemize}
+	\item \bd{publish}: che pubblica la documentazione;
+	\item \bd{cleanup}: che elimina la documentazione contentente SNAPSHOT nel nome.
+\end{itemize}
+
+Il principale è \emph{publish} e si occupa della pubblicazione su  \emph{Docs} Confluence della documentazione del codice di un qualunque progetto Maven su cui è configurato il plugin.
+Questo è possibile perché il plugin \emph{Docs} di Confluence accetta archivi, ovvero file in formato .zip o .jar.
+La documentazione in questo formato può essere per esempio la documentazione Javadoc (documentazione del codice sorgente scritto in linguaggio Java) o Open API (specifica per file di interfaccia leggibili dalle macchine per descrivere servizi web RESTful, conosciuta anche come specifica Swagger).
+Entrambe Javadoc e Open API sono il tipo di documentazione di maggior interesse per l'azienda da pubblicare sul sistema aziendale. \\
+Ogni archivio caricato contribuisce alla creazione di una pagina \emph{doc}.
+Ogni \emph{doc} viene identificato univocamente all'interno di una categoria, per questo motivo, il titolo deve essere unico.
+Una pagina viene creata se il titolo della documentazione è nuovo, altrimenti la pagina già esistente viene semplicemente aggiornata. \\ 
+ 
+\emph{Maven documentation publisher plug-in} è altamente configurabile, in modo da soddisfare qualunque esigenza dello sviluppatore.
+Innanzitutto esso consente all'utente di inserire:
+\begin{itemize}
+	\item la documentazione;
+	\item le proprie credenziali per accedere a Confluence;	
+	\item il nome della categoria in cui allocare la documentazione.
+\end{itemize}
+La documentazione che fornisce l'utente può essere di tre tipi:
+\begin{enumerate}
+	\item archivio (.zip o .jar);
+	\item cartella (contentente più file HTML);
+	\item singolo file HTML.
+\end{enumerate}
+Nei casi 2. e 3. il plugin si occupa anche dell'archiviazione di quei file. \\
+
+I possibili modi per fornire le credenziali sono molteplici:
+\begin{itemize}
+	\item username e password vengono date direttamente nella configurazione
+\end{itemize}
+L'utente può inoltre 
+
+
+
+username and password are users credentials directly supplied by user;
+serverId corresponds to the server id presents in .m2/settings.xml and permits to get credentials there;
+In the above example, there are two ways to get credentials. Whether both of them have values, serverId is the used one.
+
+There must be at least one way to get credentials.
+
+
+
+
+
+
+
+Il secondo \emph{goal}, \emph{cleanup}, è nato dalla necessità di eliminare la documentazione relativa ad un prodotto che non è stato rilasciato.
+Questo tipo di prodotti presentano ``SNAPSHOT'' nella versione e per questo motivo, anche il titolo della pagina \emph{doc} lo contiene.
+Si ha quindi qui a che vedere con la pulizia totale dal plugin \emph{Docs} di tutte queste pagine.
+
+% Main goal is publish and it is bound to package life cycle phase. 
+
+% Furthermore a doc page can be overall identified by its docKey, which is a sequence of category id and doc id.
+
+% User can also configure it to be skipped always or in specific situations and choose doc page title: name and version.
+
 
 
 \section{Requisiti}
@@ -73,10 +143,10 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 
 % \newpage
 
+	% TODO dividere i requisiti in altri gruppi e dare una spiegazione
 	\subsection{Requisiti di funzionalità}\label{RequisitiFunzionalità}
 
 	% \stepcounter{tableCounter}
-	% TODO chiedere di sta roba
 	\begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}%0 opz  2 obb
 			\rowcolor{beautyblue} \textbf{Codice} & \textbf{Requisito} & \textbf{Fonte} \\\toprule
@@ -117,7 +187,8 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			\ReqF{2}{L'utente deve poter inserire i tipi di progetto supportati dal plugin}{Azienda}
 			\ReqF{2}{Il sistema deve permettere il salto dell'esecuzione del plugin, nel caso in cui il progetto compilato non sia tra i tipi supportati}{Azienda}
 			\ReqF{2}{L'utente deve poter inserie i tipi di progetto a cui il plugin non deve dare messaggi di avvertimento}{Azienda}
-			\ReqF{2}{L'utente deve poter configurare il plugin in modo che esso non fallisca se l'archivio dato non esiste}{Azienda}
+			\ReqF{0}{L'utente deve poter configurare il plugin in modo che esso non fallisca se l'archivio dato non esiste}{Azienda}
+			\ReqF{0}{L'utente deve poter eliminare tutta la documentazione con versione ``SNAPSHOT'' caricata}{Azienda}
 			\bottomrule
 		\end{paddedtablex}
 		\caption{Elenco dei requisiti di funzionalità (2)
@@ -208,7 +279,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	\end{table}
 
 
-	\section{Riepilogo dei requisiti}
+	\subsection{Riepilogo dei requisiti}
 
 	\begin{table}[H]
 		\centering
@@ -225,29 +296,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 
 
 
-% \begin{table}%
-% \caption{Tabella del tracciamento dei requisti funzionali}
-% \label{tab:requisiti-funzionali}
-% \begin{tabularx}{\textwidth}{lXl}
-% \hline\hline
-% \textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
-% \hline
-% RFN-1     & L'interfaccia permette di configurare il tipo di sonde del test & UC1 \\
-% \hline
-% \end{tabularx}
-% \end{table}%
 
-% \begin{table}%
-% \caption{Tabella del tracciamento dei requisiti qualitativi}
-% \label{tab:requisiti-qualitativi}
-% \begin{tabularx}{\textwidth}{lXl}
-% \hline\hline
-% \textbf{Requisito} & \textbf{Descrizione} & \textbf{Use Case}\\
-% \hline
-% RQD-1    & Le prestazioni del simulatore hardware deve garantire la giusta esecuzione dei test e non la generazione di falsi negativi & - \\
-% \hline
-% \end{tabularx}
-% \end{table}%
 
 % \begin{table}%
 % \caption{Tabella del tracciamento dei requisiti di vincolo}
