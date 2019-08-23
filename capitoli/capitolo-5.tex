@@ -64,6 +64,30 @@ Per il client.
     \caption{Diagramma delle classi relativo alla gerarchia principale del plugin}
 \end{figure}
 
+
+L'utente può scegliere della documentazione:
+	\begin{itemize}
+		\item \bd{nome}: alternativamente preso dal nome del progetto o \emph{artifactId};
+		\item \bd{versione}: alternativamente preso dalla versione del progetto.
+	\end{itemize} 
+Il titolo della pagina \emph{doc} viene costruito dalla congiunzione di nome e versione.
+Vengono riportati qui di seguito alcuni esempi:
+	\begin{enumerate}
+		\item docName= Quickstart Doc, docVersion= 2019, project name= Quickstart Vogella project, project version= 2.1.1-SNAPSHOT, artifactId= quickstart
+		\item project name= Quickstart Vogella project, project version= 2.1.1-SNAPSHOT,  artifactId= quickstart
+		\item docVersion=2018, project version= 2.1.1-SNAPSHOT,  artifactId= quickstart
+	\end{enumerate}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\textwidth]{immagini/DocsExamples.png}\\
+		\caption{Screenshot di un esempio di Docs Plug-in}
+	\end{figure}
+
+
+
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{immagini/client.png}\\
