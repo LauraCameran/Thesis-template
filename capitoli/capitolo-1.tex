@@ -53,11 +53,64 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     \item \bd{Meecrowave}: framework consigliato dall'azienda (ma non imposto) che permette la creazione di server velocemente
 \end{itemize}
 
-    \subsection{Confluence}
-    Cos'è..
+    \subsection{Maven} % TODO rileggere
+        
+    Maven è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale.
 
-    \subsection{Maven}
-    Cos'è, come funziona, le fasi del ciclo..
+    % -------- LIFE CYCLE
+    Maven è basato sul concetto di un ciclo di vita della build.
+    Ciò significa che il processo per la build e la distribuzione di un particolare artifatto (progetto) è chiaramente definito. 
+    Per la persona che realizza un progetto, ciò significa che è solamente necessario imparare un piccolo set di comandi per eseguire la build di un progetto e il POM assicurerà l'ottenimento dei risultati desiderati.
+    Ci sono diversi cicli di vita possibili ed ogni ciclo di vita è suddiviso in fasi ben determinate.
+    Per esempio, una fase di grande interesse per il progetto è la fase di \emph{package}, che si occupa di prendere il codice compilato e impacchettarlo nel suo formato distribuibile, come per esempio un JAR. 
+
+    % ------------------
+
+    Ciò che è possibile gestire con questo POM è, per esempio, la lista di dipendeze e i report dei test d'unità, incluso il coverage.
+    Il suo aspetto è quello di un file XML che contiene le informazioni riguardanti il progetto e i dettagli della configurazione, usati da Maven per fare la build dei progetti.
+
+    % -------- PLUGIN
+
+    Un plugin Maven è un programma non autonomo che interagisce con Maven per ampliarne o estenderne le funzionalità originarie.
+
+    Essendo il progetto incentrato sulla realizzazione di un plugin Maven, esso deve avere un \emph{goal}.
+    Un \emph{goal} rappresenta un compito specifico (è più fine di una fase) che contribuisce alla gestione del progetto.
+    Può essere legato e nessuna o più fasi della build.
+    Un \emph{goal} non legato ad alcuna fase può essere eseguito al di fuori del ciclo di vita, tramite un'invocazione diretta.
+
+
+    Quando viene eseguito un \emph{goal}, Maven cerca nel file ``pom.xml'' (il POM) nella cartella corrente, lo legge, ottiene le informazioni della configurazione e dopo di che esegue il \emph{goal}.
+
+    Alcune di queste informazioni di configurazione che possono essere specificate nel POM sono dipendeze, i plugin o goal che possono essere eseguiti, la versione del progetto, la descrizione del progetto, ecc.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{immagini/ScreenPOM.png}\\
+        \caption{Screenshot di un esempio di POM}
+    \end{figure}
+
+    % ------------------
+
+    \subsection{Confluence}
+    Confluence è un software di collaborazione sviluppato dalla compagnia australiana Atlassian.
+    Esso è il principale sistema documentale dell'azienda, infatti viene usato da ogni dipendente per la consultazione di vario materiale: dalle norme aziendali, alla documentazione del codice.
+    Ciò che è più importante, motivo per cui viene utilizzato, è il fatto che permette di raggruppare pagine correlate in uno spazio dedicato accessibile a tutti o a gruppi ristretti di persone.
+    
+    Recentemente è stato introdotto a Confluence un plugin di terze parti, chiamato \emph{Docs}. 
+    Per poter comprendere appieno il progetto del plugin Maven, è prima necessario fare luce su questo plugin.
+    Come è possibile vedere dall'immagine sottostante, \emph{Docs} è suddiviso in categorie (in questo caso ``JavaDocs'' e ``Spacification'').
+    Le categorie presentano un nome, consentono di raggruppare la documentazione e possono essere collegate agli spazi Confluence esistenti, in modo da permettere la visione di questa documentazione solo a determinate persone.
+    Ogni categoria quindi contiene al suo interno delle pagine web (chiamate anche \emph{doc}) che includono la documentazione in formato HTML (come per esempio ``JDF Specification RC2'' per la categoria ``Specification'').
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.68\textwidth]{immagini/docs-conf.png}\\
+        \caption{Screenshot di un esempio di Docs Plug-in}
+    \end{figure}
+
+
+
+
 
     \subsection{Riepilogo degli strumenti}
 
@@ -89,18 +142,9 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 %**************************************************************
 \section{Il prodotto ottenuto} %TODO vedere se spostare su sezione Confluence
 Il plugin Maven riesce a realizzare il caricamento di documentazione grazie ad un plugin di terze parti su Confluence, chiamato \emph{Docs}.
-Per poter comprendere appieno il funzionamento del plugin Maven, è prima necessario fare luce sul plugin Confluence.
-Come è possibile vedere dall'immagine sottostante, \emph{Docs} è suddiviso in categorie (in questo caso ``JavaDocs'' e ``Spacification'').
-Le categorie presentano un nome e hanno il semplice scopo di dare un ordine per gruppi della documentazione.
-Ogni categoria infatti contiene al suo interno delle pagine web (chiamate anche \emph{doc}) che includono la documentazione in formato HTML (come per esempio ``JDF Specification RC2'' per la categoria ``Specification'').
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.68\textwidth]{immagini/docs-conf.png}\\
-    \caption{Screenshot di un esempio di Docs Plug-in}
-\end{figure}
+Ciò che fa il plugin Maven è caricare su \emph{Docs} in maniera automatica la documentazione nella corretta categoria, realizzando un nuovo \emph{doc} o aggiornandone uno esistente.
 
-Ciò che fa il prodotto ottenuto è caricare in maniera automatica la documentazione nella corretta categoria, realizzando un nuovo \emph{doc} o aggiornandone uno esistente.
 Nel caso in cui l'utilizzatore del plugin Maven fornisca un titolo per la pagina \emph{doc} che non è presente nel \emph{Docs}, ne verrà creata una nuova, altrimenti il \emph{doc} già esistente con quel nome verrà aggiornato.
 
 %**************************************************************
