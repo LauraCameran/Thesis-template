@@ -29,11 +29,10 @@ Esse sono state scelte dalla candidata in concomitanza con gli sviluppatori DevO
 JavaX è un package di estensioni standard per il linguaggio Java.
 Le estensioni che include sono numerose; quelle usate per la realizzazione del prodotto sono:
 \begin{itemize}
-    \item \bd{javax.annotation}: per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, richieste secondo la politica aziendale, in modo da segnalare gli elementi che possono essere nulli o meno;
-    \item \bd{javax.ws.rs.core}: per la creazione di risorse relative ai servizi
-    RESTful, utili per il client al momento della comunicazione con Confluence;
+    \item \bd{javax.annotation}: ovvero \emph{Java Null annotation}, per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, richieste secondo la politica aziendale, in modo da segnalare gli elementi che possono essere nulli o meno;
+    \item \bd{javax.ws.rs.core}: ovvero \emph{JAX-RS}, per la creazione di risorse relative ai servizi RESTful, utili per il client al momento della comunicazione con Confluence;
     % Low-level interfaces and annotations used to create RESTful service resources
-    \item \bd{javax.xml.bind.annotation}: per la trasformazione automatica di JSON in oggetti Java, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
+    \item \bd{javax.xml.bind.annotation}: ovvero \emph{JAXB}, per la trasformazione automatica di JSON in oggetti Java, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
 \end{itemize}
 
 
@@ -119,11 +118,13 @@ Esso non richiede altri parametri in uso dall'utente: fa semplicemente affidamen
 PublisherMojo e CleanupMojo estendono \txt{AbrasctPluginMojo}.
 Questa classe astratta estende \txt{AbrasctMojo} (la classe astratta base di qualunque \emph{mojo} Maven) e definisce i metodi in comune ad entrambi, come per esempio \txt{createClient()} per l'inizializzazione del cient, lasciando implementare il metodo \txt{execute()} alle sottoclassi.
 
-AbstractPluginMojo fa uso di un oggetto di tipo\txt{ServerBean} che contiene le informazioni richieste per connettersi al server Confluence, come per esempio la URL e le credenziali dell'utente.
+AbstractPluginMojo fa uso di un oggetto di tipo \txt{ServerBean}.
+Un Java Bean è una classe utilizzata per incapsulare più oggetti in un oggetto singolo, cosicché tali oggetti possano essere passati come un singolo oggetto bean invece che come multipli oggetti individuali.
+ServerBean infatti contiene altri oggetti relativi alle informazioni richieste per connettersi al server Confluence, come per esempio la URL e le credenziali dell'utente.
 Per lo più esso richiede un booleano (\txt{trustSelfSigned}) per determinare se il certificati SSL sono eccettati, e una stringa \txt{serverId} nel caso l'utente volesse permettere di ricavare le credenziali dal file ``settings.xml''.
 
 
-
+% TODO da posizionare
 % -------------------------
 
 L'utente può scegliere della documentazione:
@@ -176,38 +177,127 @@ I metodi che compiono delle chiamate REST sono:
     \caption{Metodi di DocsPluginClient che compiono chiamate REST}
 \end{table}
 
+Molti di questi metodi possono tirare un'eccezione di tipo \txt{DocPluginException} quando la risposta del client ricevuta da Confluence in fase di comunicazione.
 
-
-
-% ----------- da tradurre ----------
-
-DocsPluginClient class provides all the necessary to create and use an instance of Jersey client. It receives the configuration information by ServerInfo (a simple bean class similar to ServerBean) and realizes the base directory required by every REST call. Primary methods which performs REST calls are:
-
-Mostly everyone of these methods can throw a DocPluginException when the client response received is unexpected because something went wrong. Another exception that DocsPluginClient can throw is DocPluginConfigurationException: a RuntimeException which can occur during client building.
-
+Un'altra eccezione che DocsPluginClient può tirare è \txt{DocPluginConfigurationException}: un'eccezione RuntimeException che può avvenire durante la creazione del client.
 
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.26\textwidth]{immagini/details.png}\\
+    \includegraphics[width=0.25\textwidth]{immagini/details.png}\\
     \caption{Diagramma delle classi relativo ai dettagli di ogni componente del plugin Confluence}
 \end{figure}
+
+Inoltre è importante specificare che una chiamata REST, come per esempio una di quelle di tipo GET, ottiene le specifiche di una categoria o un \emph{doc} tramite un file JSON.
+Questi JSON sono trasformati da JAXB in oggetti Java.
+A questo scopo, sono state create le seguenti classi:
+\begin{itemize}
+    \item \txt{RepositoryDetails}: informazioni sulla repository (comprende a sua volta tutte le informazioni sulle categorie e i loro \emph{doc});
+    \item \txt{CategoryDetails}: informazioni sulla categoria (comprende a sua volta tutti i \emph{doc} contenuti);
+    \item \txt{DocDetails}: informazioni sulla pagina \emph{doc}.
+\end{itemize}
+
+
+
+    \subsection{Riepilogo delle classi}
+
+    \begin{table}[H]
+		\begin{paddedtablex}[1.7]{\textwidth}{cX}
+			\rowcolor{beautyblue}\textbf{Nome} & \textbf{Breve descrizione} \\
+			\toprule
+
+			AbstractPluginMojo & Classe astratta dei mojo del plugin \\
+            CleanupMojo & Classe mojo coincidente con il \emph{goal cleanup}: elimina la documentazione ``SNAPSHOT'' \\
+            PublisherMojo & Classe mojo coincidente con il \emph{goal publish}: pubblica la documentazione software \\
+            DocsPluginClient & Client del plugin che realizza chiamate REST \\
+            RepositoryDetails & Oggetto Java che corrisponde al JSON riguardante i dettagli della repository \\
+            CategoryDetails & Oggetto Java che corrisponde al JSON riguardante i dettagli di una categoria \\
+            DocDetails & Oggetto Java che corrisponde al JSON riguardante i dettagli di un \emph{doc} \\
+            ServerBean & Java bean contenente le informazioni del sever \\
+            DocsPluginException & Eccezione sollevata da DocsPluginClient per la comunicazione con il server \\
+            DocsPluginConfigurationException & RunTimeException sollevata da DocsPluginClient per problemi di configurazione \\
+
+			\bottomrule
+		\end{paddedtablex}
+		\caption{Tabella riassuntiva delle classi}
+	\end{table}
+
+
 
 \section{Diagrammi di sequenza}
 \label{sec:diagrammi-sequenza}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{immagini/CreateDocSequence.png}\\
-    \caption{Diagramma di sequenza relativo al goal \emph{publish}}
-\end{figure}
+\subsection{Diagramma della pubblicazione della documentazione}
+Ecco come funziona la pubblicazione della documentazione:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{immagini/SequenceCleanupConfluence.png}\\
-    \caption{Diagramma di sequenza relativo al goal \emph{cleanup}}
+    \includegraphics[width=\textwidth]{immagini/SeqPublish.png}\\
+    % \includegraphics[width=\textwidth]{immagini/CreateDocSequence.png}\\
+    \caption{Diagramma di sequenza relativo al \emph{goal publish}}
 \end{figure}
+
+Quando PublisherMojo viene eseguito, esso verifica la correttezza dei parametri dati e sospende l'esecuzione se necessario (per esempio se \txt{skip} è \txt{true}, ecc).
+
+Dopo di che un'istanza di DocsPluginClient viene creata in modo da permettere le operazioni del client.
+PublisherMojo usa DocsPluginClient per ricevere i dettagli della categoria appartenente al nome dato in fase di configurazione dall'utente.
+Questo accade perché DocsPluginClient comunica con Confluence.
+Il JSON che esso riceve da Confluence è trasformato nel relativo oggetto Java CategoryDetails.
+
+Successivamente PublisherMojo costruisce il titolo della pagina \emph{doc} tramite nome e versione della documentazione.
+In questo modo è possibile trovare il \emph{doc} con quel determinato titolo.
+PublisherMojo ottiene l'id della categoria dall'oggetto precedentemente creato e richiede al client di trovare il \emph{doc} all'interno di quella categoria.
+
+In questo caso, il JSON ritornato sarà vuoto perché la pagina \emph{doc} ancora non esiste.
+A questo punto PublisherMojo ottiene l'archivio da pubblicare, che sarà l'archivio dato dall'utente o un nuovo archivio generato.
+
+Infine la pagina \emph{doc} può essere creata all'interno della categoria con il nome e l'archivio selezionati. \\
+
+L'aggiornamento di una pagina \emph{doc} funziona in maniera molto similare.
+Le uniche differenze dallo scenario precedente si trovano dal JSON riguradante il \emph{doc} ritornato da Confluence in poi.
+Esso non sarà vuoto, bensì conterrà le informazioni del \emph{doc} esistente.
+A questo punto verrebbe chiamato un oggetto di tipo DocDeatails e il metodo \txt{udpateDoc()} verrebbe chiamato al posto di \txt{createDoc()}.
+
+
+\subsection{Diagramma della pulizia della documentazione}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{immagini/SequenceCleanupConfluence.png}\\
+%     \caption{Diagramma di sequenza relativo al \emph{goal cleanup}}
+% \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/CleanupSeq1.png}\\
+    \caption{Diagramma di sequenza relativo al \emph{goal cleanup} (1)}
+\end{figure}
+
+Prima di tutto, CleanupMojo agisce come PublisherMojo: crea un DocsPluginClient.
+Grazie ad esso ottiene i dettagli relativi alla repository attraverso una chiamata GET a Confluence.
+Il JSON ricevuto come risposta viene trasformato in un oggetto Java RepositoryDetails.
+CleanupMojo ricava la lista di categorie dal RepositoryDetails precedentemente creato e itera su di esso.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{immagini/CleanupSeq2.png}\\
+    \caption{Diagramma di sequenza relativo al \emph{goal cleanup} (2)}
+\end{figure}
+
+A questo punto richiede ad ogni CategoryDetails la sua lista di \emph{doc}.
+Itera su ogni \emph{doc} controllandone il titolo per verificare se contiene ``SNAPSHOT''.
+Se questa condizione è verificata, viene presa la chiave identificativa del \emph{doc} (\txt{docKey}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{immagini/CleanupSeq3.png}\\
+    \caption{Diagramma di sequenza relativo al \emph{goal cleanup} (3)}
+\end{figure}
+
+Infine CleanupMojo elimina ogni pagina \emph{doc} all'interno del plugin Confluence \emph{Docs} di cui possiede l'identificativo.
+
+
 
 %**************************************************************
 % \section{Ciclo di vita del software}
