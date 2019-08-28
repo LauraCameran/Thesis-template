@@ -110,7 +110,7 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.85\textwidth]{immagini/DocsExamples.png}\\
+		\includegraphics[width=0.88\textwidth]{immagini/DocsExamples.png}\\
 		\caption{Screenshot di esempi di titoli di pagine doc}
 		\label{screenDocsNameVersion}
 	\end{figure}
@@ -121,6 +121,8 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	Poichè nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utlizzare l'ultima opzione rimanente: l'artifactId.
 
 	% ---------------------------
+
+	% \newpage
 
 	L'utente può inoltre decidere di impostare:
 	\begin{itemize}
@@ -145,10 +147,19 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 
 
 \subsection{Il goal \emph{cleanup}}
-Il secondo \emph{goal}, \emph{cleanup}, è nato dalla necessità di eliminare la documentazione relativa ad un prodotto che non è stato rilasciato.
+Il secondo goal, \emph{cleanup}, è nato dalla necessità di eliminare la documentazione relativa ad un prodotto che non è stato rilasciato.
 Questo tipo di prodotti presentano ``SNAPSHOT'' nella versione e per questo motivo, anche il titolo della pagina \emph{doc} lo contiene.
 Si ha quindi qui a che vedere con la pulizia totale dal plugin \emph{Docs} di tutte queste pagine. \\
 A questo scopo non è necessario aggiungere nulla alla configurazione del plugin: sono sufficienti le credenziali dell'utente. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/cleanup3D.png}\\
+	\caption{Esempio di Docs prima e dopo l'esecuzione del goal \emph{cleanup}}
+	\label{cleanupBeforeAfter}
+\end{figure}
+
+
 
 % Main goal is publish and it is bound to package life cycle phase. 
 
@@ -157,7 +168,7 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 
 \newpage
 
-\section{Requisiti}
+\section{Requisiti}	\label{requisiti}
 Ad ogni requisito viene assegnato il codice identificativo univoco:
 	\begin{center}
 		\texttt{R[Numero][Tipo][Priorità]}
@@ -368,7 +379,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	\end{table}
 
 
-	\subsection{Riepilogo dei requisiti}
+	\section{Riepilogo dei requisiti}
 
 	\begin{table}[H]
 		\centering
@@ -382,6 +393,110 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 		\end{tabularx}}
 		\caption{Riepilogo dei requisiti}
 	\end{table}
+
+
+	\section{Tracciamento dei requisiti}
+
+	\begin{table}[H]
+		{\def\arraystretch{1.5}
+		\begin{tabularx}{\textwidth}{XX}
+			\rowcolor{beautyblue}
+			\textbf{Codice} &
+			\textbf{Fonte} \\ \hline
+			R1F2 & Azienda \\
+			R1.1F2 & Azienda \\
+			R1.2F1 & Azienda \\
+			R1.3F1 & Azienda \\
+			R2F2 & Azienda \\
+			R2.1F2 & Azienda \\
+			R2.2F2 & Azienda \\
+			R2.3F2 & Azienda \\
+			R3F2 & Azienda \\
+			R4F2 & Azienda \\
+			R5F2 & Azienda \\
+			R6F2 & Azienda \\
+			R7F1 & Azienda \\
+			R8F1 & Azienda \\
+			R9F1 & Azienda \\
+			R10F1 & Azienda \\
+			R11F1 & Azienda \\
+			R12F1 & Azienda \\
+			R13F1 & Azienda \\
+			R14F1 & Azienda \\
+			R15F1 & Azienda \\
+			R16F2 & Azienda \\
+			R17F2 & Azienda \\
+			R18F2 & Azienda \\
+			R19F2 & Azienda \\
+			R20F1 & Azienda \\
+			R21F2 & Azienda \\
+		\end{tabularx}} 
+	\caption{Requisiti in rapporto alle fonte ``Azienda'' (1)}
+	\end{table}
+
+	\begin{table}[H]
+		{\def\arraystretch{1.5}
+		\begin{tabularx}{\textwidth}{XX}
+			\rowcolor{beautyblue}
+			\textbf{Codice} &
+			\textbf{Fonte} \\ \hline
+			
+			R22F2 & Azienda \\
+			R23F1 & Azienda \\
+			R24F1 & Azienda \\
+			R1Q2 & Azienda \\
+			R1.1Q2 & Azienda \\
+			R1.2Q2 & Azienda \\
+			R1.3Q2 & Azienda \\
+			R1.4Q2 & Azienda \\
+			R2Q2 & Azienda \\
+			R3Q2 & Azienda \\
+			R3.1Q2 & Azienda \\
+			R3.2Q1 & Azienda \\
+			R4Q2 & Azienda \\
+			R4.1Q2 & Azienda \\
+			R4.2Q2 & Azienda \\
+			R1V2 & Azienda \\
+			R2V2 & Azienda \\
+			R3V2 & Azienda \\
+			R4V2 & Azienda \\
+			R5V2 & Azienda \\
+			R6V2 & Azienda \\
+			R6.1V2 & Azienda \\
+			R7V2 & Azienda \\
+			R8V2 & Azienda \\
+			R9V2 & Azienda \\
+			R10V2 & Azienda \\
+
+		\end{tabularx}} \\
+	\caption{Requisiti in rapporto alla fonte ``Azienda'' (2)}
+	\end{table}
+
+	\begin{table}[H]
+		{\def\arraystretch{1.5}
+		\begin{tabularx}{\textwidth}{XX}
+			\rowcolor{beautyblue}
+			\textbf{Codice} &
+			\textbf{Fonte} \\ \hline
+			R5Q0 & Interno \\
+			R6Q0 & Interno \\
+			R7Q0 & Interno \\
+			R11V0 & Interno \\
+			R12V0 & Interno \\
+			R13V0 & Interno \\
+			R14V0 & Interno \\
+			R15V0 & Interno \\
+			%  & Interno \\
+			%  & Interno \\
+			%  & Interno \\
+			%  &  \\
+			%  &  \\
+			%  &  \\
+			%  &  \\
+		\end{tabularx}} \\
+	\caption{Requisiti in rapporto alle fonti (3)}
+	\end{table}
+
 
 
 
