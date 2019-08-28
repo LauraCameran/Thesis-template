@@ -48,20 +48,20 @@ Successivamente, nel corso dello stage, sono state aggiunte delle nuove funziona
 
 \section{Descrizione del prodotto}
 
-\emph{Maven documentation publisher plug-in} supporta la pubblicazione di documentazione in formato HTML. Ha due \emph{goal}:
+\emph{Maven documentation publisher plug-in} supporta la pubblicazione di documentazione in formato HTML. Ha due goal:
 \begin{itemize}
 	\item \bd{publish}: che pubblica la documentazione;
 	\item \bd{cleanup}: che elimina la documentazione contentente SNAPSHOT nel nome.
 \end{itemize}
 Il principale è \emph{publish} e si occupa della pubblicazione su  \emph{Docs} Confluence della documentazione del codice di un qualunque progetto Maven su cui è configurato il plugin.
-Questo è possibile perché il plugin \emph{Docs} di Confluence accetta archivi, ovvero file in formato .zip o .jar.
+Questo è possibile perché il plugin Docs di Confluence accetta archivi, ovvero file in formato .zip o .jar.
 La documentazione in questo formato può essere per esempio la documentazione Javadoc (documentazione del codice sorgente scritto in linguaggio Java) o Open API (specifica per file di interfaccia leggibili dalle macchine per descrivere servizi web RESTful, conosciuta anche come specifica Swagger).
-Entrambe Javadoc e Open API sono il tipo di documentazione di maggior interesse per l'azienda da pubblicare sul sistema aziendale. \\
+Entrambe Javadoc e Open API sono il tipo di documentazione di maggior interesse per l'azienda da pubblicare su Docs. \\
 Ogni archivio caricato contribuisce alla creazione di una pagina \emph{doc}.
 Ogni \emph{doc} viene identificato univocamente all'interno di una categoria, per questo motivo, il titolo deve essere unico.
 Una pagina viene creata se il titolo della documentazione è nuovo, altrimenti la pagina già esistente viene semplicemente aggiornata. \\ 
  
-\subsection{Pubblicazione documentazione}
+\subsection{Il goal \emph{publish}} \label{goalPublish}
 \emph{Maven documentation publisher plug-in} è altamente configurabile, in modo da soddisfare qualunque esigenza dello sviluppatore.
 Innanzitutto esso consente all'utente di inserire:
 \begin{itemize}
@@ -88,9 +88,39 @@ Il sistema richiede obbligatoriamente dall'utente le infomazioni sopra descritte
 Oltre a ciò, esso prevede una configurazione di default.
 Ognuno di questi parametri può essere facoltativamente cambiato dall'utente. 
 
-	\subsubsection{Parametri opzionali}
+	\subsubsection{Parametri opzionali} \label{parametriOpzionali}
 	L'utente può scegliere nome e versione della documentazione.
 	Il titolo della pagina \emph{doc} viene costruito dall'unione di nome e versione (ad esempio dato nome ``Docs Maven Plugin'' e versione ``2019'', il titolo apparirà come: ``Docs Maven Plugin 2019'').
+
+	% TODO da posizionare
+	% -------------------------
+
+	Nel caso in cui l'utente non fornisca nome o versione, o nessuno dei due, il sistema prevede il seguente comportamento per i due parametri:
+	\begin{itemize}
+		\item \bd{nome}: preso dal nome del progetto o alternativamente dall'\emph{artifactId};
+		\item \bd{versione}: preso dalla versione del progetto.
+	\end{itemize} 
+
+	Vengono riportati qui di seguito alcuni esempi:
+	\begin{enumerate}
+		\item nome documentazione = Quickstart Doc, versione documentazione = 2019, nome progetto = Quickstart Vogella project, versione progetto = 2.1.1-SNAPSHOT, artifactId = quickstart
+		\item nome progetto = Quickstart Vogella project, versione progetto = 2.1.1-SNAPSHOT,  artifactId= quickstart
+		\item versione documentazione = 2018, versione progetto = 2.1.1-SNAPSHOT,  artifactId= quickstart
+	\end{enumerate}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\textwidth]{immagini/DocsExamples.png}\\
+		\caption{Screenshot di esempi di titoli di pagine doc}
+		\label{screenDocsNameVersion}
+	\end{figure}
+
+	Come è possibile vedere dall'immagine \ref{screenDocsNameVersion}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori.
+	Nel caso 2. invece non viene fornito nessuno dei due e per questo viene utilizzato il nome e la versione del progetto. 
+	Nel caso 3. viene data solo la versione della documentazione, che infatti viene preferita alla versione del progetto, ma non il nome della documentazione. 
+	Poichè nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utlizzare l'ultima opzione rimanente: l'artifactId.
+
+	% ---------------------------
 
 	L'utente può inoltre decidere di impostare:
 	\begin{itemize}
@@ -114,7 +144,7 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	Esso indirizza automaticamente ad un altro file della documentazione: un file principale che scelto dall'utente tramite l'inserimento del nome in fase di configurazione.
 
 
-\subsection{Pulizia documentazione}
+\subsection{Il goal \emph{cleanup}}
 Il secondo \emph{goal}, \emph{cleanup}, è nato dalla necessità di eliminare la documentazione relativa ad un prodotto che non è stato rilasciato.
 Questo tipo di prodotti presentano ``SNAPSHOT'' nella versione e per questo motivo, anche il titolo della pagina \emph{doc} lo contiene.
 Si ha quindi qui a che vedere con la pulizia totale dal plugin \emph{Docs} di tutte queste pagine. \\

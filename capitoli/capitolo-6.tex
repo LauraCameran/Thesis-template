@@ -3,12 +3,42 @@
 % !TEX root = ../tesi.tex
 
 %**************************************************************
-\chapter{Testing}
-\label{cap:testing}
+\chapter{Verifica e validazione}
+\label{cap:testing} % TODO sistemare riferimenti
+
+\section{Analisi statica}
+L'analisi statica relizzata grazie all'utilizzo di SonarQube.
+La sua esecuzione veniva messa in atto ogni qual volta avveniva una build di Jenkins.
+I problemi che SonarQube può segnalare, possono essere di tre tipi:
+\begin{itemize}
+    \item \bd{bug}: un errore nel codice che richiede di essere corretto il prima immediatamente;
+    \item \bd{vulnerabilità}: un punto nel codice che è aperto agli attacchi;
+    \item \bd{codesmell}:  un problema di manutenibiltià che rende il codice confuso e difficile da manutenere.
+\end{itemize}
+Ognuno dei quali può avere un grado di severità differente, ordinate dalla più alla meno importante:
+\begin{itemize}
+    \item \bd{BLOCKER}
+    \item \bd{CRITICAL}
+    \item \bd{MAJOR}
+    \item \bd{MINOR}
+    \item \bd{INFO}.
+\end{itemize}
+
+La maggior parte dei problemi segnalati da SonarQube durante il progetto, erano codesmell di diversa severità MINOR o MAJOR.
+Per il termine del progetto, la totalità di quelli etichettati come MAJOR sono stati risolti, come richiesto dalle norme aziendali relative al codice, ma anche molti dei MINOR.
+ 
+
 
 \section{Test di unità}
 
-Con Mockito 
+L'attività di testing per quel che riguarda i test di unità è stata svolta utilizzando principalmente due framework: JUnit e Mockito.
+
+    \subsection{JUnit}
+
+
+    \subsection{Mockito}
+
+
 
 \section{Test di validazione}
 
