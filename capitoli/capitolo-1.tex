@@ -19,7 +19,7 @@
 % citazione\footcite{womak:lean-thinking} \\
 
 %**************************************************************
-\section{Il progetto}
+\section{Il progetto}   \label{secProgetto}
 %Descrizione dell'azienda.
 Finantix è un'azienda di informatica che vende prodotti software.
 Il suo prodotto principale è suddiviso in moduli.
@@ -30,7 +30,9 @@ Questa documentazione viene manualmente caricata sulla piattaforma Confluence, o
 Il plugin Maven nasce dalla necessità di automatizzare la pubblicazione di questa documentazione su Confluence, in modo da semplificare e velocizzare notevolmente questo processo.
 Infatti, una volta configurato correttamente il plugin in tutti i progetti relativi ai moduli software, il caricamento avviene direttamente durante la build dei progetti, senza richiedere ulteriore intervento umano.
 
-    \subsection{Pianificazione} \label{pianificazione}
+% TODO sistemare
+    % \subsection{Pianificazione} \label{pianificazione}
+    
     Il progetto ha avuto inizio il 10 giugno 2019 ed ha terminato il 2 agosto 2019, per un totale di 320 ore.
 
     Durante queste 8 settimane, i prodotti attesi erano:
@@ -40,7 +42,7 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
         \item \bd{Manuale del programmatore}: descrizione tecnica del plug-in Maven, vale a dire, le classi principali dell’implementazione con le relative responsabilità ed il relativo funzionamento dinamico.
     \end{enumerate}
 
-    Per raggiungere questo scopo, gli obiettivi fissati erano:
+    Per raggiungere questo scopo, sono stati fissati alcuni fondamentali obiettivi, i quali sono riportati nella tabella \ref{obiettiviProgetto}.
     \begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
 			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Descrizione} & \textbf{Priorità} \\
@@ -48,7 +50,7 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
 			
             O01 & Acquisizione competenze su Maven & Obbligatorio \\
             O02 & Acquisizione competenze sull’implementazione di plug-in Maven & Obbligatorio \\
-            O03 & Familiarita’ con il paradigma RESTFul & Obbligatorio \\
+            O03 & Familiarità con il paradigma RESTFul & Obbligatorio \\
             O04 & Implementazione di un plug-in Maven & Obbligatorio \\
             D01 & Documentazione per l’utilizzatore & Desiderabile \\
             D02 & Documentazione per il programmatore & Desiderabile \\
@@ -56,7 +58,8 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
 
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Obiettivi del progetto}
+        \caption{Obiettivi del progetto}
+        \label{obiettiviProgetto}
 	\end{table}
   
 
@@ -70,7 +73,6 @@ Per far fronte a questo problema, un confronto diretto e costante con gli svilup
 
 %**************************************************************
 \section{Strumenti utilizzati}
-% TODO dire quali ho scelto io e quali no, dare ulteriore spiegazione
 Gli strumenti adottati per la creazione del plugin Maven sono molteplici.
 Alcune di questi sono abitualmente adoperati da tutti gli sviluppatori dell'azienda, motivo per cui sono stati utilizzati anche per questo progetto, mentre altri sono stati liberamente scelti dalla candidata.
 Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
@@ -83,9 +85,9 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     \item \bd{Meecrowave}: framework consigliato dall'azienda (ma non imposto) che permette la creazione di server velocemente
 \end{itemize}
 
-    \subsection{Maven} % TODO rileggere
+    \subsection{Maven} \label{mavenSection} % TODO rileggere
         
-    Maven è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale.
+    Maven \cite{site:maven-introduzione} è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale.
 
     % -------- LIFE CYCLE
     Maven è basato sul concetto di un ciclo di vita della build.
@@ -113,14 +115,51 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     Quando viene eseguito un goal, Maven cerca il file ``pom.xml'' (il POM) nella cartella corrente, lo legge, ottiene le informazioni della configurazione e dopo di che esegue il goal.
 
     Alcune di queste informazioni di configurazione che possono essere specificate nel POM sono dipendeze, i plugin o goal che possono essere eseguiti, la versione del progetto, la descrizione del progetto, ecc.
-    L'immagine \ref{screenPOM} ne riporta un esempio.
+    A continuazione, viene riportato un esempio.
+
+    % \newpage
+
+    \lstset{frame=tb,
+    language=XML,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{black},
+    commentstyle=\color{black},
+    stringstyle=\color{black},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+    }
+    \begin{lstlisting} 
+    <project>
+        <modelVersion>4.0.0</modelVersion>
+        <parent>
+            <groupId>com.thedigitalstack.maven.plugins</groupId>
+            <artifactId>maven-plugins</artifactId>
+            <version>1.3.1-SNAPSHOT</version>
+        </parent>
+        <artifactId>tds-docs-publisher-plugin</artifactId>
+        <packaging>maven-plugin</packaging>
+
+        <name>Maven Docs Publisher Plugin</name>
+        <description>Maven plug-in to publish generated documentation to 
+        Confluence so that official documentation is always up to date with the 
+        binary release and easily accessible to authorized users.</description>
+        ...
+    </project>  
+    \end{lstlisting}
     
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{immagini/screenPOM2.png}\\
-        \caption{Screenshot di un esempio di POM}
-        \label{screenPOM}
-    \end{figure}
+    % \begin{figure}[H]
+    %     \centering
+    %     \includegraphics[width=\textwidth]{immagini/screenPOM2.png}\\
+    %     \caption{Screenshot di un esempio di POM}
+    %     \label{screenPOM}
+    % \end{figure}
 
     % ------------------
 
@@ -166,7 +205,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
                 Confluence & Pubblicazione, creazione e consultazione di documentazione \\
                 Jira & Issue tracking system \\
                 Jenkins & Continuous integration \\
-                Sonarqube & Analisi statica del codice \\
+                SonarQube & Analisi statica del codice \\
                 Bitbucket e GitKraken & Controllo di versione \\
                 JUnit & Test di unità \\
                 Visual Studio Code & Editor di codice \\
@@ -179,7 +218,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 
 
 %**************************************************************
-\section{Il prodotto ottenuto} %TODO vedere se spostare su sezione Confluence
+\section{Il prodotto ottenuto}
 Il plugin Maven riesce a realizzare il caricamento di documentazione grazie ad un plugin di terze parti su Confluence, chiamato \emph{Docs}, descritto nella sezione \S\ref{pluginDocs}.
 
 Ciò che fa il plugin Maven è caricare su \emph{Docs} in maniera automatica la documentazione nella corretta categoria, realizzando un nuovo \emph{doc} o aggiornandone uno esistente.
@@ -194,7 +233,7 @@ Nel caso in cui l'utilizzatore del plugin Maven fornisca un titolo per la pagina
 
     \item[{\hyperref[cap:progettazione]{Il terzo capitolo}}] spiega la progettazione e la realizzazione del software, descrivendo le tecnologie utilizzate e l'organizzione del codice tramite diagrammi.
 
-    \item[{\hyperref[cap:testing]{Il quarto capitolo}}] approfondisce come è stata effettuata l'attività di testing.
+    \item[{\hyperref[cap:testing]{Il quarto capitolo}}] approfondisce come è stata effettuata l'attività di verifica e validazione, soffermandosi in particolare sull'analisi statica del codice e il testing.
 
     \item[{\hyperref[cap:conclusioni]{Il quinto capitolo}}] corrisponde al capitolo conclusivo. Esso riassume il risultato finale ottenuto e attua una valutazine critica del prodotto.
 

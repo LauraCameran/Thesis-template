@@ -10,12 +10,28 @@
 %**************************************************************
 \section{Risultato ottenuto}
 % uguale a intro ma con riferimenti più specifici a quanto già detto
-....
+
+Maven documentation publisher plug-in realizza la pubblicazione di documentazione Javadoc o Open API sul plugin Docs di Confluence grazie al goal \emph{publish}.
+
+Questa pubblicazione avviene in maniera automatica ogni qual volta un progetto Maven, in cui è stato configurato il plugin, attraversa la fase di \emph{package} del suo ciclo di vita.
+Ciò comporta la creazione di una nuova pagina su Docs, nel caso in cui il titolo creato per la pagina a partire dai parametri dati in configurazione sia nuovo, altrimenti la pagina esistente con quel titolo viene aggiornata.
+
+Maven documentation publisher plug-in permette inoltre di ripulire la repository dalla documentazione relativa a progetti che ancora sono sotto sviluppo e non sono stati rilasciati.
+Questi progetti sono marcati da Maven con il qualificatore ``SNAPSHOT'' e la loro documentazione può essere rimossa da Docs in qualunque momento tramite un'invocazione diretta del goal \emph{cleanup}.
 
 %**************************************************************
 \section{Analisi critica del prodotto e del lavoro di stage}
-......
 
+    \subsection{Esperienza in azienda}
+    Come prima esperienza lavorativa nell'ambito IT, il progetto di stage effettuato da Finantix è risultato ottimo e soddisfacente. \\
+    Nei primi giorni è stato un po' complicato abituarsi al lavoro in open space, perché con tante altre persone attorno è in un primo momento difficile mantenere la concentrazione.
+    Successivamente a questa fase, è emerso un ambiente di lavoro pacato e confortevole, che ha permesso il proseguimento del progetto senza problemi.
+    L'opportunità di gestirsi nel proprio lavoro di stage e confrontarsi con altri esperti del settore, non è mancata e anzi, si è rivelata molto interessante e stimolante. \\
+    Mettere in pratica il way of working aziendale, è stato di grande ispirazione e ha permesso la comprensione della realtà di un'azienda medio/grande com Finantix.
+    Una delle prove più difficili è stata pianificare il lavoro in modo da rispettare le tempistiche predefinite.
+    Inizialmente infatti, il tempo da dedicare al progetto appariva scarso alla candidata, quasi insufficiente.
+    Mentre una volta ottenute la padronanza delle tecnologie coinvolte, è stato tutto molto più veloce e sbrigativo di quanto non appariva precedentemente.
+    Il passo successivo e finale ha risultato nella capacità di ragionare sul prodotto e valutarlo, permettendo con il tutor aziendale di raffinare le funzionalità, in modo che il prodotto più si avvicinasse ad estinguere le esigenze dell'azienda.
 
 %**************************************************************
 \subsection{Utilizzazione del prodotto} %Il prodotto è utilizzato?
@@ -24,15 +40,51 @@ Maven documentation publisher plug-in non è ancora stato messo in produzione ma
 
 %**************************************************************
 \subsection{Valutazione degli strumenti utilizzati}
-......
+
+    \subsubsection{Java}
+    Java si è rivelato il linguaggio di programmazione ideale per lo sviluppo del prodotto, in quanto fornisce molte librerie che sono state adatte alle varie esigenze.
+    Per esempio, JAXB ha notevolmente semplificato la conversione di messaggi JSON in oggetti Java direttamente maneggiabili dai mojo.
+
+    \subsubsection{Eclipse}
+    Eclipse è stato un buono strumento come ambiente di sviluppo per il plugin grazie a tutte le sue integrazioni con gli altri strumenti, quali JUnit, Maven e SonarQube.
+    Nonostante questo però, presenta alcuni bug che fanno preferire IntelliJ IDEA, usato dalla candidata in passato.
+
+    \subsubsection{Maven}
+    Maven è certamente eccellente per l'automazione della build di progetti e l'unico utilizzabile per lo sviluppo del prodotto.
+    Oltre a questo, era di grande interesse per la candidata approfondirne le conoscenze.
+
+    \subsubsection{Confluence e Jira}
+    Confluence e Jira della suite Atlassian erano completamente sconosciuti alla candidata prima del progetto, ma la valutazione finale è positiva.
+    Oltre che strumenti molto utili, hanno esposto delle funzionalità molto interessanti: per esempio la possibilità di collegare direttamente le issue di Jira alla documentazione di Confluence.
+
+    \subsubsection{Jenkins}
+    Di Jenkins è stato fatto solo un utilizzo base, ma si è mostrato di grande utilità al momento della build del progetto, per verificare che rispettasse le norme aziendali.
+
+    \subsubsection{SonarQube}
+    SonarQube per l'analisi statica è sempre stato un ottimo strumento, anche per questo progetto, sebbene alcune segnalazioni fossero pressoché inutili o poco idonee.
+
+    \subsubsection{BitBucket}
+    BitBucket come strumento per il controllo di versione, non è sembrato particolarmente migliore di GitHub o Gitlab, già precedentemente utilizzati dalla candidata.
+    Nonostante ciò, risulta coerente con la scelta dell'azienda di adottare interamente la suite di strumenti Atlassian (Confluence, Jira, ecc).
+
+    \subsubsection{Strumenti scelti dalla candidata}
+    Gli strumenti proposti dalla candidata, quali Visual Studio Code, GitKraken, ecc, si sono confermati i più comodi e vantaggiosi per lo scopo per la quale erano stati scelti.
+
 
 %**************************************************************
-\subsection{Possibili punti di insoddisfazione}
-......
+% \subsection{Possibili punti di insoddisfazione}
+% .....
 
-\subsubsection{Relativi miglioramenti}
-......
+% \subsubsection{Relativi miglioramenti}
+% ......
 
 %**************************************************************
 \subsection{Possibili estensioni}
-......
+Il prodotto realizzato può essere ulteriormente esteso in modo da ampliarne le funzionalità.
+A seguire, alcune proposte di estensione:
+\begin{itemize}
+    \item \bd{Rinominazione titolo del doc}: aggiungere la possibilità di aggiornare la pagina doc della documentazione, oltre che con un nuovo archivio, rinominandone il titolo, qualvolta l'utente lo voglia, anziché creare necessariamente un nuovo doc. In questo caso, in configurazione basterebbe qualche semplice parametro in più;
+    \item \bd{Pubblicazione di documentazione non HTML}: permettere all'utente di dare come documentazione una cartella contenente file in formato diverso dall'HTML. In questo caso, il plugin si occuperebbe non solo dell'archiviazione, ma anche della trasformazione dei file in linguaggio HTML. Anche in questo caso, in configurazione potrebbe bastare l'inserimento di qualche altro nuovo parametro;
+    \item \bd{Pulizia di altra documentazione}: estendere il goal cleanup o aggiungerne un altro che permetta l'eliminazione di documentazione secondo altri criteri (per esempio tutta la documentazione di una determinata categoria o tutta la documentazione con versione inferiore ad un certo anno).
+\end{itemize} 
+

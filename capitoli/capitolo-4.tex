@@ -48,7 +48,7 @@ Successivamente, nel corso dello stage, sono state aggiunte delle nuove funziona
 
 \section{Descrizione del prodotto}
 
-\emph{Maven documentation publisher plug-in} supporta la pubblicazione di documentazione in formato HTML. Ha due goal:
+Maven documentation publisher plug-in supporta la pubblicazione di documentazione in formato HTML. Ha due goal:
 \begin{itemize}
 	\item \bd{publish}: che pubblica la documentazione;
 	\item \bd{cleanup}: che elimina la documentazione contentente SNAPSHOT nel nome.
@@ -92,7 +92,7 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	L'utente può scegliere nome e versione della documentazione.
 	Il titolo della pagina \emph{doc} viene costruito dall'unione di nome e versione (ad esempio dato nome ``Docs Maven Plugin'' e versione ``2019'', il titolo apparirà come: ``Docs Maven Plugin 2019'').
 
-	% TODO da posizionare
+
 	% -------------------------
 
 	Nel caso in cui l'utente non fornisca nome o versione, o nessuno dei due, il sistema prevede il seguente comportamento per i due parametri:
@@ -115,7 +115,7 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 		\label{screenDocsNameVersion}
 	\end{figure}
 
-	Come è possibile vedere dall'immagine \ref{screenDocsNameVersion}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori.
+	Come è possibile vedere dall'immagine \underline{\ref{screenDocsNameVersion}}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori.
 	Nel caso 2. invece non viene fornito nessuno dei due e per questo viene utilizzato il nome e la versione del progetto. 
 	Nel caso 3. viene data solo la versione della documentazione, che infatti viene preferita alla versione del progetto, ma non il nome della documentazione. 
 	Poichè nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utlizzare l'ultima opzione rimanente: l'artifactId.
@@ -143,7 +143,16 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	Ogni archivio caricato su \emph{Docs} plugin di Confluence deve contenere al suo interno una pagina denominata \emph{main entrance page}, la quale essenzialmente è la prima pagina che viene visualizzata quando si entra nella pagina \emph{doc}.
 	Questa è impostata di default nel plugin come ``index.html''.
 	Per questo motivo è stato scelto di permettere a \emph{Maven documentation publisher plug-in} di creare questo file qualora mancasse.
-	Esso indirizza automaticamente ad un altro file della documentazione: un file principale che scelto dall'utente tramite l'inserimento del nome in fase di configurazione.
+	Esso indirizza automaticamente ad un altro file della documentazione: un file principale scelto dall'utente tramite l'inserimento del nome in fase di configurazione.
+
+	La figura \ref{errorDocs} mostra Docs nel caso di main entrance page mancante.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{immagini/indexError.png}\\
+		\caption{Esempio di Docs nel caso di file ``index.html'' mancante}
+		\label{errorDocs}
+	\end{figure}
 
 
 \subsection{Il goal \emph{cleanup}}
@@ -154,7 +163,7 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{immagini/cleanup3D.png}\\
+	\includegraphics[width=\textwidth]{cleanup3D}\\
 	\caption{Esempio di Docs prima e dopo l'esecuzione del goal \emph{cleanup}}
 	\label{cleanupBeforeAfter}
 \end{figure}
@@ -165,6 +174,7 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 
 % Furthermore a doc page can be overall identified by its docKey, which is a sequence of category id and doc id.
 
+% TODO aggiungere sezione di Apertura ticket in Jira
 
 \newpage
 
@@ -191,7 +201,6 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 		\end{itemize}
 	\end{itemize}
 
-
 	Esempio: \texttt{R2Q1} indica il secondo requisito di qualità ed è desiderabile. \\
 
 	I requisiti individuati sono riassunti in tabelle secondo la loro tipologia.
@@ -202,8 +211,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 
 % \newpage
 
-	% TODO dividere i requisiti in altri gruppi e dare una spiegazione
-	\subsection{Requisiti di funzionalità}\label{RequisitiFunzionalità}
+	\subsection{Requisiti di funzionalità} \label{requisitiFunzionalita}
 	I requisiti di funzionalità sono ulteriormenti suddivisi in tabelle secondo:
 	\begin{itemize}
 		\item requisiti relativi a ciò che il sistema permette all'utente di configurare;
@@ -379,7 +387,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	\end{table}
 
 
-	\section{Riepilogo dei requisiti}
+	\subsection{Riepilogo dei requisiti}
 
 	\begin{table}[H]
 		\centering
@@ -430,6 +438,8 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			R19F2 & Azienda \\
 			R20F1 & Azienda \\
 			R21F2 & Azienda \\
+
+			\bottomrule
 		\end{tabularx}} 
 	\caption{Requisiti in rapporto alle fonte ``Azienda'' (1)}
 	\end{table}
@@ -468,9 +478,11 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			R9V2 & Azienda \\
 			R10V2 & Azienda \\
 
+			\bottomrule
 		\end{tabularx}} \\
 	\caption{Requisiti in rapporto alla fonte ``Azienda'' (2)}
 	\end{table}
+
 
 	\begin{table}[H]
 		{\def\arraystretch{1.5}
@@ -494,7 +506,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			%  &  \\
 			%  &  \\
 		\end{tabularx}} \\
-	\caption{Requisiti in rapporto alle fonti (3)}
+	\caption{Requisiti in rapporto alla fonte ``Interno''}
 	\end{table}
 
 

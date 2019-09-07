@@ -105,7 +105,7 @@
 
 \usepackage{float}                      % [H]
 % \usepackage{hyperref}                   % per i link
-%TODO sistemare gli hyperref
+%TODO sistemare gli hyperref e sistemare label
 
 % -- DA SWEG
 \usepackage{enumitem}
@@ -130,7 +130,9 @@
 \definecolor{lightgray}{gray}{0.92}
 \definecolor{lightblue}{rgb}{0.93,0.95,1.0}
 \definecolor{headgray}{gray}{0.88}
-\colorlet{beautyblue}{blue!45}
+% \colorlet{beautyblue}{blue!45}
+% BW Per il bianco e nero
+\colorlet{beautyblue}{white}
 
 % Ridefinizione dell'env tabularx. Il vecchio è utilizzabile con l'env oldtabularx
 \let\oldtabularx\tabularx
@@ -160,7 +162,7 @@
 \input{inizio-fine/colophon}
 \input{inizio-fine/dedica}
 \input{inizio-fine/sommario}
-% \input{inizio-fine/ringraziamenti}
+\input{inizio-fine/ringraziamenti}
 \input{inizio-fine/indici}
 \cleardoublepage
 
@@ -182,6 +184,6 @@
 % Materiale finale
 %**************************************************************
 \backmatter
-\printglossaries
+%\printglossaries
 \input{inizio-fine/bibliografia}
 \end{document}

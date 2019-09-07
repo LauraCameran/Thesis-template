@@ -4,7 +4,7 @@
 
 %**************************************************************
 \chapter{Verifica e validazione}
-\label{cap:testing} % TODO sistemare riferimenti
+\label{cap:testing} 
 
 \section{Analisi statica}
 L'analisi statica relizzata grazie all'utilizzo di SonarQube.
@@ -13,7 +13,7 @@ I problemi che SonarQube può segnalare, possono essere di tre tipi:
 \begin{itemize}
     \item \bd{bug}: un errore nel codice che richiede di essere corretto il prima immediatamente;
     \item \bd{vulnerabilità}: un punto nel codice che è aperto agli attacchi;
-    \item \bd{codesmell}:  un problema di manutenibiltià che rende il codice confuso e difficile da manutenere.
+    \item \bd{codesmell}:  un problema di manutenibilità che rende il codice confuso e difficile da manutenere.
 \end{itemize}
 Ognuno dei quali può avere un grado di severità differente, ordinate dalla più alla meno importante:
 \begin{itemize}
@@ -26,6 +26,9 @@ Ognuno dei quali può avere un grado di severità differente, ordinate dalla pi�
 
 La maggior parte dei problemi segnalati da SonarQube durante il progetto, erano codesmell con severità MINOR o MAJOR.
 La figura \ref{sonarMAJORissue} ne riporta un esempio.
+
+\clearpage
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{immagini/major-issue.png}\\
@@ -115,8 +118,23 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
 
 
 \section{Test di validazione}
+Al termine dell'implementazione del prodotto, insieme all'attività di testing, si è proceduto con la verifica di tutti i casi possibili, dal punto di vista di un qualunque sviluppatore che utilizza il plugin.
+Tra i casi limite, troviamo per esempio:
+\begin{itemize}
+    \item Pubblicazione di documentazione in una categoria in cui l'utente non ha permesso di accesso;
+    \item Pubblicazione di documentazione in una categoria inesistente;
+    \item Inserimento in configurazione del nome di un file inesistente all'interno della cartella data;
+    \item Omissione dell'utente di inserimento in configurazione delle credenziali;
+    \item Eliminazione di un documento inesistente.
+\end{itemize}
+In tutti questi tentativi, il prodotto si è comportato come atteso, dando dei messaggi di errore.
+Anche in tutte le altre circostanze previste, è stata verificata la corretta esecuzione del plugin. \\
 
+Insieme agli sviluppatori senior DevOps dell'azienda e il tutor aziendale, ci si è accertati che tutte le funzionalità attese del prodotto, descritte nella sezione \S\ref{requisitiFunzionalita}, sono state concretizzate.
+In generale si è appurato che i requisiti, nella loro totalità, sono stati soddisfatti; non soltanto quindi i requisiti di funzionalità, ma anche i requisiti esplicitati nelle sezioni seguenti, quali requisiti di qualità e di vincolo, dagli obbligatori agli opzionali, come la stesura dei manuali e l'adozione di tutti gli strumenti elencati.
 
+Nel corso del progetto, è stato inoltre appurato che gli obiettivi inizialmente fissati, visibili nella tabella \ref{obiettiviProgetto} alla sezione \S\ref{secProgetto}, sono stati tutti progressivamente raggiunti.
+Uno strumento di grande aiuto a questo scopo è stato Jira poiché ha permesso il monitoraggio dell'andamento del progetto tramite il continuo aggiornamento dei task.
 
 
 %**************************************************************
