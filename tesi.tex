@@ -94,7 +94,8 @@
                                         % 3. eseguire: makeindex -s tesi.ist -t tesi.alg -o tesi.acr tesi.acn
                                         % 4. compilare due volte tesi.tex.
 
-\usepackage[backend=biber,style=verbose-ibid,hyperref,backref]{biblatex}
+% \usepackage[backend=biber,style=verbose-ibid,hyperref,backref]{biblatex}
+\usepackage[backend=biber,hyperref,backref,citestyle=numeric]{biblatex}
                                         % eccellente pacchetto per la bibliografia;
                                         % produce uno stile di citazione autore-anno;
                                         % lo stile "numeric-comp" produce riferimenti numerici
@@ -130,9 +131,9 @@
 \definecolor{lightgray}{gray}{0.92}
 \definecolor{lightblue}{rgb}{0.93,0.95,1.0}
 \definecolor{headgray}{gray}{0.88}
-% \colorlet{beautyblue}{blue!45}
+\colorlet{beautyblue}{blue!45}
 % BW Per il bianco e nero
-\colorlet{beautyblue}{white}
+% \colorlet{beautyblue}{white}
 
 % Ridefinizione dell'env tabularx. Il vecchio è utilizzabile con l'env oldtabularx
 \let\oldtabularx\tabularx

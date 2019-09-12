@@ -7,7 +7,7 @@
 \label{cap:testing} 
 
 \section{Analisi statica}
-L'analisi statica relizzata grazie all'utilizzo di SonarQube.
+L'analisi statica è stata relizzata grazie all'utilizzo di SonarQube \cite{site:sonarqube}.
 La sua esecuzione veniva messa in atto ogni qual volta avveniva una build di Jenkins.
 I problemi che SonarQube può segnalare, possono essere di tre tipi:
 \begin{itemize}
@@ -45,9 +45,9 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
 
     \subsection{JUnit}
     JUnit è il framework ideale per sviluppare i test di unità in Java.
-    Esso fornisce notazioni essenziali quali:
+    Esso fornisce notazioni \cite{site:junit-annotation} essenziali quali:
     \begin{itemize}
-        \item \txt{Test} per indicare che il metodo rappresenta un test;
+        \item \txt{Test} per indicare che il metodo rappresenta un test \cite{site:junit-test};
         \item \txt{Before} per creare gli oggetti comuni a più test prima della loro esecuzione;
         \item \txt{Ignore} per ignorare temporaneamente un test.
     \end{itemize}
@@ -74,9 +74,9 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
     Sono stati utilizzati inoltre i classici metodi di \txt{org.junit.Assert} come \txt{assertEquals()}, \txt{assertNull()}, \txt{assertTrue()} ecc, utili per determinare lo stato di un test case.
 
     \subsection{Mockito}
-    Mockito è un mock framework molto popolare che può essere usato in congiunzione a JUnit. 
+    Mockito è un mock framework molto popolare che può essere usato in congiunzione a JUnit \cite{site:mockito}. 
     Ciò vuol dire che Mockito consente la creazione e configurazione di mock object.
-    I mock object sono degli oggetti simulati che riproducono il comportamento degli oggetti reali in modo controllato.
+    I mock object sono degli oggetti simulati che riproducono il comportamento degli oggetti reali in modo controllato \cite{site:mock}.
     Un programmatore crea un oggetto mock per testare il comportamento di altri oggetti, reali, ma legati ad un oggetto inaccessibile o non implementato.
     Generalmente all'interno del progetto, questi oggetti sono per esempio il client per il mojo o il server per il client.
     Realizzare un oggetto mock in questi casi era utile per evitare di trasformare i test di unità in test d'integrazione.
@@ -121,20 +121,17 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
 Al termine dell'implementazione del prodotto, insieme all'attività di testing, si è proceduto con la verifica di tutti i casi possibili, dal punto di vista di un qualunque sviluppatore che utilizza il plugin.
 Tra i casi limite, troviamo per esempio:
 \begin{itemize}
-    \item Pubblicazione di documentazione in una categoria in cui l'utente non ha permesso di accesso;
-    \item Pubblicazione di documentazione in una categoria inesistente;
+    \item pubblicazione di documentazione in una categoria in cui l'utente non ha permesso di accesso;
+    \item pubblicazione di documentazione in una categoria inesistente;
     \item Inserimento in configurazione del nome di un file inesistente all'interno della cartella data;
-    \item Omissione dell'utente di inserimento in configurazione delle credenziali;
-    \item Eliminazione di un documento inesistente.
+    \item omissione dell'utente di inserimento in configurazione delle credenziali;
+    \item eliminazione di un documento inesistente.
 \end{itemize}
 In tutti questi tentativi, il prodotto si è comportato come atteso, dando dei messaggi di errore.
 Anche in tutte le altre circostanze previste, è stata verificata la corretta esecuzione del plugin. \\
 
 Insieme agli sviluppatori senior DevOps dell'azienda e il tutor aziendale, ci si è accertati che tutte le funzionalità attese del prodotto, descritte nella sezione \S\ref{requisitiFunzionalita}, sono state concretizzate.
 In generale si è appurato che i requisiti, nella loro totalità, sono stati soddisfatti; non soltanto quindi i requisiti di funzionalità, ma anche i requisiti esplicitati nelle sezioni seguenti, quali requisiti di qualità e di vincolo, dagli obbligatori agli opzionali, come la stesura dei manuali e l'adozione di tutti gli strumenti elencati.
-
-Nel corso del progetto, è stato inoltre appurato che gli obiettivi inizialmente fissati, visibili nella tabella \ref{obiettiviProgetto} alla sezione \S\ref{secProgetto}, sono stati tutti progressivamente raggiunti.
-Uno strumento di grande aiuto a questo scopo è stato Jira poiché ha permesso il monitoraggio dell'andamento del progetto tramite il continuo aggiornamento dei task.
 
 
 %**************************************************************

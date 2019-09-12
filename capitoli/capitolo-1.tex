@@ -21,37 +21,48 @@
 %**************************************************************
 \section{Il progetto}   \label{secProgetto}
 %Descrizione dell'azienda.
-Finantix è un'azienda di informatica che vende prodotti software.
-Il suo prodotto principale è suddiviso in moduli.
-Ognuno di questi moduli prevede una propria documentazione delle API Java (un archivio zip contente documentazione in formato Javadoc) e la documentazione della API RESTful (un archivio zip contenente documentazione in formato Open API).
+Finantix è un'azienda di informatica che vende un prodotto software principale.
+Questo prodotto, per la realizzazione di applicazioni finanziarie, è suddiviso in moduli.
+Ognuno di questi moduli prevede una propria documentazione delle API Java (un archivio zip contente documentazione in formato JavaDoc) e la documentazione della API RESTful (un archivio zip contenente documentazione in formato Open API).
 Questa documentazione viene manualmente caricata sulla piattaforma Confluence, ove cui è consultata dagli sviluppatori dell'azienda.
 
 %Introduzione all'idea dello stage.
-Il plugin Maven nasce dalla necessità di automatizzare la pubblicazione di questa documentazione su Confluence, in modo da semplificare e velocizzare notevolmente questo processo.
-Infatti, una volta configurato correttamente il plugin in tutti i progetti relativi ai moduli software, il caricamento avviene direttamente durante la build dei progetti, senza richiedere ulteriore intervento umano.
+Il plugin Maven nasce dalla necessità di automatizzare la pubblicazione di questa documentazione sulla piattaforma, in modo da semplificare e velocizzare notevolmente questo processo.
+Infatti, una volta configurato correttamente il plugin in tutti i progetti relativi ai moduli software, il caricamento della documentazione avviene direttamente durante la build del progetto, senza richiedere ulteriore intervento umano.
 
-% TODO sistemare
-    % \subsection{Pianificazione} \label{pianificazione}
     
     Il progetto ha avuto inizio il 10 giugno 2019 ed ha terminato il 2 agosto 2019, per un totale di 320 ore.
 
     Durante queste 8 settimane, i prodotti attesi erano:
     \begin{enumerate}
-        \item \bd{Plug-in Maven}: progetto Java il cui risultato è un plugin per il sistema di build Maven;
-        \item \bd{Manuale dell’utilizzatore}: documentazione del plug-in Maven che illustra come attivarlo e configurarlo al fine di pubblicare la documentazione generata durante il processo di build sul sistema documentale dell’azienda;
-        \item \bd{Manuale del programmatore}: descrizione tecnica del plug-in Maven, vale a dire, le classi principali dell’implementazione con le relative responsabilità ed il relativo funzionamento dinamico.
+        \item \bd{plug-in Maven}: progetto Java il cui risultato è il plugin sopra descritto;
+        \item \bd{manuale dell’utilizzatore}: documentazione del plugin Maven che illustra come attivarlo e configurarlo al fine di pubblicare la documentazione generata durante il processo di build sul sistema documentale dell’azienda;
+        \item \bd{manuale del programmatore}: descrizione tecnica del plugin Maven, vale a dire, le classi principali dell’implementazione con le relative responsabilità ed il relativo funzionamento.
     \end{enumerate}
 
-    Per raggiungere questo scopo, sono stati fissati alcuni fondamentali obiettivi, i quali sono riportati nella tabella \ref{obiettiviProgetto}.
+    Per raggiungere questo scopo, sono stati fissati alcuni fondamentali obiettivi:
+    \begin{itemize}
+        \item studiare in maniera autonoma lo strumento Maven per poterne capire appieno l'utilità ed il funzionamento;
+        \item comprendere come realizzazione un plugin Maven, oggetto centrale del progetto;
+        \item comprendere il paradigma RESTful, per poter trasmettere dati al server documentale;
+        \item implementare il plugin Maven, una volta raggiunte le competenze sufficienti;
+        \item realizzare la documentazione utente, ovvero il manuale dell'utilizzatore sopra citato, per semplificare la comprensione dell'utilizzo del plugin all'utente finale. Non è strettamente necessario all'adempimento del plugin Maven, ma auspicabile;
+        \item realizzare la documentazione dello sviluppatore, ovvero il manuale del programmatore sopra citato, per aiutare il programmatore nella cognizione del codice. Anch'esso, come il punto precedente, non è necessario ma auspicabile;
+        \item impiegare la tecnologia Jenkins che è usata per ogni progetto per la continuos integration. Per questo motivo, è possibile farne un minimo utilizzo, ma non è strettamente richiesto.
+    \end{itemize}
+    
+    Tutti gli obiettivi possono essere tracciati da un codice univoco che li identifica. 
+    Ognuno di essi ha inoltre una determinata priorità scelta in base all'importanza e necessità di raggiungerli.
+    La tabella \ref{obiettiviProgetto} li riassume.
     \begin{table}[H]
 		\begin{paddedtablex}[1.7]{\textwidth}{cXc}
 			\rowcolor{beautyblue}\textbf{Codice} & \textbf{Descrizione} & \textbf{Priorità} \\
 			\toprule
 			
             O01 & Acquisizione competenze su Maven & Obbligatorio \\
-            O02 & Acquisizione competenze sull’implementazione di plug-in Maven & Obbligatorio \\
+            O02 & Acquisizione competenze sull’implementazione di plugin Maven & Obbligatorio \\
             O03 & Familiarità con il paradigma RESTFul & Obbligatorio \\
-            O04 & Implementazione di un plug-in Maven & Obbligatorio \\
+            O04 & Implementazione di un plugin Maven & Obbligatorio \\
             D01 & Documentazione per l’utilizzatore & Desiderabile \\
             D02 & Documentazione per il programmatore & Desiderabile \\
             F01 & Utilizzo di base di Jenkins & Facoltativo \\
@@ -62,6 +73,11 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
         \label{obiettiviProgetto}
 	\end{table}
   
+% TODO ampliare 
+% Nel piano di lavoro è presente un prospetto che settimana per settimana indica quali attività vengono svolte. L'hai riportato nella tesi? Se l'hai riportato, hai indicato le modifiche all'ordine con cui sono state svolte le attività?
+
+
+
 
 %**************************************************************
 \section{Principali problematiche}
@@ -77,12 +93,12 @@ Gli strumenti adottati per la creazione del plugin Maven sono molteplici.
 Alcune di questi sono abitualmente adoperati da tutti gli sviluppatori dell'azienda, motivo per cui sono stati utilizzati anche per questo progetto, mentre altri sono stati liberamente scelti dalla candidata.
 Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 \begin{itemize}
-    \item \textbf{GitKraken}: client di Git che presenta un'interfaccia grafica molto intuitiva e interattiva, oltre che semplice da usare
+    \item \textbf{GitKraken}: client di Git che presenta un'interfaccia grafica molto intuitiva e interattiva, oltre che semplice da usare;
     % \item \textbf{JUnit}: framework per i test d'unità che si integra facilmente con Eclipse e Maven
-    \item \textbf{Visual Studio Code}: editor di codice che supporta molti linguaggi, tra cui JSON e HTML
-    \item \bd{SequenceDiagram.org}: strumento online che permette la creazione di diagrammi di sequenza in modo semplice e veloce grazie ad una sintassi propria
-    \item \bd{ObjectAid UML Explorer}: strumento d'integrazione a Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java
-    \item \bd{Meecrowave}: framework consigliato dall'azienda (ma non imposto) che permette la creazione di server velocemente
+    \item \textbf{Visual Studio Code}: editor di codice che supporta molti linguaggi, tra cui JSON e HTML \cite{site:visual-studio-code};
+    \item \bd{SequenceDiagram.org}: strumento online che permette la creazione di diagrammi di sequenza in modo semplice e veloce grazie ad una sintassi propria;
+    \item \bd{ObjectAid UML Explorer}: strumento d'integrazione a Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java;
+    \item \bd{Meecrowave}: framework consigliato dall'azienda (ma non imposto) che permette la creazione di server velocemente \cite{site:meecrowave}.
 \end{itemize}
 
     \subsection{Maven} \label{mavenSection} % TODO rileggere
@@ -90,8 +106,8 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     Maven \cite{site:maven-introduzione} è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale.
 
     % -------- LIFE CYCLE
-    Maven è basato sul concetto di un ciclo di vita della build.
-    Ciò significa che il processo per la build e la distribuzione di un particolare artifatto (progetto) è chiaramente definito. 
+    Maven è basato sul concetto di un ciclo di vita della build \cite{site:maven-lifecycle}.
+    Ciò significa che il processo per la build e la distribuzione di un particolare artefatto (progetto) è chiaramente definito. 
     Per la persona che realizza un progetto, ciò significa che è solamente necessario imparare un piccolo set di comandi per eseguire la build di un progetto e il POM assicurerà l'ottenimento dei risultati desiderati.
     Ci sono diversi cicli di vita possibili ed ogni ciclo di vita è suddiviso in fasi ben determinate.
     Per esempio, una fase di particolare rilevanza per il progetto del plugin Maven è la fase di \emph{package}, che si occupa di prendere il codice compilato e impacchettarlo nel suo formato distribuibile, come per esempio un JAR. 
@@ -104,7 +120,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     % -------- PLUGIN
     \subsubsection{Cos'è un plugin Maven}
 
-    Un plugin Maven è un programma non autonomo che interagisce con Maven per ampliarne o estenderne le funzionalità originarie.
+    Un plugin Maven è un programma non autonomo che interagisce con Maven per ampliarne o estenderne le funzionalità originarie \cite{site:maven-plugin}.
 
     Essendo il progetto incentrato sulla realizzazione di un plugin Maven, esso deve avere un \emph{goal}.
     Un \emph{goal} rappresenta un compito specifico (è più fine di una fase) che contribuisce alla gestione del progetto.
@@ -114,7 +130,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 
     Quando viene eseguito un goal, Maven cerca il file ``pom.xml'' (il POM) nella cartella corrente, lo legge, ottiene le informazioni della configurazione e dopo di che esegue il goal.
 
-    Alcune di queste informazioni di configurazione che possono essere specificate nel POM sono dipendeze, i plugin o goal che possono essere eseguiti, la versione del progetto, la descrizione del progetto, ecc.
+    Alcune di queste informazioni di configurazione che possono essere specificate nel POM sono dipendeze, i plugin o goal che possono essere eseguiti, la versione del progetto, la descrizione del progetto, ecc \cite{site:maven-pom}.
     A continuazione, viene riportato un esempio.
 
     % \newpage
@@ -164,7 +180,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     % ------------------
 
     \subsection{Confluence}
-    Confluence è un software di collaborazione sviluppato dalla compagnia australiana Atlassian.
+    Confluence è un software di collaborazione sviluppato dalla compagnia australiana Atlassian \cite{site:confluence}.
     Esso è il principale sistema documentale dell'azienda, infatti viene usato da ogni dipendente per la consultazione di vario materiale: dalle norme aziendali, alla documentazione del codice.
     Ciò che è più importante, motivo per cui viene utilizzato, è il fatto che permette di raggruppare pagine correlate in uno spazio dedicato accessibile a tutti o a gruppi ristretti di persone.
     
@@ -173,29 +189,26 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 
     \subsubsection{Il plugin Docs} \label{pluginDocs}
 
-    Come è possibile vedere dall'immagine \ref{screenDocs}, \emph{Docs} è suddiviso in categorie (in questo caso ``JavaDocs'' e ``Spacification'').
-    Le categorie presentano un nome, consentono di raggruppare la documentazione e possono essere collegate agli spazi Confluence esistenti, in modo da permettere la visione di questa documentazione solo a determinate persone.
-    Ogni categoria quindi contiene al suo interno delle pagine web (chiamate anche \emph{doc}) che includono la documentazione in formato HTML (come per esempio ``JDF Specification RC2'' per la categoria ``Specification'').
-
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.68\textwidth]{immagini/docs-conf.png}\\
+        \includegraphics[width=0.56\textwidth]{immagini/docs-conf.png}\\
         \caption{Screenshot di un esempio di Docs Plug-in}
         \label{screenDocs}
     \end{figure}
 
+    Come è possibile vedere dall'immagine \ref{screenDocs}, \emph{Docs} è suddiviso in categorie (in questo caso ``JavaDocs'' e ``Spacification'').
+    Le categorie presentano un nome, consentono di raggruppare la documentazione e possono essere collegate agli spazi Confluence esistenti, in modo da permettere la visione di questa documentazione solo a determinate persone.
+    Ogni categoria quindi contiene al suo interno delle pagine web (chiamate anche \emph{doc}) che includono la documentazione in formato HTML \cite{site:docs-plugin} (come per esempio ``JDF Specification RC2'' per la categoria ``Specification'').
 
-
-
-    \newpage
+    % \clearpage
 
     \subsection{Riepilogo degli strumenti}
 
-    Qui di seguito viene riportata una tabella che riassume tutti gli strumenti utilizzati e a quale scopo.
+    In seguito viene riportata una tabella (\ref{tabellaStrumenti}) che riassume tutti gli strumenti utilizzati e a quale scopo.
 
         \begin{table}[H]
             {\def\arraystretch{1.5}
-            \begin{tabularx}{\textwidth}{c | X}
+            \begin{tabularx}{\textwidth}{cX}
                 \rowcolor{beautyblue}
                 \textbf{Strumento} &
                 \textbf{Scopo} \\ \hline
@@ -214,6 +227,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
                 Meecrowave & Creazione di server \\
             \end{tabularx}} \\
         \caption{Tabella di tecnologie utilizzate durante il progetto e loro scopo.}
+        \label{tabellaStrumenti}
         \end{table}
 
 
@@ -239,11 +253,11 @@ Nel caso in cui l'utilizzatore del plugin Maven fornisca un titolo per la pagina
 
 \end{description}
 
-% TODO aggiungere altro
-Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
+Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni:
 \begin{itemize}
 	% \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
 	% \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
 	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \emph{corsivo};
-	\item per tutti i concetti che possono essere riassunti, viene fornita una tabella o un elenco puntato.
+	\item per tutti i concetti che possono essere riassunti, viene fornita una tabella o un elenco puntato;
+	\item citazioni e riferimenti provenienti da siti o libri vengono accompagnati dal loro numero identificativo tra parentesi quadre, ad esempio \cite{site:junit-annotation}.
 \end{itemize}

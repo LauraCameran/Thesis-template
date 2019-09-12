@@ -46,7 +46,7 @@ L'obiettivo all'inizio dello stage era il semplice caricamento di documentazione
 Successivamente, nel corso dello stage, sono state aggiunte delle nuove funzionalità e un nuovo goal, dato che le tempistiche pianificate erano ottimistiche e hanno permesso sufficiente tempo per ampliare il prodotto.
 
 
-\section{Descrizione del prodotto}
+\section{Descrizione del prodotto} \label{descrizioneProdotto}
 
 Maven documentation publisher plug-in supporta la pubblicazione di documentazione in formato HTML. Ha due goal:
 \begin{itemize}
@@ -55,7 +55,7 @@ Maven documentation publisher plug-in supporta la pubblicazione di documentazion
 \end{itemize}
 Il principale è \emph{publish} e si occupa della pubblicazione su  \emph{Docs} Confluence della documentazione del codice di un qualunque progetto Maven su cui è configurato il plugin.
 Questo è possibile perché il plugin Docs di Confluence accetta archivi, ovvero file in formato .zip o .jar.
-La documentazione in questo formato può essere per esempio la documentazione Javadoc (documentazione del codice sorgente scritto in linguaggio Java) o Open API (specifica per file di interfaccia leggibili dalle macchine per descrivere servizi web RESTful, conosciuta anche come specifica Swagger).
+La documentazione in questo formato può essere per esempio la documentazione Javadoc (documentazione del codice sorgente scritto in linguaggio Java) o Open API (specifica per file di interfaccia leggibili dalle macchine per descrivere servizi web RESTful, conosciuta anche come specifica Swagger \cite{site:specifica-openapi}).
 Entrambe Javadoc e Open API sono il tipo di documentazione di maggior interesse per l'azienda da pubblicare su Docs. \\
 Ogni archivio caricato contribuisce alla creazione di una pagina \emph{doc}.
 Ogni \emph{doc} viene identificato univocamente all'interno di una categoria, per questo motivo, il titolo deve essere unico.
@@ -170,13 +170,19 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 
 
 
-% Main goal is publish and it is bound to package life cycle phase. 
-
 % Furthermore a doc page can be overall identified by its docKey, which is a sequence of category id and doc id.
 
-% TODO aggiungere sezione di Apertura ticket in Jira
+% TODO aggiungere sezione di Apertura ticket in Jira e pagine Confluence?
 
-\newpage
+\section{Raccolta dei requisiti}
+Il momento dell'analisi e raccolta dei requisiti è avvenuto in congiunzione con il tutor aziendale.
+In principio è stato discusso dei prodotti principali da realizzare, quali plugin e documentazione. 
+Dopodiché si è proseguiti con il dettaglio delle loro caratteristiche, come per esempio gli artefatti compresi nella documentazione e i compiti previsti dal plugin.
+Tutti i requisiti identificati sono stati riportati in specifici ticket in Jira.
+Ogni ticket infatti possiede un identificativo univoco e una struttura ben delineata che spiega nel miglior modo possibile al lettore, il motivo per cui è stato creato.
+
+
+\clearpage
 
 \section{Requisiti}	\label{requisiti}
 Ad ogni requisito viene assegnato il codice identificativo univoco:
@@ -210,6 +216,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 % Da un'attenta analisi dei requisiti e dei casi d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.
 
 % \newpage
+
 
 	\subsection{Requisiti di funzionalità} \label{requisitiFunzionalita}
 	I requisiti di funzionalità sono ulteriormenti suddivisi in tabelle secondo:
@@ -327,7 +334,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			\ReqQ{2}{Deve essere redatto un manuale utente}{Azienda}
 				\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva come configurare il plugin}{Azienda}
 				\subReqQ{1}{Deve essere redatta una pagina di utilizzo Maven ``Usage'' che descriva tutti i possibili utilizzi del plugin}{Azienda}
-			\ReqQ{2}{Deve essere redatto un manuale dello sviluppatore}{Azienda}
+			\ReqQ{2}{Deve essere redatto un manuale sviluppatore}{Azienda}
 				\subReqQ{2}{Deve essere redatta una pagina Confluence che descriva la progettazione del plugin tramite diagrammi}{Azienda}
 				\subReqQ{2}{Deve essere redatta e generata la documentazione Javadoc del plugin}{Azienda}
 			\ReqQ{0}{Il nome di ogni test realizzato con JUnit deve iniziare con ``test''}{Interno}

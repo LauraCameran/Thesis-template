@@ -22,7 +22,7 @@ Questi progetti sono marcati da Maven con il qualificatore ``SNAPSHOT'' e la lor
 %**************************************************************
 \section{Analisi critica del prodotto e del lavoro di stage}
 
-    \subsection{Esperienza in azienda}
+    % \subsection{Esperienza in azienda}
     Come prima esperienza lavorativa nell'ambito IT, il progetto di stage effettuato da Finantix è risultato ottimo e soddisfacente. \\
     Nei primi giorni è stato un po' complicato abituarsi al lavoro in open space, perché con tante altre persone attorno è in un primo momento difficile mantenere la concentrazione.
     Successivamente a questa fase, è emerso un ambiente di lavoro pacato e confortevole, che ha permesso il proseguimento del progetto senza problemi.
@@ -32,6 +32,64 @@ Questi progetti sono marcati da Maven con il qualificatore ``SNAPSHOT'' e la lor
     Inizialmente infatti, il tempo da dedicare al progetto appariva scarso alla candidata, quasi insufficiente.
     Mentre una volta ottenute la padronanza delle tecnologie coinvolte, è stato tutto molto più veloce e sbrigativo di quanto non appariva precedentemente.
     Il passo successivo e finale ha risultato nella capacità di ragionare sul prodotto e valutarlo, permettendo con il tutor aziendale di raffinare le funzionalità, in modo che il prodotto più si avvicinasse ad estinguere le esigenze dell'azienda.
+
+    \subsection{Raggiungimento degli obiettivi}
+    Nel corso del progetto, è stato inoltre appurato che gli obiettivi inizialmente fissati, visibili nella tabella \ref{obiettiviProgetto} alla sezione \S\ref{secProgetto}, sono stati tutti progressivamente raggiunti.
+    Una spiegazione più precisa che giustifica il successo di ognuno di essi è mostrato nella tabella \ref{tabellaObiettiviRaggiunti}.
+
+    \begin{table}[H]
+        {\def\arraystretch{1.5}
+        \begin{tabularx}{\textwidth}{cX}
+            \rowcolor{beautyblue}
+            \textbf{Codice} &
+            \textbf{Spiegazione} \\ \hline
+
+            O01 & Le competenze su Maven sono state acquisite durante il primo periodo di studio autonomo sulla documentazione di Maven \\
+            O02 & Le competenze sull'implementazione di un plugin Maven sono sono state acquisite tramite studio autonomo e realizzazione del Proof of Concept \\
+            O03 & La conoscenza del paradigma RESTful è stata ottenuta  tramite studio autonomo, realizzazione del Proof of Concept e creazione del server con Meecrowave \\
+            O04 & L'implementazione del plugin Maven ha avuto luogo in un secondo momento, successivo al Proof of Concept, grazie alla padronanza delle tecnologie ottenuta nel periodo precedente \\
+            D01 & La documentazione utente è stata svolta al termine dell'implementazione del plugin con le configurazioni utilizzate nei progetti di prova che lo adoperavano \\
+            D02 & La documentazione dello sviluppatore è stata svolta al termine dell'implementazione del plugin, utilizzando diagrammi UML e la specifica del codice \\
+            F01 & Seppure facoltativo, è anche stato fatto un utilizzo base di Jenkins verso il termine del progetto, al momento della build finale \\
+            
+        \end{tabularx}} \\
+    \caption{Tabella di tecnologie utilizzate durante il progetto e loro scopo.}
+    \label{tabellaObiettiviRaggiunti}
+    \end{table}
+
+    Uno strumento di grande aiuto a questo scopo è stato Jira poiché ha permesso il monitoraggio dell'andamento del progetto tramite il continuo aggiornamento dei task.
+    Oltre a questo, anche l'iniziale sopravvalutazione della difficoltà di implementazione del plugin e della documentazione, ha contribuito al raggiungimento di tutti gli obiettivi prefissati, dando spazio anche a quelli di minor importanza, desiderabili e facoltativi. 
+
+
+    \clearpage
+
+    \subsection{Conoscenze possedute e acquisite}
+    Le conoscenze possedute, antecedenti all'inizio del progetto, erano:
+    \begin{itemize}
+        \item buona conoscenza e uso intermedio di JUnit e annotazioni per i test;
+        \item utilizzo base di Eclipse;
+        \item conoscenza base di Maven;
+        \item conoscenza base di Mockito;
+        \item conoscenza base di SonarQube;
+        \item conoscenza base della specifica JavaDoc.
+    \end{itemize}
+    % \subsection{Conoscenze acquisite}
+    Grazie a questa esperienza di stage, le conoscenze acquisite dalla candidata sono ora:
+    \begin{itemize}
+        \item ottima conoscenza di Maven e dei plugin Maven;
+        \item ottima conoscenza di JUnit e miglioramento nella scrittura di test;
+        \item ottima conoscenza della specifica JavaDoc e suo utilizzo;
+        \item utilizzo intermedio di Eclipse;
+        \item buona conoscenza del paradigma RESTful;
+        \item buona conoscenza di Confluence;
+        \item buona conoscenza di Meecrowave;
+        \item buona conoscenza di SonarQube e risoluzione di segnalazioni;
+        \item buona conoscenza di Mockito;
+        \item buona conoscenza di JavaX, Codehaus Plexus e Jersey;
+        \item conoscenza base di Jenkins;
+        \item conoscenza base di Jira.
+    \end{itemize}
+    È quindi evidente che la candidata ha ottenuto delle nuove capacità e ha migliorato quelle precedentemente possedute.
 
 %**************************************************************
 \subsection{Utilizzazione del prodotto} %Il prodotto è utilizzato?
@@ -79,12 +137,14 @@ Maven documentation publisher plug-in non è ancora stato messo in produzione ma
 % ......
 
 %**************************************************************
-\subsection{Possibili estensioni}
+\clearpage
+
+\subsection{Possibili estensioni del prodotto}
 Il prodotto realizzato può essere ulteriormente esteso in modo da ampliarne le funzionalità.
 A seguire, alcune proposte di estensione:
 \begin{itemize}
-    \item \bd{Rinominazione titolo del doc}: aggiungere la possibilità di aggiornare la pagina doc della documentazione, oltre che con un nuovo archivio, rinominandone il titolo, qualvolta l'utente lo voglia, anziché creare necessariamente un nuovo doc. In questo caso, in configurazione basterebbe qualche semplice parametro in più;
-    \item \bd{Pubblicazione di documentazione non HTML}: permettere all'utente di dare come documentazione una cartella contenente file in formato diverso dall'HTML. In questo caso, il plugin si occuperebbe non solo dell'archiviazione, ma anche della trasformazione dei file in linguaggio HTML. Anche in questo caso, in configurazione potrebbe bastare l'inserimento di qualche altro nuovo parametro;
-    \item \bd{Pulizia di altra documentazione}: estendere il goal cleanup o aggiungerne un altro che permetta l'eliminazione di documentazione secondo altri criteri (per esempio tutta la documentazione di una determinata categoria o tutta la documentazione con versione inferiore ad un certo anno).
+    \item \bd{rinominazione titolo del doc}: aggiungere la possibilità di aggiornare la pagina doc della documentazione, oltre che con un nuovo archivio, rinominandone il titolo, qualvolta l'utente lo voglia, anziché creare necessariamente un nuovo doc. In questo caso, in configurazione basterebbe qualche semplice parametro in più;
+    \item \bd{pubblicazione di documentazione non HTML}: permettere all'utente di dare come documentazione una cartella contenente file in formato diverso dall'HTML. In questo caso, il plugin si occuperebbe non solo dell'archiviazione, ma anche della trasformazione dei file in linguaggio HTML. Anche in questo caso, in configurazione potrebbe bastare l'inserimento di qualche altro nuovo parametro;
+    \item \bd{pulizia di altra documentazione}: estendere il goal cleanup o aggiungerne un altro che permetta l'eliminazione di documentazione secondo altri criteri (per esempio tutta la documentazione di una determinata categoria o tutta la documentazione con versione inferiore ad un certo anno).
 \end{itemize} 
 

@@ -30,9 +30,9 @@ JavaX è un package di estensioni standard per il linguaggio Java.
 Le estensioni che include sono numerose; quelle usate per la realizzazione del prodotto sono:
 \begin{itemize}
     \item \bd{javax.annotation}: ovvero \emph{Java Null annotation}, per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, richieste secondo la politica aziendale, in modo da segnalare gli elementi che possono essere nulli o meno;
-    \item \bd{javax.ws.rs.core}: ovvero \emph{JAX-RS}, per la creazione di risorse relative ai servizi RESTful, utili per il client al momento della comunicazione con Confluence;
+    \item \bd{javax.ws.rs.core}: ovvero \emph{JAX-RS}, per la creazione di risorse relative ai servizi RESTful \cite{site:jax-rs}, utili per il client al momento della comunicazione con Confluence;
     % Low-level interfaces and annotations used to create RESTful service resources
-    \item \bd{javax.xml.bind.annotation}: ovvero \emph{JAXB}, per la trasformazione automatica di JSON in oggetti Java, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
+    \item \bd{javax.xml.bind.annotation}: ovvero \emph{JAXB}, per la trasformazione automatica di JSON in oggetti Java \cite{site:jaxb}, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
 \end{itemize}
 
 
@@ -57,7 +57,7 @@ Di essa sono state utilizzate numerose classi, ma i package principali sono:
 
 
 \subsection{Jersey} %aveva tanta documentazione rispetto ad altri client
-Jersey è un framework opensource per lo sviluppo di servizi web RESTful in Java.
+Jersey è un framework opensource per lo sviluppo di servizi web RESTful in Java \cite{site:jersey}.
 All'interno del progetto è stata una parte focale perché utilizzato per la creazione del client:
 \begin{itemize}
     \item \bd{com.sun.jersey.api.client}: per il client che effettua le chiamate verso Confluence;
@@ -154,7 +154,7 @@ Esso richiede inoltre il booleano \txt{trustSelfSigned} per determinare se i cer
 Il client è creato da AbstractPluginMojo ed è un oggetto di tipo \txt{DocsPluginClient}.
 Questa classe fornisce tutto il necessario per creare ed usare un'istanza del client Jersey: riceve le informazioni per la configurazione da \txt{ServerInfo} (un semplice Java bean simile a ServerBean) e produce la directory di base richiesta per svolgere qualunque tipo di chiamata REST.
 
-I metodi che compiono delle chiamate REST sono elencati nella tabella \ref{tabellaREST}.
+I metodi che compiono delle chiamate REST \cite{site:rest-docs} sono elencati nella tabella \ref{tabellaREST}.
 
 \begin{table}[H]
     \begin{paddedtablex}[1.7]{\textwidth}{XcX}
@@ -320,7 +320,7 @@ Infine CleanupMojo elimina ogni pagina \emph{doc} all'interno del plugin Conflue
   tabsize=3
 }
 La configurazione è una parte predominante del Maven documentation publisher plug-in, poiché è l'unico momento un cui l'utente ha potere di decisione.
-Come già precedentemente spiegato nella sezione \S\ref{mavenSection}, tutte le informazioni di configurazione del progetto risiedono nel file ``pom.xml''.
+Come già precedentemente spiegato nella sezione \S\ref{mavenSection}, tutte le informazioni di configurazione del progetto risiedono nel file ``pom.xml'' \cite{site:maven-plugin-configurazione}.
 Per questo motivo, bisogna innanzitutto aggiungere il plugin al proprio progetto inserendo le informazioni che lo identificano:
 
 \begin{lstlisting} 
@@ -465,7 +465,7 @@ Per quel che riguarda gli altri parametri del plugin inerenti allo skip dell'ese
 
 \clearpage
 
-\section{Esecuzione}
+\section{Esecuzione}    \label{secEsecuzione}
 Per eseguire il goal \emph{publish} può essere lanciato sul progetto Maven qualunque comando che comprenda la fase di \emph{package}, come per esempio:
 \begin{lstlisting} 
     mvn install
@@ -478,15 +478,59 @@ Per il goal \emph{cleanup} invece, non essendo legato a nessuna fase, è necessa
     mvn tds-docs-publisher-plugin:cleanup
 \end{lstlisting}
 
+\clearpage
 
 \section{Documentazione}    \label{secDocumentazione}
 Oltre al plugin Maven, altri due prodotti sono stati realizzati per questo progetto: il manuale utente e il manuale dello sviluppatore.
 
     \subsection{Manuale utente}
-    Il manuale utente ..
+    Il manuale dell'utilizzatore ha il compito di descrivere le possibili configurazioni del plugin per semplificarne l'utilizzo allo sviluppatore.
+    Esso è suddiviso in due artefatti:
+    \begin{itemize}
+        \item una pagina di documentazione Confluence;
+        \item una pagina di utilizzo Maven \emph{Usage}.
+    \end{itemize}
+    Entrambe hanno essenzialmente lo stesso contenuto, ma la pagina Confluence è simile ad un documento Word con testo e immagini, mentre la pagina Maven di Usage presenta una struttura diversa.
+
+        \subsubsection{Usage}
+        Per realizzare una pagina di Usage è necessario comprendere la sintassi del linguaggio APT.
+        APT sta per ``Almost Plain Text'' ed è un linguaggio di markup che è stato creato con l'obiettivo di semplificare la scrittura e la struttura della documentazione Maven \cite{site:apt}.
+        La sua sintassi assomiglia al plain-text (testo non formattato) e permette la generazione automatica di una pagina web, come mostrato dalle prossime immagini.
+
+        Il pezzo di file APT mostrato in figura \ref{usageAPT}, correttamente eseguito durante il ciclo di vita Maven denominato \emph{site}, crea la parte di pagina HTML di Usage della figura \ref{usageImage}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{usageAPT}\\
+            \caption{Esempio di un file in formato APT \cite{site:apt-file}}
+            \label{usageAPT}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.9\textwidth]{usagePage}\\
+            \caption{Esempio di pagina di Usage Maven \cite{site:maven-usage}}
+            \label{usageImage}
+        \end{figure}
+
+        La pagina di Usage realizzata per questo progetto è simile all'esempio sopra riportato: spiega i due goal del plugin, \emph{publish} e \emph{cleanup}, con le stesse informazioni presenti in questo documento alla sezione \S\ref{descrizioneProdotto}, e con le istruzioni per la configurazione e l'esecuzione come esposti nelle sezioni \S\ref{configurazioneSec} e \S\ref{secEsecuzione}.
 
     \subsection{Manuale sviluppatore}
-    ...
+    Il manuale del programmatore garantisce una spiegazione dettagliata delle classi create per la realizzazione del plugin Maven.
+    Anch'esso ha richiesto la creazione di due artefatti tecnici:
+    \begin{itemize}
+        \item una pagina di documentazione Confluence;
+        \item documentazione JavaDoc.
+    \end{itemize}
+    La pagina Confluence comprende la descrizione di tutte le classi con il supporto di diagrammi dei package, delle classi e di sequenza, come le sezioni \S\ref{sec:diagramma-package}, \S\ref{sec:diagrammi-classi} e \S\ref{sec:diagrammi-sequenza} di questo documento.
+    La specifica JavaDoc consta di tutti i dettagli rilevanti di ogni frammento di codice (metodi e campi dati), con i classici tag \cite{site:javadoc} quali per esempio:
+    \begin{itemize}
+        \item \txt{@author}: per inserire il nome dello sviluppatore;
+        \item \txt{@param}: per definire i parametri di un metodo;
+        \item \txt{@return}: per indicare il valore di ritorno di un metodo;
+        \item \txt{@exception}: per indicare l'eccezione che il metodo può lanciare.
+    \end{itemize}
+    Sono state inoltre utilizzare le annotazioni di \txt{Nonnull} per segnalare campi che non posso avere valore nullo e \txt{Nullable} per indicare invece quali possono averlo.
 
 
 %**************************************************************
