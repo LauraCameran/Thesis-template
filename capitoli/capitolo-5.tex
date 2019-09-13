@@ -12,10 +12,11 @@
 \section{Procedura di lavoro}
 Inizialmente per capire il funzionamento di un plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo.
 Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria.
-Il prototipo consisteva in un semplice plugin Maven che effettuava delle stampe e delle chiamate REST ad un server creato al momento con Meecrowave.
-Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence.
+Il prototipo consisteva in un semplice plugin Maven (un ``hello world'') che effettuava delle stampe e delle chiamate REST ad un server creato al momento con Meecrowave.
+Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence, anzichè il server Meecrowave.
 Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effetture la scelta delle librerie Java più adatte per il prodotto finale.
-
+Nel corso dello svolgimento delle attività, veniva aggiornato lo stato dei ticket Jira coinvolti.
+Al termine dell'implementazione del Proof of Concept per esempio, il ticket ad esso corrispondente è stato aggiornato a ``DONE''.
 
 %**************************************************************
 \section{Tecnologie e librerie utilizzate}
@@ -478,7 +479,7 @@ Per il goal \emph{cleanup} invece, non essendo legato a nessuna fase, è necessa
     mvn tds-docs-publisher-plugin:cleanup
 \end{lstlisting}
 
-\clearpage
+% \clearpage
 
 \section{Documentazione}    \label{secDocumentazione}
 Oltre al plugin Maven, altri due prodotti sono stati realizzati per questo progetto: il manuale utente e il manuale dello sviluppatore.

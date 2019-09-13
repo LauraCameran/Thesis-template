@@ -177,9 +177,41 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 \section{Raccolta dei requisiti}
 Il momento dell'analisi e raccolta dei requisiti è avvenuto in congiunzione con il tutor aziendale.
 In principio è stato discusso dei prodotti principali da realizzare, quali plugin e documentazione. 
-Dopodiché si è proseguiti con il dettaglio delle loro caratteristiche, come per esempio gli artefatti compresi nella documentazione e i compiti previsti dal plugin.
-Tutti i requisiti identificati sono stati riportati in specifici ticket in Jira.
-Ogni ticket infatti possiede un identificativo univoco e una struttura ben delineata che spiega nel miglior modo possibile al lettore, il motivo per cui è stato creato.
+Dopodiché si è proseguiti con il dettaglio delle loro caratteristiche, come per esempio gli artefatti compresi nella documentazione e i precisi compiti del plugin.
+Tutti i requisiti identificati sono stati riportati in specifici ticket in Jira, lo strumento di monitoraggio delle attività di riferimento per tutti gli sviluppatori dell'azienda.
+Ogni ticket possiede un identificativo univoco e specifica un compito da svolgere all'interno del progetto ben preciso; citiamo per esempio:
+\begin{itemize}
+	\item creazione di un ``hello world'' (prototipo semplice) plugin Maven;
+	\item implementazione del plugin Maven per la pubblicazione di documentazione;
+	\item creazione manuale dello sviluppatore;
+	\item creazione manuale per l'utente.
+\end{itemize}
+Ognuno di questi ticket ha un proprio flusso di lavoro predefinito o personalizzabile in base alla modalità di lavoro \cite{site:jira}.
+In questo caso, essendo il progetto portato avanti da una persona singola in maniera incrementale, il flusso comprendeva gli stati:
+\begin{enumerate}
+	\item \bd{TO DO}: attività da svolgere;
+	\item \bd{IN PROGRESS}: attività iniziato da completare;
+	\item \bd{DONE}: attività completata.
+\end{enumerate} 
+% Lo stato veniva gradualmente aggiornato dalla candidata.
+Ogni ticket viene associato ad una pagina di Confluence, appositamente creata in parallelo, che possiede una struttura ben delineata.
+Essa spiega nel modo più specifico possibile, il motivo per cui il ticket è stato creato.
+Viene innanzitutto riportata la \emph{user story}, ovvero la descrizione del linguaggio naturale e informale di una o più funzionalità di un sistema software \cite{site:user-story}, comprendente le informazioni riguardanti a: la persona che richiede che l'attività venga svolta, qual è esattamente il compito e per quale motivo deve essere svolto.
+Per esempio, nel caso della pagina Confluence legata al ticket della creazione del manuale utente, questa era: \\
+\emph{As a developer \\
+I want a guide for the Maven documentation publisher plug-in \\
+so that can easily configure it for my Java project.} \\
+Successivamente alla user story, devono essere inseriti gli artefatti tecnici, ovvero il dettaglio delle caratteristiche.
+Nel caso dell'implementazione del plugin Maven, questi erano:
+\begin{itemize}
+	\item informazioni sulla repository di Bitbucket in cui deve risiedere il codice sorgente;
+	\item informazioni sull'identificazione del plugin;
+	\item configurazione desiderata;
+	\item comportamento desiderato;
+	\item scenari di test;
+	\item goal extra;
+	\item configurazioni extra.
+\end{itemize}
 
 
 \clearpage
