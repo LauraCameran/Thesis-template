@@ -13,8 +13,8 @@
 Inizialmente per capire il funzionamento di un plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo.
 Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria.
 Il prototipo consisteva in un semplice plugin Maven (un ``hello world'') che effettuava delle stampe e delle chiamate REST ad un server creato al momento con Meecrowave.
-Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence, anzichè il server Meecrowave.
-Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effetture la scelta delle librerie Java più adatte per il prodotto finale.
+Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence, anziché il server Meecrowave.
+Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effettuare la scelta delle librerie Java più adatte per il prodotto finale.
 Nel corso dello svolgimento delle attività, veniva aggiornato lo stato dei ticket Jira coinvolti.
 Al termine dell'implementazione del Proof of Concept per esempio, il ticket ad esso corrispondente è stato aggiornato a ``DONE''.
 
@@ -50,7 +50,7 @@ Le librerie adottate per il progetto sono:
 Maven è la tecnologia centrale del prodotto.
 Di essa sono state utilizzate numerose classi, ma i package principali sono:
 \begin{itemize}
-    \item \bd{org.apache.maven.plugins.annotations}: per le annotazioni relative ai plugin Maven, quali per esempio \texttt{Mojo} per identificare un \emph{goal},  \texttt{Paremeter} per segnalare un parametro della configurazione, ecc;
+    \item \bd{org.apache.maven.plugins.annotations}: per le annotazioni relative ai plugin Maven, quali per esempio \texttt{Mojo} per identificare un \emph{goal},  \texttt{Parameter} per segnalare un parametro della configurazione, ecc;
     \item \bd{org.apache.maven.plugin}: per le eccezioni che può lanciare un plugin Maven;
     \item \bd{org.apache.maven.project}: per accedere alle informazioni del progetto (quali nome e versione);
     \item \bd{org.apache.maven.settings}: per decriptare le credenziali provenienti dal file ``settings.xml''.
@@ -76,10 +76,10 @@ All'interno del progetto è stata una parte focale perché utilizzato per la cre
     \caption{Diagramma dei package}
 \end{figure}
 Le classi principali del \emph{Maven documentation publisher plug-in} sono i \emph{mojos} di Maven e il client.
-Un \emph{mojo} è un \emph{goal} esguibile in Maven, ovvero la classe che concretamente realizza lo scopo prefissato.
-I \emph{mojos} appartengono al package Java \texttt{com.thedigitalstack.maven.docs.publisher.plugin} e il client al sub-package\\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin.client}.
+Un \emph{mojo} è un \emph{goal} eseguibile in Maven, ovvero la classe che concretamente realizza lo scopo prefissato.
+I mojos appartengono al package Java \texttt{com.thedigitalstack.maven.docs.publisher.plugin} e il client al sub-package\\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin.client}.
 Tra loro è possibile identificare due classi fondamentali: PublisherMojo e CleanupMojo.
-Entrambe sono \emph{mojos} di Maven e perciò determinano \emph{goal} differenti.
+Entrambe sono mojos di Maven e perciò determinano \emph{goal} differenti.
 Alcuni metodi che riguardano il client e le impostazioni del server sono uguali, per questo motivo esiste una classe padre e un riferimento a DocPluginClient.
 DocPluginClient svolge le operazioni lato client ed è l'unico oggetto che comunica direttamente con Confluence.
 
@@ -99,7 +99,7 @@ DocPluginClient svolge le operazioni lato client ed è l'unico oggetto che comun
     \label{diagrammaMojo}
 \end{figure}
 
-\txt{PublisherMojo} realizza la pubblicazione della documentazione su Confluence, per questo motivo, il suo \emph{goal} è nominato \emph{publish} e la fase del ciclo di vita Maven relativo al progetto è package di default.
+\txt{PublisherMojo} realizza la pubblicazione della documentazione su Confluence, per questo motivo, il suo goal è nominato \emph{publish} e la fase del ciclo di vita Maven relativo al progetto è package di default.
 Nella tabella \ref{tabellaParametri} è possibile vedere tutti i parametri configurabili dall'utente che, come è possibile notare, coincidono con i campi dati di PublisherMojo visibili nella figura \ref{diagrammaMojo}.
 
 \begin{table}[H]
@@ -133,11 +133,11 @@ Come spiegato nella sezione \S\ref{goalPublish}, i primi tre parametri della tab
 
 \txt{CleanupMojo} si occupa dell'eliminazione completa delle pagine \emph{doc} contenenti SNAPSHOT.
 Ciò significa tutta la documentazione la cui versione comprende il qualificatore ``-SNAPSHOT''.
-Per questo motivo, il \emph{goal} relativo si chiama \emph{cleanup} e non è specificata nessuna fase del ciclo di vita di un progetto Maven.
-Esso non richiede altri parametri in uso dall'utente: fa semplicemente affidamento sul method \txt{isSnapshot(String)} per comprendere se il titolo valutato è un ``-SNAPSHOT''.
+Per questo motivo, il goal relativo si chiama \emph{cleanup} e non è specificata nessuna fase del ciclo di vita di un progetto Maven.
+Esso non richiede altri parametri in uso dall'utente: fa semplicemente affidamento sul metodo \txt{isSnapshot(String)} per comprendere se il titolo valutato è un ``-SNAPSHOT''.
 
 PublisherMojo e CleanupMojo estendono \txt{AbrasctPluginMojo}.
-Questa classe astratta estende \txt{AbrasctMojo} (la classe astratta base di qualunque mojo Maven) e definisce i metodi in comune ad entrambi, come per esempio \txt{createClient()} per l'inizializzazione del cient, lasciando implementare il metodo \txt{execute()}, che permette l'esecuzione del goal, alle sottoclassi.
+Questa classe astratta estende \txt{AbrasctMojo} (la classe astratta base di qualunque mojo Maven) e definisce i metodi in comune ad entrambi, come per esempio \txt{createClient()} per l'inizializzazione del client, lasciando implementare il metodo \txt{execute()}, che permette l'esecuzione del goal, alle sottoclassi.
 
 AbstractPluginMojo fa uso di un oggetto di tipo \txt{ServerBean}.
 Un Java Bean è una classe utilizzata per incapsulare più oggetti in un oggetto singolo, cosicché tali oggetti possano essere passati come un singolo oggetto bean invece che come multipli oggetti individuali.
@@ -167,7 +167,7 @@ I metodi che compiono delle chiamate REST \cite{site:rest-docs} sono elencati ne
         \txt{createDoc(String categoryId, String docName, File docArchive)} & \bd{PUT} & Crea la pagina doc all'interno di una categoria esistente, con l'archivio e il nome dato \\
         \txt{updateDoc(String docKey, File docArchive)} & \bd{POST} & Aggiorna la pagina doc identificata dalla \txt{docKey} data, con l'archivio dato \\
         \txt{getRepositoryDetails()} & \bd{GET} & Ritorna tutti i dettagli relativi alla repository: tutte le categorie e i doc esistenti \\
-        \txt{deleteDoc(String docKey)} & \bd{DELETE} & Elimina la pgina doc relativa alla \txt{docKey} data \\
+        \txt{deleteDoc(String docKey)} & \bd{DELETE} & Elimina la pagina doc relativa alla \txt{docKey} data \\
 
         \bottomrule
     \end{paddedtablex}

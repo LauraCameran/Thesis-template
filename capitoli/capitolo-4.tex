@@ -51,7 +51,7 @@ Successivamente, nel corso dello stage, sono state aggiunte delle nuove funziona
 Maven documentation publisher plug-in supporta la pubblicazione di documentazione in formato HTML. Ha due goal:
 \begin{itemize}
 	\item \bd{publish}: che pubblica la documentazione;
-	\item \bd{cleanup}: che elimina la documentazione contentente SNAPSHOT nel nome.
+	\item \bd{cleanup}: che elimina la documentazione contenente SNAPSHOT nel nome.
 \end{itemize}
 Il principale è \emph{publish} e si occupa della pubblicazione su  \emph{Docs} Confluence della documentazione del codice di un qualunque progetto Maven su cui è configurato il plugin.
 Questo è possibile perché il plugin Docs di Confluence accetta archivi, ovvero file in formato .zip o .jar.
@@ -72,7 +72,7 @@ Innanzitutto esso consente all'utente di inserire:
 La documentazione che fornisce l'utente può essere di tre tipi:
 \begin{enumerate}
 	\item archivio (.zip o .jar);
-	\item cartella (contentente più file HTML);
+	\item cartella (contenente più file HTML);
 	\item singolo file HTML.
 \end{enumerate}
 Nei casi 2. e 3. il plugin si occupa anche dell'archiviazione. \\
@@ -84,7 +84,7 @@ I possibili modi per fornire le credenziali sono molteplici:
 Non è necessario che l'utente provveda entrambi i modi, ma almeno uno deve esserci.
 Se ci sono entrambi, il plugin utilizza il prelevamento dal file ``settings.xml''. \\
 
-Il sistema richiede obbligatoriamente dall'utente le infomazioni sopra descritte.
+Il sistema richiede obbligatoriamente dall'utente le informazioni sopra descritte.
 Oltre a ciò, esso prevede una configurazione di default.
 Ognuno di questi parametri può essere facoltativamente cambiato dall'utente. 
 
@@ -118,7 +118,7 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	Come è possibile vedere dall'immagine \underline{\ref{screenDocsNameVersion}}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori.
 	Nel caso 2. invece non viene fornito nessuno dei due e per questo viene utilizzato il nome e la versione del progetto. 
 	Nel caso 3. viene data solo la versione della documentazione, che infatti viene preferita alla versione del progetto, ma non il nome della documentazione. 
-	Poichè nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utlizzare l'ultima opzione rimanente: l'artifactId.
+	Poiché nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utilizzare l'ultima opzione rimanente: l'artifactId.
 
 	% ---------------------------
 
@@ -172,7 +172,6 @@ A questo scopo non è necessario aggiungere nulla alla configurazione del plugin
 
 % Furthermore a doc page can be overall identified by its docKey, which is a sequence of category id and doc id.
 
-% TODO aggiungere sezione di Apertura ticket in Jira e pagine Confluence?
 
 \section{Raccolta dei requisiti}
 Il momento dell'analisi e raccolta dei requisiti è avvenuto in congiunzione con il tutor aziendale.
@@ -242,7 +241,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	Esempio: \texttt{R2Q1} indica il secondo requisito di qualità ed è desiderabile. \\
 
 	I requisiti individuati sono riassunti in tabelle secondo la loro tipologia.
-	Inoltre, tutti i requisiti individuati e scelti dalla candidata, presentano nella tabella come fonte ``Interno'' e come grado di urgenza ``0'' poichè il loro soddisfacimento non è strettamente necessario.
+	Inoltre, tutti i requisiti individuati e scelti dalla candidata, presentano nella tabella come fonte ``Interno'' e come grado di urgenza ``0'' poiché il loro soddisfacimento non è strettamente necessario.
 
 
 % Da un'attenta analisi dei requisiti e dei casi d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.
@@ -251,13 +250,13 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 
 
 	\subsection{Requisiti di funzionalità} \label{requisitiFunzionalita}
-	I requisiti di funzionalità sono ulteriormenti suddivisi in tabelle secondo:
+	I requisiti di funzionalità sono ulteriormente suddivisi in tabelle secondo:
 	\begin{itemize}
 		\item requisiti relativi a ciò che il sistema permette all'utente di configurare;
 		\item requisiti relativi a messaggi di errore che il sistema deve essere in grado di lanciare;
 		\item requisiti relativi a generiche funzionalità del sistema.
 	\end{itemize}
-	Per ogni tabella, i primi requisiti, segnalati come obbligtori, sono i requisiti identificati all'inizio del progetto, essenziali per il funzionamento del plugin.
+	Per ogni tabella, i primi requisiti, segnalati come obbligatori, sono i requisiti identificati all'inizio del progetto, essenziali per il funzionamento del plugin.
 	I requisiti elencati successivamente come desiderabili sono invece le funzionalità aggiunte in un secondo momento, nel corso dello stage, come quanto accennato nella premessa all'inizio di questo capitolo.
 	All'interno della descrizione del requisito si utilizzano alcune abbreviazioni per semplificare la lettura della tabella:
 	\begin{itemize}
@@ -273,7 +272,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			
 			\ReqF{2}{Inserimento documentazione}{Azienda}
 				\subReqF{2}{Inserimento archivio (.zip o .jar)}{Azienda}
-				\subReqF{1}{Inserimento file html}{Azienda}
+				\subReqF{1}{Inserimento file HTML}{Azienda}
 				\subReqF{1}{Inserimento cartella}{Azienda}	
             \ReqF{2}{Inserimento credenziali}{Azienda}
 			    \subReqF{2}{Inserimento username}{Azienda}
@@ -410,7 +409,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 
 			\ReqV{2}{I requisiti identificati devono essere tracciati su Jira}{Azienda}
 			\subReqV{2}{Lo stato di ogni requisito presente su Jira deve sempre essere opportunamente aggiornato}{Azienda}
-			\ReqV{2}{Come strumento di Continuous integration è necessario utilizzare Jenkins}{Azienda}
+			\ReqV{2}{Come strumento di continuous integration è necessario utilizzare Jenkins}{Azienda}
 			\ReqV{2}{Per l'analisi statica del codice è necessario utilizzare SonarQube}{Azienda}
 			\ReqV{2}{Per il controllo di versione del codice è necessario utilizzare Bitbucket}{Azienda}
 			\ReqV{2}{Utilizzare JUnit per realizzare test di unità}{Azienda}
