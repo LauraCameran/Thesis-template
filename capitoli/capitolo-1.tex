@@ -43,12 +43,12 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
     Per raggiungere questo scopo, sono stati fissati alcuni fondamentali obiettivi:
     \begin{itemize}
         \item studiare in maniera autonoma lo strumento Maven per poterne capire appieno l'utilità ed il funzionamento;
-        \item comprendere come realizzazione un plugin Maven, oggetto centrale del progetto;
+        \item comprendere come realizzare un plugin Maven, oggetto centrale del progetto;
         \item comprendere il paradigma RESTful, per poter trasmettere dati al server documentale;
         \item implementare il plugin Maven, una volta raggiunte le competenze sufficienti;
         \item realizzare la documentazione utente, ovvero il manuale dell'utilizzatore sopra citato, per semplificare la comprensione dell'utilizzo del plugin all'utente finale. Non è strettamente necessario all'adempimento del plugin Maven, ma auspicabile;
-        \item realizzare la documentazione dello sviluppatore, ovvero il manuale del programmatore sopra citato, per aiutare il programmatore nella cognizione del codice. Anch'esso, come il punto precedente, non è necessario ma auspicabile;
-        \item impiegare la tecnologia Jenkins che è usata per ogni progetto per la continuous integration. Per questo motivo, è possibile farne un minimo utilizzo, ma non è strettamente richiesto.
+        \item realizzare la documentazione dello sviluppatore, ovvero il manuale del programmatore sopra citato, per aiutare il programmatore che dovrà fare manutenzione nella cognizione del codice. Anch'esso, come il punto precedente, non è necessario ma auspicabile;
+        \item impiegare la tecnologia Jenkins che è usata in azienda per ogni progetto per la continuous integration. Per questo motivo, è possibile farne un minimo utilizzo, ma non è strettamente richiesto.
     \end{itemize}
     
     Tutti gli obiettivi possono essere tracciati da un codice univoco che li identifica. 
@@ -84,38 +84,38 @@ Infatti, una volta configurato correttamente il plugin in tutti i progetti relat
 Durante il corso dello stage non sono stati riscontrati rilevanti problemi che hanno particolarmente influito sull'attività.
 Nonostante ciò, un problema non banale che è stato affrontato riguarda la documentazione di Maven.
 Molte pagine relative alla documentazione di plugin Maven infatti, risultano obsolete perché poco aggiornate.
-Per far fronte a questo problema, un confronto diretto e costante con gli sviluppatori senior del team DevOps, esperti della tecnologia, è stato il metodo di risoluzione determinante.
+Per far fronte a questo problema, un confronto diretto e costante con gli sviluppatori senior del team DevOps, esperti della tecnologia, è stato il metodo di risoluzione determinante per il proseguimento del progetto.
 
 
 %**************************************************************
 \section{Strumenti utilizzati}
 Gli strumenti adottati per la creazione del plugin Maven sono molteplici.
-Alcune di questi sono abitualmente adoperati da tutti gli sviluppatori dell'azienda, motivo per cui sono stati utilizzati anche per questo progetto, mentre altri sono stati liberamente scelti dalla candidata.
-Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
+Alcuni di questi sono abitualmente adoperati da tutti gli sviluppatori dell'azienda, motivo per cui sono stati utilizzati anche per questo progetto, mentre altri sono stati liberamente scelti dalla candidata.
+Tra essi, selezionati per i vari motivi sotto elencati, troviamo:
 \begin{itemize}
     \item \textbf{GitKraken}: client di Git che presenta un'interfaccia grafica molto intuitiva e interattiva, oltre che semplice da usare;
     % \item \textbf{JUnit}: framework per i test d'unità che si integra facilmente con Eclipse e Maven
     \item \textbf{Visual Studio Code}: editor di codice che supporta molti linguaggi, tra cui JSON e HTML \cite{site:visual-studio-code};
     \item \bd{SequenceDiagram.org}: strumento online che permette la creazione di diagrammi di sequenza in modo semplice e veloce grazie ad una sintassi propria;
-    \item \bd{ObjectAid UML Explorer}: strumento d'integrazione a Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java;
-    \item \bd{Meecrowave}: framework consigliato dall'azienda (ma non imposto) che permette la creazione di server velocemente \cite{site:meecrowave}.
+    \item \bd{ObjectAid UML Explorer}: plugin di Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java;
+    \item \bd{Meecrowave}: framework, tra i vari consigliat dall'azienda, che permette la creazione di server velocemente \cite{site:meecrowave}.
 \end{itemize}
 
     \subsection{Maven} \label{mavenSection} % TODO rileggere
         
-    Maven \cite{site:maven-introduzione} è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale.
+    Maven è un software per la gestione di progetti, basato sul concetto di un ``project object model'' (POM), che gli permette di gestire la build, il report e la documentazione di un progetto Java da un unico pezzo di informazione centrale \cite{site:maven-introduzione}.
 
     % -------- LIFE CYCLE
-    Maven è basato sul concetto di un ciclo di vita della build \cite{site:maven-lifecycle}.
+    Maven è basato sul concetto di un ciclo di vita della build .
     Ciò significa che il processo per la build e la distribuzione di un particolare artefatto (progetto) è chiaramente definito. 
-    Per la persona che realizza un progetto, ciò significa che è solamente necessario imparare un piccolo set di comandi per eseguire la build di un progetto e il POM assicurerà l'ottenimento dei risultati desiderati.
+    Per la persona che realizza un progetto, ciò significa che è solamente necessario imparare un piccolo set di comandi per eseguire la build di un progetto e il POM assicurerà l'ottenimento dei risultati desiderati \cite{site:maven-lifecycle}.
     Ci sono diversi cicli di vita possibili ed ogni ciclo di vita è suddiviso in fasi ben determinate.
     Per esempio, una fase di particolare rilevanza per il progetto del plugin Maven è la fase di \emph{package}, che si occupa di prendere il codice compilato e impacchettarlo nel suo formato distribuibile, come per esempio un JAR. 
 
     % ------------------
 
     Ciò che è possibile gestire con questo POM è, per esempio, la lista di dipendeze e i report dei test d'unità, incluso il coverage.
-    Il suo aspetto è quello di un file XML che contiene le informazioni riguardanti il progetto e i dettagli della configurazione, usati da Maven per fare la build dei progetti.
+    Il suo aspetto è quello di un file XML che contiene le informazioni riguardanti ul progetto e la sua configurazione, usati da Maven per farne la build.
 
     % -------- PLUGIN
     \subsubsection{Cos'è un plugin Maven}
@@ -130,8 +130,8 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 
     Quando viene eseguito un goal, Maven cerca il file ``pom.xml'' (il POM) nella cartella corrente, lo legge, ottiene le informazioni della configurazione e dopo di che esegue il goal.
 
-    Alcune di queste informazioni di configurazione che possono essere specificate nel POM sono dipendenze, i plugin o goal che possono essere eseguiti, la versione e descrizione del progetto, ecc \cite{site:maven-pom}.
-    A continuazione, viene riportato un esempio.
+    Alcune di queste informazioni di configurazione che si possono specificrte nel POM possono essere dipendenze, plugin o goal che possono essere eseguiti, versione e descrizione del progetto, ecc \cite{site:maven-pom}.
+    A continuazione, ne viene riportato un esempio.
 
     % \newpage
 
@@ -192,7 +192,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.56\textwidth]{immagini/docs-conf.png}\\
-        \caption{Screenshot di un esempio di Docs Plug-in}
+        \caption{Esempio di Docs Plug-in}
         \label{screenDocs}
     \end{figure}
 
@@ -204,7 +204,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
 
     \subsection{Riepilogo degli strumenti}
 
-    In seguito viene riportata una tabella (\ref{tabellaStrumenti}) che riassume tutti gli strumenti utilizzati e a quale scopo.
+    La tabella \ref{tabellaStrumenti} riportata in seguito, riassume tutti gli strumenti utilizzati e a quale scopo.
 
         \begin{table}[H]
             {\def\arraystretch{1.5}
@@ -226,7 +226,7 @@ Tra essi, scelti selezionati per i vari motivi sotto elencati, troviamo:
                 ObjectAid UML Explorer & Creazione dei diagrammi delle classi \\
                 Meecrowave & Creazione di server \\
             \end{tabularx}} \\
-        \caption{Tabella di tecnologie utilizzate durante il progetto e loro scopo.}
+        \caption{Tecnologie utilizzate durante il progetto e loro scopo.}
         \label{tabellaStrumenti}
         \end{table}
 
@@ -237,7 +237,7 @@ Il plugin Maven riesce a realizzare il caricamento di documentazione grazie ad u
 
 Ciò che fa il plugin Maven è caricare su \emph{Docs} in maniera automatica la documentazione nella corretta categoria, realizzando un nuovo \emph{doc} o aggiornandone uno esistente.
 
-Nel caso in cui l'utilizzatore del plugin Maven fornisca un titolo per la pagina \emph{doc} che non è presente nel \emph{Docs}, verrà creata una nuova pagina, altrimenti il \emph{doc} già esistente con quel nome verrà aggiornato con la documentazione data.
+Nel caso in cui il titolo fornito per la pagina \emph{doc} non sia presente in \emph{Docs}, verrà creata una nuova pagina, altrimenti il \emph{doc} già esistente con quel nome verrà aggiornato con la documentazione data.
 
 %**************************************************************
 \section{Organizzazione del testo}
@@ -249,7 +249,7 @@ Nel caso in cui l'utilizzatore del plugin Maven fornisca un titolo per la pagina
 
     \item[{\hyperref[cap:testing]{Il quarto capitolo}}] approfondisce come è stata effettuata l'attività di verifica e validazione, soffermandosi in particolare sull'analisi statica del codice e il testing.
 
-    \item[{\hyperref[cap:conclusioni]{Il quinto capitolo}}] corrisponde al capitolo conclusivo. Esso riassume il risultato finale ottenuto e attua una valutazione critica del prodotto.
+    \item[{\hyperref[cap:conclusioni]{Il quinto capitolo}}] corrisponde al capitolo conclusivo. Esso riassume il risultato finale ottenuto e la valutazione critica del prodotto attuata.
 
 \end{description}
 
@@ -258,6 +258,6 @@ Riguardo la stesura del testo, relativamente al documento sono state adottate le
 	% \item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
 	% \item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
 	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \emph{corsivo};
-	\item per tutti i concetti che possono essere riassunti, viene fornita una tabella o un elenco puntato;
-	\item citazioni e riferimenti provenienti da siti o libri vengono accompagnati dal loro numero identificativo tra parentesi quadre, ad esempio \cite{site:junit-annotation}.
+	\item tutti i concetti che possono essere riassunti, vengono raccolti in una tabella o in un elenco puntato;
+	\item citazioni e riferimenti, provenienti da siti o libri, vengono accompagnati dal loro numero identificativo tra parentesi quadre, ad esempio \cite{site:junit-annotation}.
 \end{itemize}

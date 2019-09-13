@@ -42,7 +42,7 @@ L'attività di analisi ha funto da base per la fase di progettazione del softwar
 \section{Premessa}
 Il prodotto realizzato è un plugin Maven e possiede come nome ufficiale: \emph{Maven documentation publisher plug-in}.
 
-L'obiettivo all'inizio dello stage era il semplice caricamento di documentazione archiviata su \emph{Docs} di Confluence, per questo motivo è stato scelto di creare il goal denominato \emph{publish}.
+L'obiettivo all'inizio dello stage era il semplice caricamento di documentazione archiviata su \emph{Docs}, per questo motivo è stato scelto di creare il goal denominato \emph{publish}.
 Successivamente, nel corso dello stage, sono state aggiunte delle nuove funzionalità e un nuovo goal, dato che le tempistiche pianificate erano ottimistiche e hanno permesso sufficiente tempo per ampliare il prodotto.
 
 
@@ -54,11 +54,10 @@ Maven documentation publisher plug-in supporta la pubblicazione di documentazion
 	\item \bd{cleanup}: che elimina la documentazione contenente SNAPSHOT nel nome.
 \end{itemize}
 Il principale è \emph{publish} e si occupa della pubblicazione su  \emph{Docs} Confluence della documentazione del codice di un qualunque progetto Maven su cui è configurato il plugin.
-Questo è possibile perché il plugin Docs di Confluence accetta archivi, ovvero file in formato .zip o .jar.
+Questo è possibile perché il plugin Docs di Confluence accetta archivi, ovvero file con estensione .zip o .jar.
 La documentazione in questo formato può essere per esempio la documentazione Javadoc (documentazione del codice sorgente scritto in linguaggio Java) o Open API (specifica per file di interfaccia leggibili dalle macchine per descrivere servizi web RESTful, conosciuta anche come specifica Swagger \cite{site:specifica-openapi}).
 Entrambe Javadoc e Open API sono il tipo di documentazione di maggior interesse per l'azienda da pubblicare su Docs. \\
-Ogni archivio caricato contribuisce alla creazione di una pagina \emph{doc}.
-Ogni \emph{doc} viene identificato univocamente all'interno di una categoria, per questo motivo, il titolo deve essere unico.
+Ogni archivio caricato contribuisce alla creazione di una pagina \emph{doc} ed ogni \emph{doc} viene identificato univocamente all'interno di una categoria, per questo motivo, il titolo deve essere unico.
 Una pagina viene creata se il titolo della documentazione è nuovo, altrimenti la pagina già esistente viene semplicemente aggiornata. \\ 
  
 \subsection{Il goal \emph{publish}} \label{goalPublish}
@@ -71,52 +70,59 @@ Innanzitutto esso consente all'utente di inserire:
 \end{itemize}
 La documentazione che fornisce l'utente può essere di tre tipi:
 \begin{enumerate}
-	\item archivio (.zip o .jar);
+	\item archivio (ZIP o JAR);
 	\item cartella (contenente più file HTML);
-	\item singolo file HTML.
+	\item singolo file (HTML).
 \end{enumerate}
-Nei casi 2. e 3. il plugin si occupa anche dell'archiviazione. \\
+Nei casi 2. e 3. il plugin si occupa anche dell'archiviazione per permettere a Docs di mostrare correttamente la documentazione su Confluence. \\
 I possibili modi per fornire le credenziali sono molteplici:
 \begin{itemize}
 	\item username e password vengono date direttamente nei campi della configurazione a loro destinati;
 	\item username e password vengono prese dalla sezione server del file ``.m2/settings.xml'' in cui sono salvate criptate. \footnote{A questo scopo, l'utente deve aver prima proceduto con la criptazione delle proprie credenziali come spiegato alla pagina \url{https://maven.apache.org/guides/mini/guide-encryption.html}} 
 \end{itemize}
-Non è necessario che l'utente provveda entrambi i modi, ma almeno uno deve esserci.
+Non è necessario che l'utente provveda ad entrambi, ma almeno uno ci deve sempre essere.
 Se ci sono entrambi, il plugin utilizza il prelevamento dal file ``settings.xml''. \\
 
-Il sistema richiede obbligatoriamente dall'utente le informazioni sopra descritte.
-Oltre a ciò, esso prevede una configurazione di default.
-Ognuno di questi parametri può essere facoltativamente cambiato dall'utente. 
+Il sistema richiede obbligatoriamente che l'utente fornisca le informazioni sopra descritte.
+Oltre a questi parametri però, esistono altri parametri per cui il sistema prevede una configurazione di default, ma che possono essere facoltativamente cambiato dall'utente. 
 
 	\subsubsection{Parametri opzionali} \label{parametriOpzionali}
 	L'utente può scegliere nome e versione della documentazione.
-	Il titolo della pagina \emph{doc} viene costruito dall'unione di nome e versione (ad esempio dato nome ``Docs Maven Plugin'' e versione ``2019'', il titolo apparirà come: ``Docs Maven Plugin 2019'').
+	Il titolo della pagina \emph{doc} viene costruito dall'unione di nome e versione (ad esempio dati il nome ``Docs Maven Plugin'' e la versione ``2019'', il titolo apparirà come: ``Docs Maven Plugin 2019'').
 
 
 	% -------------------------
 
 	Nel caso in cui l'utente non fornisca nome o versione, o nessuno dei due, il sistema prevede il seguente comportamento per i due parametri:
 	\begin{itemize}
-		\item \bd{nome}: preso dal nome del progetto o alternativamente dall'\emph{artifactId};
+		\item \bd{nome}: preso dal nome del progetto o alternativamente dall'\emph{artifactId} (identificativo di un progetto Maven);
 		\item \bd{versione}: preso dalla versione del progetto.
 	\end{itemize} 
 
-	Vengono riportati qui di seguito alcuni esempi:
+	Vengono riportati qui di seguito alcuni esempi (in grassetto vengono evidenziati i valori dati dall'utente per la documentazione, i restanti sono altri elementi configurabili nel POM di un generico progetto Maven):
 	\begin{enumerate}
-		\item nome documentazione = Quickstart Doc, versione documentazione = 2019, nome progetto = Quickstart Vogella project, versione progetto = 2.1.1-SNAPSHOT, artifactId = quickstart
-		\item nome progetto = Quickstart Vogella project, versione progetto = 2.1.1-SNAPSHOT,  artifactId= quickstart
-		\item versione documentazione = 2018, versione progetto = 2.1.1-SNAPSHOT,  artifactId= quickstart
+		\item \bd{nome documentazione}: Quickstart Doc,
+		\bd{versione documentazione}: 2019,
+		 nome progetto: Quickstart Vogella project,  
+		 versione progetto: 2.1.1-SNAPSHOT,
+		 artifactId: quickstart
+		\item nome progetto: Quickstart Vogella project, 
+		 versione progetto: 2.1.1-SNAPSHOT, 
+		  artifactId: quickstart
+		\item \bd{versione documentazione}: 2018,
+		 versione progetto: 2.1.1-SNAPSHOT, 
+		  artifactId: quickstart
 	\end{enumerate}
 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.88\textwidth]{immagini/DocsExamples.png}\\
-		\caption{Screenshot di esempi di titoli di pagine doc}
+		\caption{Esempi di titoli di pagine doc}
 		\label{screenDocsNameVersion}
 	\end{figure}
 
-	Come è possibile vedere dall'immagine \underline{\ref{screenDocsNameVersion}}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori.
-	Nel caso 2. invece non viene fornito nessuno dei due e per questo viene utilizzato il nome e la versione del progetto. 
+	Come è possibile vedere dall'immagine \ref{screenDocsNameVersion}, nel caso 1. vengono dati dall'utente sia nome che versione della documentazione, per questo il titolo viene costruito con questi valori. 
+	Nel caso 2. invece non viene fornito nessuno dei due e per questo vengono utilizzati il nome e la versione del progetto. 
 	Nel caso 3. viene data solo la versione della documentazione, che infatti viene preferita alla versione del progetto, ma non il nome della documentazione. 
 	Poiché nemmeno il nome del progetto è configurato nel POM del progetto, viene scelto di utilizzare l'ultima opzione rimanente: l'artifactId.
 
@@ -128,22 +134,20 @@ Ognuno di questi parametri può essere facoltativamente cambiato dall'utente.
 	\begin{itemize}
 		\item lo skip (salto) dell'esecuzione del plugin;
 		\item che il plugin non fallisca nel caso in cui accada qualche errore del client;
-		\item i tipi di progetto supportati dal plugin;
-		\item i tipi di progetto a cui il plugin non deve dare dei warning (messaggi di avvertimento);
-		\item che il plugin non fallisca nel caso in cui il percorso all'archivio dato dall'utente come documentazione da caricare non esista.
+		\item i tipi di progetto supportati dal plugin e quelli a cui il plugin non deve dare dei warning (messaggi di avvertimento);
+		\item che il plugin non fallisca nel caso in cui il percorso all'archivio dato dall'utente come documentazione non esista.
 	\end{itemize}
 
 	Per di più, nel caso in cui la documentazione non sia di tipo archivio, bensì il percorso ad una cartella, è possibile dare delle ulteriori istruzioni:
 	\begin{itemize}
 		\item dove salvare l'archivio creato;
-		\item quali tipi di file includere nell'archivio;
-		\item quali tipi di file escludere dall'archivio.
+		\item quali tipi di file includere ed escludere dall'archivio.
 	\end{itemize}
 
-	Ogni archivio caricato su \emph{Docs} plugin di Confluence deve contenere al suo interno una pagina denominata \emph{main entrance page}, la quale essenzialmente è la prima pagina che viene visualizzata quando si entra nella pagina \emph{doc}.
+	Ogni archivio caricato su \emph{Docs} plugin di Confluence deve contenere al suo interno una pagina denominata \emph{main entrance page}, la quale essenzialmente è la prima pagina che viene visualizzata quando si entra in un \emph{doc}.
 	Questa è impostata di default nel plugin come ``index.html''.
 	Per questo motivo è stato scelto di permettere a \emph{Maven documentation publisher plug-in} di creare questo file qualora mancasse.
-	Esso indirizza automaticamente ad un altro file della documentazione: un file principale scelto dall'utente tramite l'inserimento del nome in fase di configurazione.
+	Esso indirizza automaticamente al file principale della documentazione: un file scelto dall'utente tramite l'inserimento del nome in fase di configurazione.
 
 	La figura \ref{errorDocs} mostra Docs nel caso di main entrance page mancante.
 
@@ -178,7 +182,7 @@ Il momento dell'analisi e raccolta dei requisiti è avvenuto in congiunzione con
 In principio è stato discusso dei prodotti principali da realizzare, quali plugin e documentazione. 
 Dopodiché si è proseguiti con il dettaglio delle loro caratteristiche, come per esempio gli artefatti compresi nella documentazione e i precisi compiti del plugin.
 Tutti i requisiti identificati sono stati riportati in specifici ticket in Jira, lo strumento di monitoraggio delle attività di riferimento per tutti gli sviluppatori dell'azienda.
-Ogni ticket possiede un identificativo univoco e specifica un compito da svolgere all'interno del progetto ben preciso; citiamo per esempio:
+Ogni ticket possiede un identificativo univoco e specifica un compito da svolgere; citiamo per esempio:
 \begin{itemize}
 	\item creazione di un ``hello world'' (prototipo semplice) plugin Maven;
 	\item implementazione del plugin Maven per la pubblicazione di documentazione;
@@ -186,21 +190,21 @@ Ogni ticket possiede un identificativo univoco e specifica un compito da svolger
 	\item creazione manuale per l'utente.
 \end{itemize}
 Ognuno di questi ticket ha un proprio flusso di lavoro predefinito o personalizzabile in base alla modalità di lavoro \cite{site:jira}.
-In questo caso, essendo il progetto portato avanti da una persona singola in maniera incrementale, il flusso comprendeva gli stati:
+In questo caso, essendo il progetto portato avanti da una persona singola sequenzialmente, il flusso comprendeva gli stati di base:
 \begin{enumerate}
 	\item \bd{TO DO}: attività da svolgere;
-	\item \bd{IN PROGRESS}: attività iniziato da completare;
+	\item \bd{IN PROGRESS}: attività iniziata da completare;
 	\item \bd{DONE}: attività completata.
 \end{enumerate} 
 % Lo stato veniva gradualmente aggiornato dalla candidata.
 Ogni ticket viene associato ad una pagina di Confluence, appositamente creata in parallelo, che possiede una struttura ben delineata.
-Essa spiega nel modo più specifico possibile, il motivo per cui il ticket è stato creato.
+Essa spiega nel modo più specifico possibile il ticket a cui è collegato: quale necessità ne ha spinta la creazione, che cosa ne consegue, ecc.
 Viene innanzitutto riportata la \emph{user story}, ovvero la descrizione del linguaggio naturale e informale di una o più funzionalità di un sistema software \cite{site:user-story}, comprendente le informazioni riguardanti a: la persona che richiede che l'attività venga svolta, qual è esattamente il compito e per quale motivo deve essere svolto.
 Per esempio, nel caso della pagina Confluence legata al ticket della creazione del manuale utente, questa era: \\
 \emph{As a developer \\
 I want a guide for the Maven documentation publisher plug-in \\
 so that can easily configure it for my Java project.} \\
-Successivamente alla user story, devono essere inseriti gli artefatti tecnici, ovvero il dettaglio delle caratteristiche.
+Successivamente alla user story, nella pagina Confluence  gli artefatti tecnici, ovvero il dettaglio delle caratteristiche del ticket.
 Nel caso dell'implementazione del plugin Maven, questi erano:
 \begin{itemize}
 	\item informazioni sulla repository di Bitbucket in cui deve risiedere il codice sorgente;
@@ -241,7 +245,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 	Esempio: \texttt{R2Q1} indica il secondo requisito di qualità ed è desiderabile. \\
 
 	I requisiti individuati sono riassunti in tabelle secondo la loro tipologia.
-	Inoltre, tutti i requisiti individuati e scelti dalla candidata, presentano nella tabella come fonte ``Interno'' e come grado di urgenza ``0'' poiché il loro soddisfacimento non è strettamente necessario.
+	Inoltre, tutti i requisiti individuati e scelti dalla candidata, presentano nella tabella come fonte ``Interno'' e come grado di urgenza ``0'' poiché il loro soddisfacimento non è richiesto.
 
 
 % Da un'attenta analisi dei requisiti e dei casi d'uso effettuata sul progetto, è stata stilata la tabella che traccia tutti i requisiti in rapporto alle loro fonti.
