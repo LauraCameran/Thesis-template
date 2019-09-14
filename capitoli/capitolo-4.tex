@@ -275,7 +275,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			\rowcolor{beautyblue} \textbf{Codice} & \textbf{Descrizione} & \textbf{Fonte} \\\toprule
 			
 			\ReqF{2}{Inserimento documentazione}{Azienda}
-				\subReqF{2}{Inserimento archivio (.zip o .jar)}{Azienda}
+				\subReqF{2}{Inserimento archivio (ZIP o JAR)}{Azienda}
 				\subReqF{1}{Inserimento file HTML}{Azienda}
 				\subReqF{1}{Inserimento cartella}{Azienda}	
             \ReqF{2}{Inserimento credenziali}{Azienda}
@@ -288,8 +288,8 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			\ReqF{2}{L'utente deve poter configurare il plugin in modo che esso ne salti la propria esecuzione}{Azienda}
 			\ReqF{1}{Inserimento luogo in cui l'archivio viene salvato all'interno del progetto}{Azienda}
 			\ReqF{1}{Inserimento tipologie di file attinenti alla documentazione}{Azienda}
-				\ReqF{1}{Inserimento tipologie di file da includere nella cartella}{Azienda}
-				\ReqF{1}{Inserimento tipologie di file da escludere dalla cartella}{Azienda}
+				\ReqF{1}{Inserimento tipologie di file da includere nell'archivio}{Azienda}
+				\ReqF{1}{Inserimento tipologie di file da escludere dall'archivio}{Azienda}
 			\ReqF{1}{Inserimento nome del file principale della documentazione}{Azienda}
 			\ReqF{1}{L'utente deve poter configurare il plugin in modo che esso non fallisca se avvengono errori del client}{Azienda}
 			\ReqF{1}{Inserimento tipi di progetto supportati dal plugin}{Azienda}
@@ -298,7 +298,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Elenco dei requisiti di funzionalità}
+		\caption{Elenco dei requisiti di funzionalità relativi alla configurazione}
 	\end{table}
 
 
@@ -309,8 +309,8 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			\ReqF{2}{Errore se l'utente non fornisce nessuna documentazione}{Azienda}
 			\ReqF{2}{Errore se l'archivio dato non esiste}{Azienda}	
 			\ReqF{2}{Errore se l'utente non fornisce le proprie credenziali}{Azienda}
-			\ReqF{2}{Errore se la categoria non è stata aggiunta}{Azienda}
-			\ReqF{1}{Errore se il file indicato dall'utente come file principale della cartella non esiste}{Azienda}
+			\ReqF{2}{Errore se l'utente non fornisce il nome della categoria}{Azienda}
+			\ReqF{1}{Errore se il file indicato dall'utente, come file principale della cartella, non esiste}{Azienda}
 
 			\bottomrule
 		\end{paddedtablex}
@@ -349,7 +349,7 @@ Ad ogni requisito viene assegnato il codice identificativo univoco:
 			
 			\ReqQ{2}{Le norme presenti sulla wiki aziendale devono essere rispettate}{Azienda}
 				% \subReqQ{1}{Ogni commit effettuato deve rispettare la formattazione descritta nella wiki}{Azienda}
-				\subReqQ{2}{Il nome di ogni variabile, classe, ecc nel codice deve essere significativo}{Azienda}
+				\subReqQ{2}{Il nome di ogni variabile, classe e metodo nel codice deve essere significativo}{Azienda}
 				\subReqQ{2}{I commenti nel codice devono essere facilmente comprensibili}{Azienda}
 				\subReqQ{2}{Il codice non deve contenere violazioni di SonarQube con alta severità}{Azienda}
 				\subReqQ{2}{La copertura dei test deve essere almeno pari al 70\% del codice}{Azienda}

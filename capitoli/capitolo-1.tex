@@ -86,6 +86,7 @@ Nonostante ciò, un problema non banale che è stato affrontato riguarda la docu
 Molte pagine relative alla documentazione di plugin Maven infatti, risultano obsolete perché poco aggiornate.
 Per far fronte a questo problema, un confronto diretto e costante con gli sviluppatori senior del team DevOps, esperti della tecnologia, è stato il metodo di risoluzione determinante per il proseguimento del progetto.
 
+% \clearpage
 
 %**************************************************************
 \section{Strumenti utilizzati}
@@ -230,9 +231,18 @@ Tra essi, selezionati per i vari motivi sotto elencati, troviamo:
         \label{tabellaStrumenti}
         \end{table}
 
+\clearpage
 
 %**************************************************************
 \section{Il prodotto ottenuto}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{intro}\\
+    \caption{Schema riassuntivo del prodotto}
+    \label{screenDocs}
+\end{figure}
+
 Il plugin Maven riesce a realizzare il caricamento di documentazione grazie ad un plugin di terze parti su Confluence, chiamato \emph{Docs}, descritto nella sezione \S\ref{pluginDocs}.
 
 Ciò che fa il plugin Maven è caricare su \emph{Docs} in maniera automatica la documentazione nella corretta categoria, realizzando un nuovo \emph{doc} o aggiornandone uno esistente.

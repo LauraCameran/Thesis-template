@@ -7,15 +7,15 @@
 \label{cap:progettazione}
 %**************************************************************
 
-\intro{Il capitolo corrente ha lo scopo di illustrare l'architettura del plugin nel  dettaglio con il supporto di diagrammi e le scelte progettuali effettuate.}\\
+\intro{Il capitolo corrente ha lo scopo di illustrare l'architettura del plugin nel  dettaglio con il supporto di diagrammi, le sue possibili configurazioni, la sua esecuzione e la relativa documentazione.}\\
 
 \section{Procedura di lavoro}
-Inizialmente per capire il funzionamento di un plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo.
-Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria.
-Il prototipo consisteva in un semplice plugin Maven (un ``hello world'') che effettuava delle stampe e delle chiamate REST ad un server creato al momento con Meecrowave.
+Inizialmente, per capire il funzionamento dei plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo. \\
+Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria. 
+Il prototipo consisteva in un semplice plugin Maven (un ``hello world'') che effettuava delle stampe e delle chiamate secondo il paradigma RESTful ad un server creato al momento con Meecrowave.
 Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence, anziché il server Meecrowave.
-Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effettuare la scelta delle librerie Java più adatte per il prodotto finale.
-Nel corso dello svolgimento delle attività, veniva aggiornato lo stato dei ticket Jira coinvolti.
+Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effettuare la scelta delle librerie Java più adatte per il prodotto finale. \\
+Nel corso dello svolgimento delle attività, veniva regolarmente aggiornato lo stato dei ticket Jira coinvolti.
 Al termine dell'implementazione del Proof of Concept per esempio, il ticket ad esso corrispondente è stato aggiornato a ``DONE''.
 
 %**************************************************************
@@ -23,14 +23,14 @@ Al termine dell'implementazione del Proof of Concept per esempio, il ticket ad e
 \label{sec:tecnologie-strumenti}
 
 In questa sezione viene data una panoramica delle tecnologie e librerie principali utilizzate.
-Esse sono state scelte dalla candidata in concomitanza con gli sviluppatori DevOps senior dell'azienda.
+Esse sono state scelte dalla candidata in concomitanza con il tutor aziendale e gli sviluppatori DevOps senior dell'azienda.
 
 
-\subsection{JavaX}
-JavaX è un package di estensioni standard per il linguaggio Java.
+\subsection{Javax}
+Javax è un package di estensioni standard per il linguaggio Java \cite{site:javax}.
 Le estensioni che include sono numerose; quelle usate per la realizzazione del prodotto sono:
 \begin{itemize}
-    \item \bd{javax.annotation}: ovvero \emph{Java Null annotation}, per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, richieste secondo la politica aziendale, in modo da segnalare gli elementi che possono essere nulli o meno;
+    \item \bd{javax.annotation}: ovvero \emph{Java Null annotation}, per le annotazioni  \texttt{Nonnull} e  \texttt{Nullable}, in modo da segnalare gli elementi che possono o meno essere nulli;
     \item \bd{javax.ws.rs.core}: ovvero \emph{JAX-RS}, per la creazione di risorse relative ai servizi RESTful \cite{site:jax-rs}, utili per il client al momento della comunicazione con Confluence;
     % Low-level interfaces and annotations used to create RESTful service resources
     \item \bd{javax.xml.bind.annotation}: ovvero \emph{JAXB}, per la trasformazione automatica di JSON in oggetti Java \cite{site:jaxb}, utile per convertire i messaggi mandati da Confluence in oggetti facilmente manipolabili dal plugin.
@@ -72,15 +72,15 @@ All'interno del progetto è stata una parte focale perché utilizzato per la cre
 \label{sec:diagramma-package}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{immagini/PackageDiagram.png}\\
+    \includegraphics[width=0.8\textwidth]{immagini/PackageDiagram.png}\\
     \caption{Diagramma dei package}
 \end{figure}
-Le classi principali del \emph{Maven documentation publisher plug-in} sono i \emph{mojos} di Maven e il client.
-Un \emph{mojo} è un \emph{goal} eseguibile in Maven, ovvero la classe che concretamente realizza lo scopo prefissato.
-I mojos appartengono al package Java \texttt{com.thedigitalstack.maven.docs.publisher.plugin} e il client al sub-package\\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin.client}.
+Le classi principali di \emph{Maven documentation publisher plug-in} sono i \emph{mojos} di Maven e il client.
+Un \emph{mojo} è un \emph{goal} eseguibile in Maven, ovvero la classe che concretamente realizza lo scopo prefissato \cite{site:maven-mojo}. \\
+I mojos appartengono al package Java \\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin} e il client al sub-package\\ \texttt{com.thedigitalstack.maven.docs.publisher.plugin.client}.
 Tra loro è possibile identificare due classi fondamentali: PublisherMojo e CleanupMojo.
-Entrambe sono mojos di Maven e perciò determinano \emph{goal} differenti.
-Alcuni metodi che riguardano il client e le impostazioni del server sono uguali, per questo motivo esiste una classe padre e un riferimento a DocPluginClient.
+Entrambe sono mojos di Maven e perciò rappresentano \emph{goal} differenti. \\
+Alcuni metodi che riguardano il client e le impostazioni del server sono uguali, per questo motivo esiste una classe base e un riferimento a DocPluginClient.
 DocPluginClient svolge le operazioni lato client ed è l'unico oggetto che comunica direttamente con Confluence.
 
 \clearpage
@@ -99,8 +99,9 @@ DocPluginClient svolge le operazioni lato client ed è l'unico oggetto che comun
     \label{diagrammaMojo}
 \end{figure}
 
-\txt{PublisherMojo} realizza la pubblicazione della documentazione su Confluence, per questo motivo, il suo goal è nominato \emph{publish} e la fase del ciclo di vita Maven relativo al progetto è package di default.
+\txt{PublisherMojo} realizza la pubblicazione della documentazione su Confluence, per questo motivo, il suo goal è nominato \emph{publish} e la fase del ciclo di vita Maven a cui è legato è \emph{package} di default. \\
 Nella tabella \ref{tabellaParametri} è possibile vedere tutti i parametri configurabili dall'utente che, come è possibile notare, coincidono con i campi dati di PublisherMojo visibili nella figura \ref{diagrammaMojo}.
+Ognuno di essi è seguito da una descrizione che li definisce e dal loro valore di default.
 
 \begin{table}[H]
     \centering
@@ -129,18 +130,18 @@ Nella tabella \ref{tabellaParametri} è possibile vedere tutti i parametri confi
     \label{tabellaParametri}
 \end{table}
 
-Come spiegato nella sezione \S\ref{goalPublish}, i primi tre parametri della tabella \ref{tabellaParametri} sono necessariamente richiesti all'utente per l'esecuzione del goal publish, mentre i successivi sono opzionalmente configurabili e per questo motivo, presentano tutti dei valori di default.
+Come spiegato nella sezione \S\ref{goalPublish}, i primi tre parametri della tabella \ref{tabellaParametri} sono necessariamente richiesti all'utente per l'esecuzione del goal publish, mentre i successivi sono opzionalmente configurabili e per questo motivo, presentano tutti dei valori di default utilizzabili dal sistema qualora l'utente non li specificasse.
 
 \txt{CleanupMojo} si occupa dell'eliminazione completa delle pagine \emph{doc} contenenti SNAPSHOT.
 Ciò significa tutta la documentazione la cui versione comprende il qualificatore ``-SNAPSHOT''.
 Per questo motivo, il goal relativo si chiama \emph{cleanup} e non è specificata nessuna fase del ciclo di vita di un progetto Maven.
-Esso non richiede altri parametri in uso dall'utente: fa semplicemente affidamento sul metodo \txt{isSnapshot(String)} per comprendere se il titolo valutato è un ``-SNAPSHOT''.
+Esso non richiede altri parametri in uso dall'utente: fa semplicemente affidamento sul metodo \txt{isSnapshot()} per comprendere se il titolo valutato è un ``-SNAPSHOT''.
 
 PublisherMojo e CleanupMojo estendono \txt{AbrasctPluginMojo}.
 Questa classe astratta estende \txt{AbrasctMojo} (la classe astratta base di qualunque mojo Maven) e definisce i metodi in comune ad entrambi, come per esempio \txt{createClient()} per l'inizializzazione del client, lasciando implementare il metodo \txt{execute()}, che permette l'esecuzione del goal, alle sottoclassi.
 
 AbstractPluginMojo fa uso di un oggetto di tipo \txt{ServerBean}.
-Un Java Bean è una classe utilizzata per incapsulare più oggetti in un oggetto singolo, cosicché tali oggetti possano essere passati come un singolo oggetto bean invece che come multipli oggetti individuali.
+Un Java Bean è una classe utilizzata per incapsulare più oggetti in un oggetto singolo, cosicché tali oggetti possano essere passati come un singolo oggetto bean invece che come multipli oggetti individuali \cite{site:java-bean}.
 ServerBean infatti contiene altri oggetti relativi alle informazioni richieste per connettersi al server Confluence, come per esempio la URL e le credenziali dell'utente.
 Esso richiede inoltre il booleano \txt{trustSelfSigned} per determinare se i certificati SSL sono accettati, e una stringa \txt{serverId} nel caso l'utente volesse permettere di ricavare le credenziali dal file ``settings.xml''.
 
@@ -163,7 +164,7 @@ I metodi che compiono delle chiamate REST \cite{site:rest-docs} sono elencati ne
         \toprule
 
         \txt{findCategoryByName(String categoryName)} & \bd{GET} & Ritorna una lista di categorie esistenti, il cui nome coincide con la stringa data \\
-        \txt{findDocByName(String categoryId, String docName)} & \bd{GET}  & Ritorna una lista di doc esistenti all'interno di una categoria esistente e i cui nomi coincidono con la stringa data \\
+        \txt{findDocByName(String categoryId, String docName)} & \bd{GET}  & Ritorna una lista di doc esistenti all'interno di una categoria i cui nomi coincidono con la stringa data \\
         \txt{createDoc(String categoryId, String docName, File docArchive)} & \bd{PUT} & Crea la pagina doc all'interno di una categoria esistente, con l'archivio e il nome dato \\
         \txt{updateDoc(String docKey, File docArchive)} & \bd{POST} & Aggiorna la pagina doc identificata dalla \txt{docKey} data, con l'archivio dato \\
         \txt{getRepositoryDetails()} & \bd{GET} & Ritorna tutti i dettagli relativi alla repository: tutte le categorie e i doc esistenti \\
@@ -175,7 +176,7 @@ I metodi che compiono delle chiamate REST \cite{site:rest-docs} sono elencati ne
     \label{tabellaREST}
 \end{table}
 
-Molti di questi metodi possono tirare un'eccezione di tipo \txt{DocPluginException} quando la risposta del client ricevuta da Confluence in fase di comunicazione.
+Molti di questi metodi possono tirare un'eccezione di tipo \txt{DocPluginException} quando il client riceve una risposta inaspettata da Confluence in fase di comunicazione.
 
 
 Un'altra eccezione che DocsPluginClient può tirare è \txt{DocPluginConfigurationException}: un'eccezione RuntimeException che può avvenire durante la creazione del client.
@@ -190,7 +191,7 @@ Un'altra eccezione che DocsPluginClient può tirare è \txt{DocPluginConfigurati
     \caption{Diagramma delle classi relativo ai dettagli di ogni componente del plugin Confluence}
 \end{figure}
 
-Inoltre è importante specificare che una chiamata REST, come per esempio una di quelle di tipo GET, ottiene le specifiche di una categoria o un \emph{doc} tramite un file JSON.
+È importante specificare che una chiamata REST, come per esempio una di quelle di tipo GET, ottiene le specifiche di una categoria o un \emph{doc} tramite un file JSON.
 Questi JSON sono trasformati da JAXB in oggetti Java.
 A questo scopo, sono state create le seguenti classi:
 \begin{itemize}
@@ -221,7 +222,7 @@ A questo scopo, sono state create le seguenti classi:
 
 			\bottomrule
 		\end{paddedtablex}
-		\caption{Tabella riassuntiva delle classi}
+		\caption{Elenco riassuntivo delle classi}
 	\end{table}
 
 
@@ -255,7 +256,7 @@ PublisherMojo ottiene l'id della categoria dall'oggetto precedentemente creato e
 In questo caso, il JSON ritornato sarà vuoto perché la pagina \emph{doc} ancora non esiste.
 A questo punto PublisherMojo ottiene l'archivio da pubblicare, che sarà l'archivio dato dall'utente o un nuovo archivio generato.
 
-Infine la pagina \emph{doc} può essere creata all'interno della categoria con il nome e l'archivio selezionati.
+Infine la pagina \emph{doc} può essere creata all'interno della categoria con il nome e l'archivio selezionati. \\
 
 
 L'aggiornamento di una pagina \emph{doc} funziona in maniera molto similare.
@@ -320,7 +321,7 @@ Infine CleanupMojo elimina ogni pagina \emph{doc} all'interno del plugin Conflue
   breakatwhitespace=true,
   tabsize=3
 }
-La configurazione è una parte predominante del Maven documentation publisher plug-in, poiché è l'unico momento un cui l'utente ha potere di decisione.
+La configurazione è una parte predominante di Maven documentation publisher plug-in, poiché è l'unico momento un cui l'utente ha potere di decisione.
 Come già precedentemente spiegato nella sezione \S\ref{mavenSection}, tutte le informazioni di configurazione del progetto risiedono nel file ``pom.xml'' \cite{site:maven-plugin-configurazione}.
 Per questo motivo, bisogna innanzitutto aggiungere il plugin al proprio progetto inserendo le informazioni che lo identificano:
 
@@ -417,7 +418,7 @@ Nel caso in cui la documentazione fosse una cartella, è necessaria l'archiviazi
 Questo perché l'archivio verrà salvato nel percorso e col nome specificato da \txt{archiveOutputFile}.
 Inoltre, gli elementi \txt{includes} e \txt{excludes} definiscono i file della cartella da inserire o meno nel nuovo archivio.
 
-Nel caso in cui la documentazione data non contenesse il file ``index.html'' richiesto dal plugin Docs di Confluence, la configurazione sarebbe uguale alla precedente, con l'aggiunta dell'elemento \txt{indexFile}.
+Nel caso in cui la documentazione data non contenesse il file ``index.html'', la \emph{main entrance page} richiesta dal plugin Docs di Confluence, la configurazione sarebbe uguale alla precedente, con l'aggiunta dell'elemento \txt{indexFile}.
 Questo elemento richiede come valore il nome del file che l'utente sceglie come file principale della documentazione data, ad esempio \txt{<indexFile>home.html</indexFile>}.\\
 
 
@@ -453,7 +454,7 @@ Per quel che riguarda gli altri parametri del plugin inerenti allo skip dell'ese
 
     \subsection{Proprietà}
     Ognuno di questi elementi configurabili può essere personalizzato dall'utente anche tramite l'utilizzo delle proprietà.
-    Una proprietà è composta da \txt{tds.docpublisher.} e il nome dell'elemento. Essa va aggiunta nell'elemento \txt{properties} del POM, ad esempio:
+    Una proprietà è composta da \txt{tds.docpublisher.} e il nome dell'elemento. Essa va aggiunta all'elemento \txt{properties} del POM, come ad esempio:
         \begin{lstlisting}
         <project>
             ...
@@ -471,7 +472,7 @@ Per eseguire il goal \emph{publish} può essere lanciato sul progetto Maven qual
 \begin{lstlisting} 
     mvn install
 \end{lstlisting}
-Questo perché \emph{install} è la fase del ciclo di vita del progetto in cui Maven installa il pacchetto (JAR) nella repository locale, per poterlo usare come dipendeza in altri progetti locali.
+Questo perché \emph{install} è la fase del ciclo di vita del progetto in cui Maven installa il pacchetto (JAR) nella repository locale, per poterlo usare come dipendeza in altri progetti locali \cite{site:maven-lifecycle}.
 Lanciando questo comando quindi, vengono eseguite anche tutte la fasi precedenti.\\
 
 Per il goal \emph{cleanup} invece, non essendo legato a nessuna fase, è necessario invocare esplicitamente il goal del plugin, ovvero lanciare:

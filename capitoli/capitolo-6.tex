@@ -7,13 +7,12 @@
 \label{cap:testing} 
 
 \section{Analisi statica}
-L'analisi statica è stata realizzata grazie all'utilizzo di SonarQube \cite{site:sonarqube}.
-La sua esecuzione veniva messa in atto ogni qual volta avveniva una build di Jenkins.
+L'analisi statica è stata realizzata grazie all'utilizzo di SonarQube \cite{site:sonarqube} e veniva eseguita ad ogni occorrenza di una build di Jenkins.
 I problemi che SonarQube può segnalare, possono essere di tre tipi:
 \begin{itemize}
-    \item \bd{bug}: un errore nel codice che richiede di essere corretto il prima immediatamente;
+    \item \bd{bug}: un errore nel codice che richiede di essere corretto il prima possibile;
     \item \bd{vulnerabilità}: un punto nel codice che è aperto agli attacchi;
-    \item \bd{codesmell}:  un problema di manutenibilità che rende il codice confuso e difficile da manutenere.
+    \item \bd{codesmell}:  un problema che rende il codice confuso e difficile da manutenere.
 \end{itemize}
 Ognuno dei quali può avere un grado di severità differente, ordinate dalla più alla meno importante:
 \begin{itemize}
@@ -68,7 +67,7 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
         mojo.execute();
     }
     \end{lstlisting}
-    La notazione Test viene usata, in aggiunta al tipo di eccezione che il test si aspetta.
+    La notazione Test viene qui usata in aggiunta al tipo di eccezione che il test si aspetta.
     Questo perché, in questo caso in particolare, il test verifica che venga tirata un'eccezione durante l'esecuzione del plugin, perché sia serverId che username sono stringhe vuote, quindi non c'è nessun modo per ottenere le credenziali corrette. \\
 
     Sono stati utilizzati inoltre i classici metodi di \txt{org.junit.Assert} come \txt{assertEquals()}, \txt{assertNull()}, \txt{assertTrue()} ecc, utili per determinare lo stato di un test case.
@@ -78,7 +77,7 @@ L'attività di testing per quel che riguarda i test di unità è stata svolta ut
     Ciò vuol dire che Mockito consente la creazione e configurazione di mock object.
     I mock object sono degli oggetti simulati che riproducono il comportamento degli oggetti reali in modo controllato \cite{site:mock}.
     Un programmatore crea un oggetto mock per testare il comportamento di altri oggetti, reali, ma legati ad un oggetto inaccessibile o non implementato.
-    Generalmente all'interno del progetto, questi oggetti sono per esempio il client per il mojo o il server per il client.
+    Generalmente, all'interno del progetto, questi oggetti sono per esempio il client per il mojo o il server per il client.
     Realizzare un oggetto mock in questi casi era utile per evitare di trasformare i test di unità in test d'integrazione.
 
     Ad esempio:
@@ -123,15 +122,14 @@ Tra i casi limite, troviamo per esempio:
 \begin{itemize}
     \item pubblicazione di documentazione in una categoria in cui l'utente non ha permesso di accesso;
     \item pubblicazione di documentazione in una categoria inesistente;
-    \item Inserimento in configurazione del nome di un file inesistente all'interno della cartella data;
-    \item omissione dell'utente di inserimento in configurazione delle credenziali;
-    \item eliminazione di un documento inesistente.
+    \item inserimento in configurazione del nome di un file inesistente all'interno della cartella data;
+    \item omissione dell'utente di inserimento in configurazione delle credenziali.
 \end{itemize}
 In tutti questi tentativi, il prodotto si è comportato come atteso, dando dei messaggi di errore.
 Anche in tutte le altre circostanze previste, è stata verificata la corretta esecuzione del plugin. \\
 
-Insieme agli sviluppatori senior DevOps dell'azienda e il tutor aziendale, ci si è accertati che tutte le funzionalità attese del prodotto, descritte nella sezione \S\ref{requisitiFunzionalita}, sono state concretizzate.
-In generale si è appurato che i requisiti, nella loro totalità, sono stati soddisfatti; non soltanto quindi i requisiti di funzionalità, ma anche i requisiti esplicitati nelle sezioni seguenti, quali requisiti di qualità e di vincolo, dagli obbligatori agli opzionali, come la stesura dei manuali e l'adozione di tutti gli strumenti elencati.
+Insieme agli sviluppatori senior DevOps dell'azienda e il tutor aziendale, ci si è accertati che tutte le funzionalità attese del prodotto, descritte nella sezione \S\ref{requisitiFunzionalita}, sono state concretizzate. \\
+In generale si è appurato che i requisiti, nella loro totalità, siano stati soddisfatti; non soltanto quindi i requisiti di funzionalità, ma anche i requisiti esplicitati nelle sezioni successive, quali requisiti di qualità e di vincolo, dagli obbligatori agli opzionali, come la stesura dei manuali e l'adozione di tutti gli strumenti elencati.
 
 
 %**************************************************************
