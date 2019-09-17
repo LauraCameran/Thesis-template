@@ -2,6 +2,7 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../tesi.tex
 
+%TODO cambiare tutti i plugin in sinonimo
 %**************************************************************
 \chapter{Introduzione}
 \label{cap:introduzione}
@@ -98,7 +99,7 @@ Tra essi, selezionati per i vari motivi sotto elencati, troviamo:
     % \item \textbf{JUnit}: framework per i test d'unità che si integra facilmente con Eclipse e Maven
     \item \textbf{Visual Studio Code}: editor di codice che supporta molti linguaggi, tra cui JSON e HTML \cite{site:visual-studio-code};
     \item \bd{SequenceDiagram.org}: strumento online che permette la creazione di diagrammi di sequenza in modo semplice e veloce grazie ad una sintassi propria;
-    \item \bd{ObjectAid UML Explorer}: plugin di Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java;
+    \item \bd{ObjectAid UML Explorer}: estensione di Eclipse che permette la creazione automatica di diagrammi delle classi a partire dal codice Java;
     \item \bd{Meecrowave}: framework, tra i vari consigliat dall'azienda, che permette la creazione di server velocemente \cite{site:meecrowave}.
 \end{itemize}
 
@@ -121,17 +122,18 @@ Tra essi, selezionati per i vari motivi sotto elencati, troviamo:
     % -------- PLUGIN
     \subsubsection{Cos'è un plugin Maven}
 
-    Un plugin Maven è un programma non autonomo che interagisce con Maven per ampliarne o estenderne le funzionalità originarie \cite{site:maven-plugin}.
+    Un plugin è un programma non autonomo che interagisce con un programma per ampliarne o estenderne le funzionalità originarie.
+    In questo caso specifico, il programma in questione è Maven.
 
     Essendo il progetto incentrato sulla realizzazione di un plugin Maven, esso deve avere un \emph{goal}.
     Un \emph{goal} rappresenta un compito specifico (è più fine di una fase) che contribuisce alla gestione del progetto.
     Può essere legato a nessuna, una o più fasi della build.
-    Un \emph{goal} non legato ad alcuna fase può essere eseguito al di fuori del ciclo di vita, tramite un'invocazione diretta.
+    Un \emph{goal} non legato ad alcuna fase può essere eseguito al di fuori del ciclo di vita, tramite un'invocazione diretta \cite{site:maven-plugin}.
 
 
     Quando viene eseguito un goal, Maven cerca il file ``pom.xml'' (il POM) nella cartella corrente, lo legge, ottiene le informazioni della configurazione e dopo di che esegue il goal.
 
-    Alcune di queste informazioni di configurazione che si possono specificrte nel POM possono essere dipendenze, plugin o goal che possono essere eseguiti, versione e descrizione del progetto, ecc \cite{site:maven-pom}.
+    Alcune di queste informazioni di configurazione che si possono specificare nel POM possono essere: dipendenze, plugin o goal che possono essere eseguiti, versione e descrizione del progetto, ecc \cite{site:maven-pom}.
     A continuazione, ne viene riportato un esempio.
 
     % \newpage
@@ -186,7 +188,7 @@ Tra essi, selezionati per i vari motivi sotto elencati, troviamo:
     Ciò che è più importante, motivo per cui viene utilizzato, è il fatto che permette di raggruppare pagine correlate in uno spazio dedicato accessibile a tutti o a gruppi ristretti di persone.
     
     Recentemente è stato introdotto a Confluence un plugin di terze parti, chiamato \emph{Docs}. 
-    Per poter comprendere appieno il progetto del plugin Maven, è prima necessario fare luce su questo plugin.
+    Per poter comprendere appieno il progetto del plugin Maven, è prima necessario fare luce su questa estensione di Confluence.
 
     \subsubsection{Il plugin Docs} \label{pluginDocs}
 
