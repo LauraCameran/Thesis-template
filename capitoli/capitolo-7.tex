@@ -11,13 +11,13 @@
 \section{Risultato ottenuto}
 % uguale a intro ma con riferimenti più specifici a quanto già detto
 
-Maven documentation publisher plug-in realizza la pubblicazione di documentazione Javadoc o Open API sul plugin Docs di Confluence grazie al goal \emph{publish}.
+Maven documentation publisher plug-in realizza la pubblicazione di documentazione Javadoc o Open API su Docs di Confluence grazie al goal \emph{publish}.
 
 Questa pubblicazione avviene in maniera automatica ogni qual volta un progetto Maven, in cui è stato configurato il plugin, attraversa la fase di \emph{package} del suo ciclo di vita.
 Ciò comporta la creazione di una nuova pagina su Docs, nel caso in cui il titolo creato per la pagina a partire dai parametri dati in configurazione sia nuovo, altrimenti la pagina esistente con quel titolo viene aggiornata.
 
 Maven documentation publisher plug-in permette inoltre di ripulire la repository dalla documentazione relativa a progetti che ancora sono sotto sviluppo e non sono stati rilasciati.
-Questi progetti sono marcati da Maven con il qualificatore ``SNAPSHOT'' e la loro documentazione può essere rimossa da Docs in qualunque momento tramite un'invocazione diretta del goal \emph{cleanup}.
+Questi progetti sono marcati da Maven con il qualificatore ``SNAPSHOT'' e la loro documentazione può essere rimossa da Confluence in qualunque momento tramite un'invocazione diretta del goal \emph{cleanup}.
 
 %**************************************************************
 \section{Analisi critica del prodotto e del lavoro di stage}
@@ -101,7 +101,7 @@ Maven documentation publisher plug-in non è ancora stato messo in produzione ma
 
     \subsubsection{Java}
     Java si è rivelato il linguaggio di programmazione ideale per lo sviluppo del prodotto, in quanto fornisce molte librerie che sono state adatte alle varie esigenze.
-    Per esempio, JAXB ha notevolmente semplificato la conversione di messaggi JSON in oggetti Java direttamente maneggiabili dai mojo.
+    Per esempio, JAXB ha notevolmente semplificato la conversione di messaggi JSON in oggetti Java direttamente maneggiabili dai mojos.
 
     \subsubsection{Eclipse}
     Eclipse è stato un buon strumento come ambiente di sviluppo per il plugin grazie a tutte le sue integrazioni con gli altri strumenti, quali JUnit, Maven e SonarQube.

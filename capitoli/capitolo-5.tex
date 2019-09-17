@@ -13,7 +13,7 @@
 Inizialmente, per capire il funzionamento dei plugin Maven e delle API RESTful del server documentale (Confluence), è stato dedicato del tempo allo studio autonomo. \\
 Successivamente è stato sviluppato un Proof of Concept al fine di mettere in pratica quanto appreso dalla teoria. 
 Il prototipo consisteva in un semplice plugin Maven (un ``hello world'') che effettuava delle stampe e delle chiamate secondo il paradigma RESTful ad un server creato al momento con Meecrowave.
-Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con il plugin Docs di Confluence, anziché il server Meecrowave.
+Questo prototipo è successivamente cresciuto ed è stato ampliato e modificato per poter interagire con Docs di Confluence, anziché il server Meecrowave.
 Ciò ha permesso di comprendere il caricamento di materiale su Docs ed ha consentito di effettuare la scelta delle librerie Java più adatte per il prodotto finale. \\
 Nel corso dello svolgimento delle attività, veniva regolarmente aggiornato lo stato dei ticket Jira coinvolti.
 Al termine dell'implementazione del Proof of Concept per esempio, il ticket ad esso corrispondente è stato aggiornato a ``DONE''.
@@ -48,7 +48,7 @@ Le librerie adottate per il progetto sono:
 
 \subsection{Maven}
 Maven è la tecnologia centrale del prodotto.
-Di essa sono state utilizzate numerose classi, ma i package principali sono:
+Di essa sono state utilizzate numerose classi, ma i packages principali sono:
 \begin{itemize}
     \item \bd{org.apache.maven.plugins.annotations}: per le annotazioni relative ai plugin Maven, quali per esempio \texttt{Mojo} per identificare un \emph{goal},  \texttt{Parameter} per segnalare un parametro della configurazione, ecc;
     \item \bd{org.apache.maven.plugin}: per le eccezioni che può lanciare un plugin Maven;
@@ -209,7 +209,7 @@ A questo scopo, sono state create le seguenti classi:
 			\rowcolor{beautyblue}\textbf{Nome} & \textbf{Breve descrizione} \\
 			\toprule
 
-			\txt{AbstractPluginMojo} & Classe astratta dei mojo del plugin \\
+			\txt{AbstractPluginMojo} & Classe astratta dei mojos del plugin \\
             \txt{CleanupMojo} & Classe mojo coincidente con il \emph{goal cleanup}: elimina la documentazione ``SNAPSHOT'' \\
             \txt{PublisherMojo} & Classe mojo coincidente con il \emph{goal publish}: pubblica la documentazione software \\
             \txt{DocsPluginClient} & Client del plugin che realizza chiamate REST \\
@@ -260,7 +260,7 @@ Infine la pagina \emph{doc} può essere creata all'interno della categoria con i
 
 
 L'aggiornamento di una pagina \emph{doc} funziona in maniera molto similare.
-Le uniche differenze dallo scenario precedente si trovano dal JSON riguradante il \emph{doc} ritornato da Confluence in poi.
+Le uniche differenze dallo scenario precedente si trovano dal JSON riguardante il \emph{doc} ritornato da Confluence in poi.
 Esso non sarà vuoto, bensì conterrà le informazioni del \emph{doc} esistente.
 A questo punto verrebbe chiamato un oggetto di tipo DocDeatails e il metodo \txt{udpateDoc()} verrebbe chiamato al posto di \txt{createDoc()}.
 
@@ -430,7 +430,7 @@ La configurazione per il titolo della pagina doc avviene tramite i parametri \tx
     <docVersion>2019</docVersion>
 </configuration>
 \end{lstlisting}
-per otteren il titolo ``Docs Maven Plugin 2019''.
+per ottenere il titolo ``Docs Maven Plugin 2019''.
 
 Per quel che riguarda gli altri parametri del plugin inerenti allo skip dell'esecuzione, la configurazione (seguendo sempre i valori di default) sarebbe:
 
@@ -472,7 +472,7 @@ Per eseguire il goal \emph{publish} può essere lanciato sul progetto Maven qual
 \begin{lstlisting} 
     mvn install
 \end{lstlisting}
-Questo perché \emph{install} è la fase del ciclo di vita del progetto in cui Maven installa il pacchetto (JAR) nella repository locale, per poterlo usare come dipendeza in altri progetti locali \cite{site:maven-lifecycle}.
+Questo perché \emph{install} è la fase del ciclo di vita del progetto in cui Maven installa il pacchetto (JAR) nella repository locale, per poterlo usare come dipendenza in altri progetti locali \cite{site:maven-lifecycle}.
 Lanciando questo comando quindi, vengono eseguite anche tutte la fasi precedenti.\\
 
 Per il goal \emph{cleanup} invece, non essendo legato a nessuna fase, è necessario invocare esplicitamente il goal del plugin, ovvero lanciare:
